@@ -1,0 +1,39 @@
+PROJE: Düğün ve özel gün fotoğrafçılığı stüdyoları için web tabanlı paket konfigüratörü.
+9 adımlık görsel akış: bağlam → tarih → stil → lokasyon → süre → ekip → teslimat → ekstralar → sonuç.
+Çift, kartlarla seçim yaparak kendi paketini tasarlar, fiyat aralığı görür, WhatsApp'tan stüdyoya ulaşır.
+
+KATEGORİ: Photography (Creative) + Booking & Appointment (Services) — iki endüstri kuralını birleştir.
+
+ZORUNLU PALET:
+- Krem bg: #F7F1E6
+- Altın: #B89968
+- Koyu altın: #9A7E4F
+- Mürekkep: #2A2520
+- Yumuşak altın: #D9C39A
+
+ZORUNLU TİPOGRAFİ:
+- Display: Cormorant Garamond
+- Accent (italic vurgular): Italiana
+- Body/UI: Inter
+
+YÖN: Editöryal lüks, sade, fine art matbaa hissi. Soft UI değil.
+Animasyonlar: 200-300ms ease-out, abartısız.
+Kart hover: hafif yukarı translate + altın border.
+Otomatik ilerleme: seçim sonrası 300ms gecikme + fade.
+Mobile-first: 375 / 768 / 1024 / 1440 breakpoint'leri.
+
+STACK: Next.js 15 App Router + Tailwind CSS v4 + shadcn/ui (seçici).
+
+İSTEDİĞİM ÇIKTILAR:
+1. Design pattern (9-step linear flow + result screen)
+2. Tam renk paleti (hex + Tailwind config formatında)
+3. Tipografi skalası (h1/h2/h3/body/caption + Tailwind)
+4. Spacing skalası
+5. Component checklist: Card, ProgressBar, StepContainer, Button, FormField, CalendarGrid, SummaryRow, PriceDisplay
+6. Animation token'ları (duration, easing)
+7. Bu sektör için anti-pattern listesi
+8. Pre-delivery checklist (WCAG AA, klavye nav, prefers-reduced-motion)
+9. design-system/pages/*.md klasör yapısı örneği
+
+ui-ux-pro-max skill'ini kullan. Çıktıyı design-system/MASTER.md olarak kaydet.
+Bitirince dosyayı bana göster.

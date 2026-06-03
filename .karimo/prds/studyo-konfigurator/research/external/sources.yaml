@@ -1,0 +1,147 @@
+sources:
+  - id: nuqs-docs
+    title: "nuqs — Type-safe search params state management for React"
+    url: "https://nuqs.dev/"
+    accessed: "2026-06-03"
+    relevance: high
+    topic: "URL state management, wizard navigation"
+
+  - id: nuqs-github
+    title: "47ng/nuqs — GitHub Repository"
+    url: "https://github.com/47ng/nuqs"
+    accessed: "2026-06-03"
+    relevance: high
+    topic: "nuqs source code, examples"
+
+  - id: nuqs-logrocket
+    title: "Managing search parameters in Next.js with nuqs — LogRocket Blog"
+    url: "https://blog.logrocket.com/managing-search-parameters-next-js-nuqs/"
+    accessed: "2026-06-03"
+    relevance: high
+    topic: "nuqs NuqsAdapter setup, useQueryStates"
+
+  - id: nuqs-wizard-medium
+    title: "How to properly manage search params in NextJS App Router — Medium"
+    url: "https://medium.com/@Jaimayal/how-to-properly-manage-search-params-in-nextjs-app-router-leverage-the-power-of-nuqs-the-right-way-9f7238cff76a"
+    accessed: "2026-06-03"
+    relevance: medium
+    topic: "Wizard navigation with nuqs"
+
+  - id: nextjs-use-search-params
+    title: "useSearchParams — Next.js Official Docs"
+    url: "https://nextjs.org/docs/app/api-reference/functions/use-search-params"
+    accessed: "2026-06-03"
+    relevance: medium
+    topic: "Next.js search params API"
+
+  - id: nextjs-unstable-cache
+    title: "unstable_cache — Next.js Official Docs"
+    url: "https://nextjs.org/docs/app/api-reference/functions/unstable_cache"
+    accessed: "2026-06-03"
+    relevance: high
+    topic: "Server-side caching for Calendar API"
+
+  - id: google-freebusy-api
+    title: "Freebusy: query — Google Calendar API Reference"
+    url: "https://developers.google.com/workspace/calendar/api/v3/reference/freebusy/query"
+    accessed: "2026-06-03"
+    relevance: high
+    topic: "Calendar freebusy query parameters, response format"
+
+  - id: googleapis-nodejs
+    title: "googleapis/google-api-nodejs-client — GitHub"
+    url: "https://github.com/googleapis/google-api-nodejs-client"
+    accessed: "2026-06-03"
+    relevance: high
+    topic: "Service account auth, JWT flow"
+
+  - id: calendar-service-account
+    title: "Accessing Google Calendar API with Service Account — Medium"
+    url: "https://medium.com/product-monday/accessing-google-calendar-api-with-service-account-a99aa0f7f743"
+    accessed: "2026-06-03"
+    relevance: high
+    topic: "Service account calendar setup, delegation"
+
+  - id: vercel-service-account
+    title: "Google Cloud Keyfile.json — Vercel Community Discussion"
+    url: "https://github.com/vercel/community/discussions/219"
+    accessed: "2026-06-03"
+    relevance: high
+    topic: "JSON private key newline encoding in Vercel"
+
+  - id: framer-bundle-size
+    title: "Reduce bundle size — Motion.dev"
+    url: "https://motion.dev/docs/react-reduce-bundle-size"
+    accessed: "2026-06-03"
+    relevance: high
+    topic: "LazyMotion, domAnimation, m component"
+
+  - id: framer-lazy-motion
+    title: "LazyMotion — Framer Docs"
+    url: "https://www.framer.com/motion/lazy-motion/"
+    accessed: "2026-06-03"
+    relevance: high
+    topic: "Feature bundles, bundle optimization"
+
+  - id: framer-app-router
+    title: "Solving Framer Motion Page Transitions in Next.js App Router — imcorfitz.com"
+    url: "https://www.imcorfitz.com/posts/adding-framer-motion-page-transitions-to-next-js-app-router"
+    accessed: "2026-06-03"
+    relevance: high
+    topic: "FrozenRouter, LayoutTransition, useSelectedLayoutSegment"
+
+  - id: shadcn-tailwind-v4
+    title: "Tailwind v4 — shadcn/ui Official Docs"
+    url: "https://ui.shadcn.com/docs/tailwind-v4"
+    accessed: "2026-06-03"
+    relevance: high
+    topic: "@theme inline, CSS variables, migration path"
+
+  - id: shadcn-theming
+    title: "Theming — shadcn/ui"
+    url: "https://ui.shadcn.com/docs/theming"
+    accessed: "2026-06-03"
+    relevance: medium
+    topic: "CSS variable based theming"
+
+  - id: cormorant-google-fonts
+    title: "Cormorant Garamond — Google Fonts"
+    url: "https://fonts.google.com/specimen/Cormorant+Garamond"
+    accessed: "2026-06-03"
+    relevance: high
+    topic: "Font subsets, latin-ext, weights, variable font"
+
+  - id: cormorant-fontsource
+    title: "Cormorant Garamond — Fontsource"
+    url: "https://fontsource.org/fonts/cormorant-garamond"
+    accessed: "2026-06-03"
+    relevance: medium
+    topic: "Variable font, weights 300-700"
+
+  - id: whatsapp-format
+    title: "WhatsApp Link: wa.me format — Qualimero"
+    url: "https://qualimero.com/en/blog/whatsapp-link"
+    accessed: "2026-06-03"
+    relevance: high
+    topic: "wa.me URL format, phone number format"
+
+  - id: whatsapp-char-limits
+    title: "Character Limits WhatsApp — Picky Assist"
+    url: "https://help.pickyassist.com/general-guidelines/character-limits-whatsapp"
+    accessed: "2026-06-03"
+    relevance: high
+    topic: "4096 character limit, session messages"
+
+  - id: whatsapp-deep-link-guide
+    title: "WhatsApp deep links — AppsFlyer"
+    url: "https://www.appsflyer.com/blog/deep-linking/whatsapp-deep-link/"
+    accessed: "2026-06-03"
+    relevance: medium
+    topic: "iOS vs Android deep link behavior"
+
+  - id: turkish-chars-encoding
+    title: "Turkish Characters HTML Codes — Turkish Basics"
+    url: "https://turkishbasics.com/resources/turkish-characters-html-codes.php"
+    accessed: "2026-06-03"
+    relevance: medium
+    topic: "Turkish character Unicode values"

@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 *)",
+      "WebSearch",
+      "WebFetch(domain:nuqs.dev)",
+      "WebFetch(domain:developers.google.com)",
+      "WebFetch(domain:ui.shadcn.com)",
+      "WebFetch(domain:motion.dev)",
+      "WebFetch(domain:fonts.google.com)",
+      "WebFetch(domain:blog.logrocket.com)",
+      "WebFetch(domain:www.imcorfitz.com)",
+      "WebFetch(domain:fontsource.org)",
+      "Bash(npm --version)",
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --no-src-dir --import-alias \"@/*\" --yes)",
+      "Bash(mkdir -p \"C:/Users/pc81/Desktop/Fotoğraf stüdyosu/studyo-konfigurator/app/configure/context\")",
+      "Bash(mkdir -p \"C:/Users/pc81/Desktop/Fotoğraf stüdyosu/studyo-konfigurator/app/configure/season\")",
+      "Bash(mkdir -p \"C:/Users/pc81/Desktop/Fotoğraf stüdyosu/studyo-konfigurator/app/configure/date\")",
+      "Bash(mkdir -p \"C:/Users/pc81/Desktop/Fotoğraf stüdyosu/studyo-konfigurator/app/configure/style\")",
+      "Bash(mkdir -p \"C:/Users/pc81/Desktop/Fotoğraf stüdyosu/studyo-konfigurator/app/configure/location\")",
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "mcp__plugin_context-mode_context-mode__ctx_doctor",
+      "Bash(Get-Item \"C:\\\\Users\\\\pc81\\\\Desktop\\\\Fotoğraf stüdyosu\\\\studyo-konfigurator\\\\CLAUDE.md\")",
+      "Bash(Select-Object Length, Name)",
+      "Bash(git add *)",
+      "Bash(git commit *)"
+    ]
+  }
+}

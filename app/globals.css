@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* Renk Token'ları */
+  --color-cream: #F7F1E6;
+  --color-gold: #B89968;
+  --color-gold-dark: #9A7E4F;
+  --color-ink: #2A2520;
+  --color-gold-soft: #D9C39A;
+  --color-error: #B04A2F;
+
+  /* Font Aileleri */
+  --font-display: var(--font-cormorant), 'Cormorant Garamond', Georgia, serif;
+  --font-accent: var(--font-italiana), 'Italiana', Georgia, serif;
+  --font-body: var(--font-inter), 'Inter', system-ui, sans-serif;
+
+  /* Easing */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-expo: cubic-bezier(0.4, 0, 1, 1);
+
+  /* Geçiş Süreleri */
+  --duration-fast: 150ms;
+  --duration-base: 200ms;
+  --duration-slow: 300ms;
+  --duration-enter: 250ms;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  color-scheme: light;
+  background-color: #F7F1E6;
+  color: #2A2520;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

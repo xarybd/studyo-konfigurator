@@ -1,0 +1,10 @@
+{
+  "slug": "studyo-konfigurator",
+  "researched_at": "2026-06-03",
+  "phases": ["internal", "external", "summary"],
+  "internal_files": 5,
+  "external_files": 5,
+  "technical_questions": 8,
+  "binding_references": ["design-system/MASTER.md", "design-system/VISUAL-DIRECTION.md"],
+  "assets": ["StüdyoKonfigüratör.pdf", "ref-01-origin-typography-INSPIRATION.png", "ref-02-origin-cards-PARTIAL-only-floating-feel.png", "REFERENCES.md"]
+}

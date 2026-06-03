@@ -1,0 +1,50 @@
+PROJE: Düğün ve özel gün fotoğrafçılığı stüdyolarının web sitelerine entegre edilecek (veya bağımsız çalışacak) interaktif paket konfigüratörü.
+
+ANA AKIŞ (9 ADIM):
+1. Bağlam seçimi (düğün / nişan-söz / bebek-aile) — base price'ı belirler
+2. Mevsim seçimi (4 mevsim + "henüz net değil") — takvim adımının kapısı
+3. Müsait gün takvimi — seçilen mevsime ait 3 ayın Google Calendar'dan freebusy query ile alınmış müsait günleri
+4. Stil moodboard (4 kart: klasik / modern / doğal / vintage)
+5. Lokasyon (stüdyo / plato / dış mekan / venue / karma) — context'e göre filtreli
+6. Süre (tören / yarım gün / tam gün / çok günlü) — context'e göre filtreli
+7. Ekip (tek / iki / iki+asistan)
+8. Teslimat (dijital / +albüm / +video / komple)
+9. Ekstralar (multi-select: drone, full video, anı kitabı, engagement, hazırlık)
+
+SONUÇ EKRANI: Paket özeti + hesaplanan fiyat aralığı + WhatsApp deep link (paket detayıyla pre-filled mesaj) + email yedek formu.
+
+FİYAT MOTORU (deterministik):
+total = BASE[context] x STYLE_MULT[style] x DURATION_MULT[duration] x TEAM_MULT[team] + DELIVERY_ADD[delivery] + sum(EXTRAS_ADD[])
+Aralık: [total x 0.88, total x 1.12], 500 TL'ye yuvarlama.
+Tüm değerler studio.config.ts içinde, kolayca değiştirilebilir.
+
+ÇIKARILACAK ARAŞTIRMA NOKTALARI:
+- Next.js 15 App Router + URL search params ile 9-step state yönetimi
+- Google Calendar API service account auth pattern (sunucu tarafı, OAuth değil)
+- freebusy query batch'leme (3 ay için minimum API call)
+- WhatsApp deep link URL encoding limitleri (mesaj uzunluk sınırı, UTF-8, Türkçe karakter byte sayımı)
+- shadcn/ui hangi component'ler kullanılacak, hangileri elle yazılacak (card grid elle)
+- Framer Motion ile route transition vs step transition (App Router'da hangisi sorunsuz)
+- Türkçe karakterler için font subset stratejisi (next/font ile)
+- Mobile-first: takvim grid'inin 375px'de düzgün render olması için stratejiler (3 ay nasıl gösterilir)
+
+ARAŞTIRMA YASAĞI:
+- Database tasarımı (MVP'de yok)
+- Multi-tenancy (V2'de düşünülür)
+- Admin panel (V2'de)
+- Ödeme entegrasyonu (bu projede asla yok)
+- Kullanıcı hesabı / login (gereksiz)
+
+DESIGN SYSTEM REFERANSI: design-system/MASTER.md zaten üretildi. Tüm KARIMO task'ları bu dosyayı okumalı.
+
+TECH STACK:
+- Next.js 15 (App Router)
+- Tailwind CSS v4
+- shadcn/ui (form, dialog, popover gibi a11y primitifler için)
+- Google Calendar API (service account)
+- Resend (e-posta yedek)
+- Framer Motion (sade animasyonlar)
+- react-hook-form + zod (form validation)
+- Vercel (deployment)
+
+DİL: Tüm UI ve copy Türkçe.
