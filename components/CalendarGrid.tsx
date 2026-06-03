@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import { m, AnimatePresence, useReducedMotion } from 'framer-motion'
+import { AnimatePresence, m } from 'framer-motion'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -55,16 +55,13 @@ function MonthGrid({ year, month, busySet, selectedDate, today, onSelectDate }: 
 
   return (
     <div>
-      <h3 className="font-display text-[22px] italic font-light text-ink text-center mb-5">
+      <h3 className="font-display text-lg italic font-light text-ink text-center mb-4">
         {MONTH_NAMES[month]}
       </h3>
 
       <div className="grid grid-cols-7 mb-2">
         {WEEKDAYS.map((d, i) => (
-          <div
-            key={i}
-            className="font-body text-[10px] text-[#8A7F70] tracking-[2px] text-center py-1"
-          >
+          <div key={i} className="font-body text-[10px] text-ink/40 tracking-wide text-center py-1">
             {d}
           </div>
         ))}
@@ -90,19 +87,13 @@ function MonthGrid({ year, month, busySet, selectedDate, today, onSelectDate }: 
               aria-pressed={isSelected}
               className={cn(
                 'w-[44px] h-[44px] flex items-center justify-center mx-auto',
-                'font-body text-[13px] rounded-full',
-                'transition-all duration-200',
-                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-1',
-                isSelected && 'bg-[#2A2520] text-[#F7F1E6] font-medium',
-                isToday && !isSelected && 'border border-[#B89968] font-semibold text-ink',
-                !isSelected && !isToday && !isUnavailable && [
-                  'text-[#4A413A]',
-                  'bg-[#D9C39A]/40',
-                  'hover:bg-[#D9C39A]/70',
-                  'hover:scale-[1.08]',
-                  'cursor-pointer',
-                ],
-                isUnavailable && 'text-[#8A7F70] line-through cursor-not-allowed',
+                'font-body text-sm rounded-full',
+                'transition-colors duration-150',
+                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold',
+                isSelected && 'bg-ink text-cream font-medium',
+                isToday && !isSelected && 'border border-gold font-semibold text-ink',
+                !isSelected && !isToday && !isUnavailable && 'text-ink/80 hover:bg-gold/15 cursor-pointer',
+                isUnavailable && 'text-ink/30 line-through cursor-not-allowed',
               )}
             >
               {day}
@@ -117,17 +108,17 @@ function MonthGrid({ year, month, busySet, selectedDate, today, onSelectDate }: 
 function Legend({ hasSelected }: { hasSelected: boolean }) {
   return (
     <div className="flex items-center gap-6 mt-6">
-      <span className="flex items-center gap-2 font-body text-[11px] text-[#8A7F70]">
-        <span className="w-3 h-3 rounded-full bg-[#D9C39A] inline-block" />
+      <span className="flex items-center gap-2 font-body text-xs text-ink/50">
+        <span className="w-3 h-3 rounded-full bg-gold-soft inline-block" />
         Müsait
       </span>
-      <span className="flex items-center gap-2 font-body text-[11px] text-[#8A7F70]">
-        <span className="font-body text-[11px] text-[#8A7F70] line-through">15</span>
+      <span className="flex items-center gap-2 font-body text-xs text-ink/50">
+        <span className="font-body text-xs text-ink/40 line-through">15</span>
         Dolu
       </span>
       {hasSelected && (
-        <span className="flex items-center gap-2 font-body text-[11px] text-[#8A7F70]">
-          <span className="w-3 h-3 rounded-full bg-[#2A2520] inline-block" />
+        <span className="flex items-center gap-2 font-body text-xs text-ink/50">
+          <span className="w-3 h-3 rounded-full bg-ink inline-block" />
           Seçili
         </span>
       )}
@@ -144,7 +135,6 @@ function MobileCalendar({ months, busySet, selectedDate, today, onSelectDate }: 
 }) {
   const [activeIndex, setActiveIndex] = useState(0)
   const [direction, setDirection] = useState(0)
-  const shouldReduce = useReducedMotion()
 
   function goTo(index: number) {
     if (index < 0 || index >= months.length) return
@@ -152,9 +142,7 @@ function MobileCalendar({ months, busySet, selectedDate, today, onSelectDate }: 
     setActiveIndex(index)
   }
 
-  const swipeThreshold = 50
-
-  const m_ = months[activeIndex]
+  const current = months[activeIndex]
 
   return (
     <div>
@@ -168,8 +156,8 @@ function MobileCalendar({ months, busySet, selectedDate, today, onSelectDate }: 
           <ChevronLeft size={18} strokeWidth={1.5} />
         </button>
 
-        <h3 className="font-display text-[22px] italic font-light text-ink">
-          {MONTH_NAMES[m_.month]}
+        <h3 className="font-display text-xl italic font-light text-ink">
+          {MONTH_NAMES[current.month]}
         </h3>
 
         <button
@@ -182,35 +170,24 @@ function MobileCalendar({ months, busySet, selectedDate, today, onSelectDate }: 
         </button>
       </div>
 
-      <m.div
-        drag={shouldReduce ? false : 'x'}
-        dragConstraints={{ left: 0, right: 0 }}
-        dragElastic={0.1}
-        onDragEnd={(_, { offset, velocity }) => {
-          const swipe = Math.abs(offset.x) + Math.abs(velocity.x) * 10
-          if (offset.x < -swipeThreshold && swipe > swipeThreshold) goTo(activeIndex + 1)
-          else if (offset.x > swipeThreshold && swipe > swipeThreshold) goTo(activeIndex - 1)
-        }}
-      >
-        <AnimatePresence mode="wait" initial={false}>
-          <m.div
-            key={activeIndex}
-            initial={shouldReduce ? { opacity: 0 } : { opacity: 0, x: direction * 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={shouldReduce ? { opacity: 0 } : { opacity: 0, x: -direction * 40 }}
-            transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
-          >
-            <MonthGrid
-              year={m_.year}
-              month={m_.month}
-              busySet={busySet}
-              selectedDate={selectedDate}
-              today={today}
-              onSelectDate={onSelectDate}
-            />
-          </m.div>
-        </AnimatePresence>
-      </m.div>
+      <AnimatePresence mode="wait" initial={false}>
+        <m.div
+          key={activeIndex}
+          initial={{ opacity: 0, x: direction * 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -direction * 20 }}
+          transition={{ duration: 0.18, ease: 'easeInOut' }}
+        >
+          <MonthGrid
+            year={current.year}
+            month={current.month}
+            busySet={busySet}
+            selectedDate={selectedDate}
+            today={today}
+            onSelectDate={onSelectDate}
+          />
+        </m.div>
+      </AnimatePresence>
 
       <div className="flex items-center justify-center gap-2 mt-4">
         {months.map((_, i) => (
@@ -220,9 +197,7 @@ function MobileCalendar({ months, busySet, selectedDate, today, onSelectDate }: 
             aria-label={`${MONTH_NAMES[months[i].month]} ayına git`}
             className={cn(
               'rounded-full transition-all duration-200 cursor-pointer',
-              i === activeIndex
-                ? 'w-2 h-2 bg-gold'
-                : 'w-1.5 h-1.5 bg-gold-soft/60 hover:bg-gold/60'
+              i === activeIndex ? 'w-2 h-2 bg-gold' : 'w-1.5 h-1.5 bg-gold-soft/60 hover:bg-gold/60',
             )}
           />
         ))}

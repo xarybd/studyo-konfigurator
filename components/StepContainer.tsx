@@ -1,6 +1,5 @@
-'use client'
-import { m, LazyMotion, domAnimation, useReducedMotion } from 'framer-motion'
 import { ProgressBar } from '@/components/ProgressBar'
+import { studioConfig } from '@/studio.config'
 
 interface StepContainerProps {
   step: number
@@ -19,76 +18,37 @@ export function StepContainer({
   footer,
   hasPriceBar,
 }: StepContainerProps) {
-  const shouldReduce = useReducedMotion()
-
-  const containerVariants = {
-    hidden: {},
-    visible: { transition: { staggerChildren: shouldReduce ? 0 : 0.08, delayChildren: 0.05 } },
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: shouldReduce ? 0 : 12 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] },
-    },
-  }
-
   return (
-    <LazyMotion features={domAnimation}>
-      <section className={`min-h-[calc(100dvh-60px)] flex flex-col ${hasPriceBar ? 'pb-24' : ''}`}>
-        <m.div
-          className="w-full max-w-[1100px] mx-auto px-6 md:px-12 pt-3 pb-2"
-          variants={itemVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          <ProgressBar current={step} />
-        </m.div>
-
-        <m.div
-          className="flex-1 flex flex-col justify-center"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          <div className="w-full max-w-[1100px] mx-auto px-6 md:px-12 py-8 md:py-10">
-            <m.h1
-              variants={itemVariants}
-              className="font-display font-light text-ink leading-[1.05]"
-              style={{ fontSize: 'clamp(36px, 8vw, 72px)' }}
-            >
-              {title}
-            </m.h1>
-
-            {subtitle && (
-              <m.p
-                variants={itemVariants}
-                className="font-body text-[#8A7F70] mt-4 max-w-[540px] leading-relaxed"
-                style={{ fontSize: 'clamp(15px, 2vw, 18px)' }}
-              >
-                {subtitle}
-              </m.p>
-            )}
-
-            <m.div variants={itemVariants} className="mt-10 md:mt-12">
-              {children}
-            </m.div>
+    <section className="min-h-screen flex flex-col">
+      <header className="px-6 pt-6 pb-4 md:px-12">
+        <div className="flex items-center justify-between mb-4">
+          <div>
+            <p className="font-body text-[10px] tracking-[0.25em] uppercase text-ink/40">
+              {studioConfig.name}
+            </p>
+            <p className="font-body text-[10px] tracking-[0.2em] uppercase text-gold-soft">
+              {studioConfig.tagline}
+            </p>
           </div>
-        </m.div>
-
-        {footer && (
-          <m.div
-            variants={itemVariants}
-            initial="hidden"
-            animate="visible"
-            className="w-full max-w-[1100px] mx-auto px-6 md:px-12 pb-8"
-          >
-            {footer}
-          </m.div>
+        </div>
+        <ProgressBar current={step} />
+        <h1 className="font-display text-4xl md:text-5xl font-light text-ink mt-8 leading-tight">
+          {title}
+        </h1>
+        {subtitle && (
+          <p className="font-body text-base text-ink/60 mt-3 max-w-prose leading-relaxed">
+            {subtitle}
+          </p>
         )}
-      </section>
-    </LazyMotion>
+      </header>
+
+      <main className={`flex-1 px-6 md:px-12 ${hasPriceBar ? 'pb-24' : 'pb-16'}`}>
+        {children}
+      </main>
+
+      {footer && (
+        <footer className="px-6 pb-8 md:px-12">{footer}</footer>
+      )}
+    </section>
   )
 }

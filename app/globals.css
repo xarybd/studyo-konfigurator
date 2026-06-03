@@ -1,7 +1,6 @@
 @import "tailwindcss";
 
 @theme inline {
-  /* Renk Token'ları */
   --color-cream: #F7F1E6;
   --color-gold: #B89968;
   --color-gold-dark: #9A7E4F;
@@ -9,20 +8,9 @@
   --color-gold-soft: #D9C39A;
   --color-error: #B04A2F;
 
-  /* Font Aileleri */
   --font-display: var(--font-cormorant), 'Cormorant Garamond', Georgia, serif;
   --font-accent: var(--font-italiana), 'Italiana', Georgia, serif;
   --font-body: var(--font-inter), 'Inter', system-ui, sans-serif;
-
-  /* Easing */
-  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-in-expo: cubic-bezier(0.4, 0, 1, 1);
-
-  /* Geçiş Süreleri */
-  --duration-fast: 150ms;
-  --duration-base: 200ms;
-  --duration-slow: 300ms;
-  --duration-enter: 250ms;
 }
 
 * {
@@ -38,76 +26,6 @@ body {
   color-scheme: light;
   background-color: #F7F1E6;
   color: #2A2520;
-}
-
-@keyframes blob-drift-a {
-  0%, 100% { transform: translate(0px, 0px) scale(1); }
-  33% { transform: translate(40px, 30px) scale(1.08); }
-  66% { transform: translate(-20px, 50px) scale(0.95); }
-}
-@keyframes blob-drift-b {
-  0%, 100% { transform: translate(0px, 0px) scale(1); }
-  33% { transform: translate(-50px, 20px) scale(0.92); }
-  66% { transform: translate(30px, -40px) scale(1.06); }
-}
-@keyframes blob-drift-c {
-  0%, 100% { transform: translate(0px, 0px) scale(1); }
-  50% { transform: translate(-35px, -30px) scale(1.1); }
-}
-@keyframes blob-drift-d {
-  0%, 100% { transform: translate(0px, 0px) scale(1); }
-  40% { transform: translate(50px, -20px) scale(0.9); }
-  80% { transform: translate(-20px, 30px) scale(1.05); }
-}
-
-.mesh-blob-a {
-  position: absolute;
-  width: 700px; height: 700px;
-  top: -220px; left: -200px;
-  background: radial-gradient(circle, rgba(217,195,154,0.38) 0%, transparent 70%);
-  animation: blob-drift-a 28s ease-in-out infinite;
-  will-change: transform;
-}
-.mesh-blob-b {
-  position: absolute;
-  width: 600px; height: 600px;
-  top: -100px; right: -160px;
-  background: radial-gradient(circle, rgba(247,241,230,0.55) 0%, transparent 70%);
-  animation: blob-drift-b 33s ease-in-out infinite;
-  will-change: transform;
-}
-.mesh-blob-c {
-  position: absolute;
-  width: 800px; height: 800px;
-  bottom: -260px; right: -200px;
-  background: radial-gradient(circle, rgba(184,153,104,0.18) 0%, transparent 70%);
-  animation: blob-drift-c 26s ease-in-out infinite;
-  will-change: transform;
-}
-.mesh-blob-d {
-  position: absolute;
-  width: 600px; height: 600px;
-  bottom: -160px; left: -100px;
-  background: radial-gradient(circle, rgba(255,240,210,0.42) 0%, transparent 70%);
-  animation: blob-drift-d 30s ease-in-out infinite;
-  will-change: transform;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .mesh-blob-a, .mesh-blob-b, .mesh-blob-c, .mesh-blob-d {
-    animation: none;
-  }
-}
-
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
-  mix-blend-mode: overlay;
-  opacity: 0.05;
-  pointer-events: none;
-  z-index: 9999;
 }
 
 @media (prefers-reduced-motion: reduce) {
