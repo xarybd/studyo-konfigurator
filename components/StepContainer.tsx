@@ -1,5 +1,4 @@
-import { ProgressBar } from '@/components/ProgressBar'
-import { studioConfig } from '@/studio.config'
+import { cn } from '@/lib/utils'
 
 interface StepContainerProps {
   step: number
@@ -10,45 +9,48 @@ interface StepContainerProps {
   hasPriceBar?: boolean
 }
 
-export function StepContainer({
-  step,
-  title,
-  subtitle,
-  children,
-  footer,
-  hasPriceBar,
-}: StepContainerProps) {
+export function StepContainer({ step, title, subtitle, children, footer, hasPriceBar }: StepContainerProps) {
   return (
-    <section className="min-h-screen flex flex-col">
-      <header className="px-6 pt-6 pb-4 md:px-12">
-        <div className="flex items-center justify-between mb-4">
-          <div>
-            <p className="font-body text-[10px] tracking-[0.25em] uppercase text-ink/40">
-              {studioConfig.name}
-            </p>
-            <p className="font-body text-[10px] tracking-[0.2em] uppercase text-gold-soft">
-              {studioConfig.tagline}
-            </p>
-          </div>
-        </div>
-        <ProgressBar current={step} />
-        <h1 className="font-display text-4xl md:text-5xl font-light text-ink mt-8 leading-tight">
+    <section
+      className={cn(
+        'flex-1 flex flex-col items-center justify-center px-5 md:px-12',
+        'py-8',
+        hasPriceBar && 'pb-24',
+      )}
+    >
+      <div className="w-full max-w-5xl text-center">
+        {step > 0 && (
+          <p className="font-body text-[11px] tracking-[0.32em] uppercase text-gold mb-6">
+            ADIM {String(step).padStart(2, '0')} / 09
+          </p>
+        )}
+
+        <h1
+          className="font-display font-light text-ink"
+          style={{ fontSize: 'clamp(40px, 6vw, 72px)', lineHeight: '1.0' }}
+        >
           {title}
         </h1>
+
         {subtitle && (
-          <p className="font-body text-base text-ink/60 mt-3 max-w-prose leading-relaxed">
+          <p
+            className="font-display italic text-ink/50 mx-auto max-w-lg mt-4"
+            style={{ fontSize: '16px', lineHeight: '1.6' }}
+          >
             {subtitle}
           </p>
         )}
-      </header>
 
-      <main className={`flex-1 px-6 md:px-12 ${hasPriceBar ? 'pb-24' : 'pb-16'}`}>
-        {children}
-      </main>
+        <div className={cn('mt-14', !subtitle && 'mt-14')}>
+          {children}
+        </div>
 
-      {footer && (
-        <footer className="px-6 pb-8 md:px-12">{footer}</footer>
-      )}
+        {footer && (
+          <div className="mt-8">
+            {footer}
+          </div>
+        )}
+      </div>
     </section>
   )
 }

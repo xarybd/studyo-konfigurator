@@ -1,5 +1,6 @@
 'use client'
 import { m, useReducedMotion } from 'framer-motion'
+import { useState } from 'react'
 import { Check } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -15,6 +16,16 @@ interface CardProps {
   children?: React.ReactNode
 }
 
+const cardVariants = {
+  rest: { y: 0 },
+  hover: { y: -4 },
+}
+
+const iconVariants = {
+  rest: { scale: 1 },
+  hover: { scale: 1.08 },
+}
+
 export function Card({
   title,
   description,
@@ -27,6 +38,17 @@ export function Card({
   children,
 }: CardProps) {
   const shouldReduce = useReducedMotion()
+  const [hovered, setHovered] = useState(false)
+
+  const bg = selected || hovered ? 'rgba(255,252,245,0.70)' : 'rgba(255,252,245,0.55)'
+  const border = selected
+    ? '1.5px solid rgba(184,153,104,0.85)'
+    : hovered
+      ? '1px solid rgba(184,153,104,0.50)'
+      : '1px solid rgba(184,153,104,0.25)'
+  const shadow = selected || hovered
+    ? '0 4px 24px rgba(42,37,32,0.06), 0 20px 48px rgba(154,126,79,0.10), inset 0 1px 0 rgba(255,255,255,0.6)'
+    : '0 4px 20px rgba(42,37,32,0.04), 0 16px 40px rgba(154,126,79,0.06), inset 0 1px 0 rgba(255,255,255,0.5)'
 
   return (
     <m.div
@@ -34,6 +56,13 @@ export function Card({
       tabIndex={disabled ? -1 : 0}
       aria-pressed={selected}
       aria-disabled={disabled}
+      initial="rest"
+      animate="rest"
+      whileHover={shouldReduce || disabled ? 'rest' : 'hover'}
+      variants={cardVariants}
+      transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+      onHoverStart={() => !disabled && setHovered(true)}
+      onHoverEnd={() => setHovered(false)}
       onClick={!disabled ? onClick : undefined}
       onKeyDown={(e) => {
         if (!disabled && (e.key === 'Enter' || e.key === ' ')) {
@@ -41,39 +70,58 @@ export function Card({
           onClick?.()
         }
       }}
-      whileHover={shouldReduce || disabled ? {} : { y: -4 }}
-      transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
+      style={{
+        background: bg,
+        backdropFilter: 'blur(18px) saturate(1.2)',
+        WebkitBackdropFilter: 'blur(18px) saturate(1.2)',
+        border,
+        borderRadius: '16px',
+        padding: '32px 24px',
+        boxShadow: shadow,
+        minHeight: '240px',
+        transition: 'background 350ms cubic-bezier(0.4,0,0.2,1), border 350ms cubic-bezier(0.4,0,0.2,1), box-shadow 350ms cubic-bezier(0.4,0,0.2,1)',
+        opacity: disabled ? 0.4 : 1,
+      }}
       className={cn(
         'relative cursor-pointer select-none outline-none overflow-hidden',
-        'flex flex-col rounded-lg',
-        'bg-cream border transition-all duration-200',
-        !selected && !disabled && 'border-gold-soft/50 hover:border-gold hover:shadow-md',
-        selected && 'border-gold shadow-md bg-gold/5',
-        disabled && 'opacity-40 cursor-not-allowed pointer-events-none',
+        'flex flex-col gap-4',
+        disabled && 'pointer-events-none',
         'focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2',
         className,
       )}
     >
       <span
         className={cn(
-          'absolute top-3 right-3 z-10 w-5 h-5 rounded-full bg-gold',
-          'flex items-center justify-center transition-opacity duration-200',
+          'absolute top-4 right-4 z-10 w-[22px] h-[22px] rounded-full bg-gold',
+          'flex items-center justify-center',
+          'transition-opacity duration-200',
           selected ? 'opacity-100' : 'opacity-0',
         )}
       >
-        <Check size={10} strokeWidth={3} className="text-cream" />
+        <Check size={11} strokeWidth={2.5} className="text-cream" />
       </span>
 
-      {visual && <div className="w-full overflow-hidden">{visual}</div>}
+      {visual && (
+        <div className="overflow-hidden -mx-6 -mt-8 rounded-t-[16px]">{visual}</div>
+      )}
 
-      <div className="px-5 py-4 flex flex-col gap-2">
-        {icon && <div className="text-gold-dark mb-1">{icon}</div>}
-        <h2 className="font-display text-xl font-normal text-ink leading-snug">{title}</h2>
-        {description && (
-          <p className="font-body text-sm text-ink/60 leading-relaxed">{description}</p>
-        )}
-        {children}
-      </div>
+      {icon && (
+        <m.div
+          variants={iconVariants}
+          transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+          className="text-gold-dark"
+        >
+          {icon}
+        </m.div>
+      )}
+
+      <h2 className="font-display text-[22px] font-normal text-ink leading-snug">{title}</h2>
+
+      {description && (
+        <p className="font-body text-[13px] italic text-ink/55 leading-relaxed">{description}</p>
+      )}
+
+      {children}
     </m.div>
   )
 }

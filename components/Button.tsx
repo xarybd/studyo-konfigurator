@@ -21,22 +21,37 @@ export function Button({
     <Comp
       className={cn(
         'inline-flex items-center justify-center gap-2 cursor-pointer',
-        'font-body font-medium text-sm',
+        'font-body text-sm',
         'min-h-[44px] min-w-[44px]',
-        'transition-colors duration-200',
+        'transition-all duration-200',
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2',
         'disabled:opacity-60 disabled:cursor-not-allowed',
-        variant === 'primary' && 'bg-gold text-cream px-8 py-3.5 rounded-md hover:bg-gold-dark',
-        variant === 'ghost' && 'text-ink/60 hover:text-ink px-0 py-0 min-w-0',
-        variant === 'outline' && 'border border-gold text-ink px-6 py-3 rounded-md hover:bg-gold/5',
+        variant === 'primary' && [
+          'text-cream rounded-full px-10 py-[14px]',
+          'text-[12px] tracking-[0.28em] uppercase font-medium',
+          'hover:-translate-y-0.5 hover:brightness-110',
+        ],
+        variant === 'ghost' && 'text-ink/50 hover:text-ink px-0 py-0 min-w-0 font-medium',
+        variant === 'outline' && [
+          'border border-gold text-ink px-8 py-3 rounded-full',
+          'text-[12px] tracking-[0.2em] uppercase',
+          'hover:bg-gold/5',
+        ],
         variant === 'whatsapp' && [
-          'bg-gradient-to-br from-gold to-gold-dark text-cream',
-          'px-8 py-3.5 rounded-md w-full md:w-auto',
-          'uppercase tracking-[0.18em] text-[13px]',
-          'hover:brightness-105 hover:shadow-md',
+          'text-cream rounded-full w-full',
+          'px-8 py-[14px]',
+          'text-[12px] tracking-[0.22em] uppercase font-medium',
+          'hover:-translate-y-0.5 hover:brightness-105',
         ],
         className,
       )}
+      style={
+        variant === 'primary'
+          ? { background: 'linear-gradient(135deg, #2A2520, #4A3D2A)', boxShadow: '0 8px 24px rgba(42,37,32,0.18)' }
+          : variant === 'whatsapp'
+            ? { background: 'linear-gradient(135deg, #B89968, #9A7E4F)', boxShadow: '0 6px 20px rgba(154,126,79,0.22)' }
+            : undefined
+      }
       {...props}
     >
       {children}
