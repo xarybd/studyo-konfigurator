@@ -41,11 +41,11 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
       <AnimatePresence mode="wait">
         <m.div
           key={segment ?? 'root'}
-          initial={shouldReduce ? { opacity: 0 } : { opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={shouldReduce ? { opacity: 0 } : { opacity: 0, y: -8 }}
+          initial={shouldReduce ? { opacity: 0 } : { opacity: 0, scale: 0.98, y: 8 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={shouldReduce ? { opacity: 0 } : { opacity: 0, scale: 0.98, y: -6 }}
           transition={{
-            duration: shouldReduce ? 0.15 : 0.25,
+            duration: shouldReduce ? 0.15 : 0.28,
             ease: [0.16, 1, 0.3, 1],
           }}
         >
