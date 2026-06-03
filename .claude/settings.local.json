@@ -24,7 +24,8 @@
       "Bash(Get-Item \"C:\\\\Users\\\\pc81\\\\Desktop\\\\Fotoğraf stüdyosu\\\\studyo-konfigurator\\\\CLAUDE.md\")",
       "Bash(Select-Object Length, Name)",
       "Bash(git add *)",
-      "Bash(git commit *)"
+      "Bash(git commit *)",
+      "Bash(git config *)"
     ]
   }
 }

@@ -1,5 +1,4 @@
 import { ProgressBar } from '@/components/ProgressBar'
-import { studioConfig } from '@/studio.config'
 
 interface StepContainerProps {
   step: number
@@ -19,21 +18,8 @@ export function StepContainer({
   hasPriceBar,
 }: StepContainerProps) {
   return (
-    <section className="min-h-screen flex flex-col">
-      <header className="px-6 pt-8 pb-6 md:px-12 md:pt-12">
-        <div className="flex items-center justify-between mb-6">
-          <div>
-            <p className="font-body text-[10px] tracking-[0.25em] uppercase text-ink/40">
-              {studioConfig.name}
-            </p>
-            <p className="font-body text-[10px] tracking-[0.2em] uppercase text-gold-soft">
-              {studioConfig.tagline}
-            </p>
-          </div>
-          <span className="font-body text-xs text-ink/40 tracking-widest">
-            Adım {String(step).padStart(2, '0')} / 09
-          </span>
-        </div>
+    <section className="flex flex-col">
+      <header className="px-6 pt-4 pb-6 md:px-12">
         <ProgressBar current={step} />
         <h1 className="font-display text-4xl md:text-5xl font-light text-ink mt-8 leading-tight">
           {title}

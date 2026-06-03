@@ -4,6 +4,7 @@ import { PriceDisplay } from '@/components/PriceDisplay'
 import { useWizardState } from '@/hooks/useWizardState'
 import { calculatePrice } from '@/lib/price-engine'
 import { usePathname } from 'next/navigation'
+import { studioConfig } from '@/studio.config'
 
 const PRICE_VISIBLE_STEPS = [
   '/configure/style',
@@ -32,6 +33,14 @@ export function ConfigureLayoutInner({ children }: { children: React.ReactNode }
 
   return (
     <div className="min-h-screen bg-cream relative">
+      <div className="px-6 pt-8 md:px-12" aria-hidden="true">
+        <p className="font-body text-[10px] tracking-[0.25em] uppercase text-ink/40">
+          {studioConfig.name}
+        </p>
+        <p className="font-body text-[10px] tracking-[0.2em] uppercase text-gold-soft">
+          {studioConfig.tagline}
+        </p>
+      </div>
       <PageTransition>{children}</PageTransition>
       <PriceDisplay price={price} visible={showPrice} />
     </div>
