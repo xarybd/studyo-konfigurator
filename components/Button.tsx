@@ -21,23 +21,45 @@ export function Button({
     <Comp
       className={cn(
         'inline-flex items-center justify-center gap-2 cursor-pointer',
-        'font-body font-medium text-sm',
-        'min-h-[44px] min-w-[44px] px-8 py-3.5',
-        'transition-colors duration-200',
+        'font-body font-medium text-[13px]',
+        'min-h-[44px] min-w-[44px]',
+        'transition-all duration-200',
+        'rounded-full',
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2',
         'disabled:opacity-60 disabled:cursor-not-allowed',
-        variant === 'primary' && 'bg-gold text-cream hover:bg-gold-dark',
-        variant === 'ghost' && 'text-ink/60 hover:text-ink px-0 py-0 min-w-0',
-        variant === 'outline' &&
-          'border border-gold text-ink hover:bg-gold/5 px-6',
+
+        variant === 'primary' && [
+          'bg-gold text-cream',
+          'px-8 py-[14px]',
+          'hover:bg-gold-dark hover:-translate-y-0.5',
+          'hover:shadow-[0_6px_20px_rgba(154,126,79,0.35)]',
+        ],
+
+        variant === 'ghost' && [
+          'text-[#4A413A] border border-[rgba(184,153,104,0.35)]',
+          'px-6 py-3',
+          'hover:bg-[rgba(184,153,104,0.1)] hover:border-[rgba(184,153,104,0.65)]',
+          'min-w-0',
+        ],
+
+        variant === 'outline' && [
+          'border border-[rgba(184,153,104,0.4)] text-[#4A413A]',
+          'px-7 py-3',
+          'hover:bg-[rgba(184,153,104,0.1)] hover:border-[rgba(184,153,104,0.65)]',
+        ],
+
         variant === 'whatsapp' && [
           'bg-gradient-to-br from-[#B89968] to-[#9A7E4F]',
           'text-cream',
+          'px-9 py-[16px]',
           'w-full md:w-auto',
-          'uppercase tracking-[0.18em] text-[14px]',
-          'hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(154,126,79,0.3)]',
-          'transition-[transform,box-shadow,background] duration-200',
+          'uppercase tracking-[0.24em] text-[13px]',
+          'shadow-[0_4px_16px_rgba(154,126,79,0.3)]',
+          'hover:-translate-y-[2px]',
+          'hover:shadow-[0_8px_28px_rgba(154,126,79,0.42)]',
+          'hover:brightness-[1.05]',
         ],
+
         className,
       )}
       {...props}
