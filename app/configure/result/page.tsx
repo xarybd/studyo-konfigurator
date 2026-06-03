@@ -4,9 +4,7 @@ import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { StepContainer } from '@/components/StepContainer'
 import { SummaryRow } from '@/components/SummaryRow'
-import { Button } from '@/components/Button'
 import { useWizardState } from '@/hooks/useWizardState'
 import { calculatePrice } from '@/lib/price-engine'
 import { buildWhatsAppURL, buildWhatsAppMessage, LABELS } from '@/lib/whatsapp'
@@ -26,11 +24,40 @@ function label<T extends Record<string, string>>(map: T, key: string | null | un
   return (map as Record<string, string>)[key] ?? key
 }
 
+const glassPanelStyle = {
+  background: 'rgba(255,252,245,0.55)',
+  backdropFilter: 'blur(18px) saturate(1.2)',
+  WebkitBackdropFilter: 'blur(18px) saturate(1.2)',
+  border: '1px solid rgba(184,153,104,0.25)',
+  borderRadius: '16px',
+  boxShadow: '0 4px 20px rgba(42,37,32,0.04), 0 24px 56px rgba(154,126,79,0.08), inset 0 1px 0 rgba(255,255,255,0.5)',
+}
+
+const inputClass = [
+  'w-full px-4 py-[14px] font-body text-sm text-ink',
+  'placeholder:italic placeholder:text-ink/35',
+  'focus:outline-none transition-colors duration-200',
+  'rounded-[8px]',
+].join(' ')
+
+const inputStyle = {
+  background: 'rgba(255,252,245,0.7)',
+  backdropFilter: 'blur(12px)',
+  WebkitBackdropFilter: 'blur(12px)',
+  border: '1px solid rgba(184,153,104,0.3)',
+}
+
+const inputFocusStyle = {
+  border: '1px solid rgba(184,153,104,0.85)',
+  boxShadow: '0 0 0 3px rgba(184,153,104,0.08)',
+}
+
 export default function ResultPage() {
   const router = useRouter()
   const [state] = useWizardState()
   const [emailSent, setEmailSent] = useState(false)
   const [emailLoading, setEmailLoading] = useState(false)
+  const [focusedField, setFocusedField] = useState<string | null>(null)
 
   const { register, handleSubmit, formState: { errors }, watch } = useForm<FormValues>({
     resolver: zodResolver(schema),
@@ -98,124 +125,154 @@ export default function ResultPage() {
   }
 
   return (
-    <StepContainer
-      step={9}
-      title={<>Sizin için <em className="font-accent not-italic text-gold-dark italic">tasarladığımız</em> paket</>}
-      footer={
-        <Button variant="ghost" onClick={() => router.push('/configure/extras')}>
-          <ChevronLeft size={16} />
-          Geri
-        </Button>
-      }
-    >
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mt-4">
-        {/* Sol: Özet */}
-        <div>
-          <p className="font-body text-[10px] tracking-[0.2em] uppercase text-ink/40 mb-4">H A Z I R</p>
-          <SummaryRow label="Etkinlik" value={label(LABELS.context, state.context)} />
-          <SummaryRow label="Tarih" value={state.date ?? 'Belirtilmedi'} />
-          <SummaryRow label="Stil" value={label(LABELS.style, state.style)} />
-          <SummaryRow label="Lokasyon" value={label(LABELS.location, state.location)} />
-          <SummaryRow label="Süre" value={label(LABELS.duration, state.duration)} />
-          <SummaryRow label="Ekip" value={label(LABELS.team, state.team)} />
-          <SummaryRow label="Teslimat" value={label(LABELS.delivery, state.delivery)} />
-          <SummaryRow label="Ekstralar" value={extrasList} />
-        </div>
+    <section className="flex-1 flex flex-col items-center justify-center px-5 md:px-12 py-8 pb-16">
+      <div className="w-full max-w-4xl text-center">
+        <h1
+          className="font-display font-light text-ink"
+          style={{ fontSize: 'clamp(40px, 6vw, 72px)', lineHeight: '1.0' }}
+        >
+          Sizin için{' '}
+          <em className="font-accent not-italic italic text-gold-dark">tasarladığımız</em>{' '}
+          paket
+        </h1>
+        <p
+          className="font-display italic text-ink/50 mt-4 max-w-lg mx-auto"
+          style={{ fontSize: '16px', lineHeight: '1.6' }}
+        >
+          Net teklif kişisel görüşmede netleşir.
+        </p>
 
-        {/* Sağ: Fiyat + CTA */}
-        <div className="flex flex-col gap-6">
-          {price ? (
-            <div className="bg-ink rounded-[10px] p-8 text-center">
-              <p className="font-body text-[10px] tracking-[0.25em] uppercase text-cream/40 mb-4">
-                Y A T I R I M &nbsp; A R A L I Ğ I
+        <div style={glassPanelStyle} className="mt-12 text-left">
+          <div className="grid grid-cols-1 lg:grid-cols-2">
+            {/* Sol: Özet */}
+            <div className="p-8 md:p-10 border-b lg:border-b-0 lg:border-r border-gold/20">
+              <p className="font-body text-[10px] tracking-[0.28em] uppercase text-gold/70 mb-6">
+                PAKET ÖZETİ
               </p>
-              <div className="flex items-baseline justify-center gap-2">
-                <span className="font-display text-3xl md:text-4xl font-light text-cream">
-                  {formatCurrency(price.min)}
-                </span>
-                <span className="font-body text-cream/40 text-lg">—</span>
-                <span className="font-display text-3xl md:text-4xl font-light text-cream">
-                  {formatCurrency(price.max)}
-                </span>
-              </div>
-              <p className="font-accent italic text-gold-soft text-sm mt-3">
-                Net teklif kişisel görüşmede netleşir.
-              </p>
+              <SummaryRow label="Etkinlik" value={label(LABELS.context, state.context)} />
+              <SummaryRow label="Tarih" value={state.date ?? 'Belirtilmedi'} />
+              <SummaryRow label="Stil" value={label(LABELS.style, state.style)} />
+              <SummaryRow label="Lokasyon" value={label(LABELS.location, state.location)} />
+              <SummaryRow label="Süre" value={label(LABELS.duration, state.duration)} />
+              <SummaryRow label="Ekip" value={label(LABELS.team, state.team)} />
+              <SummaryRow label="Teslimat" value={label(LABELS.delivery, state.delivery)} />
+              <SummaryRow label="Ekstralar" value={extrasList} />
             </div>
-          ) : (
-            <div className="bg-gold-soft/20 rounded-[10px] p-8 text-center">
-              <p className="font-body text-sm text-ink/60">Fiyat için birkaç adım daha tamamlayın.</p>
-            </div>
-          )}
 
-          {/* WhatsApp CTA */}
-          <a href={buildWAUrl()} target="_blank" rel="noopener noreferrer">
-            <Button variant="whatsapp" className="gap-3">
-              <MessageCircle size={18} />
-              WhatsApp&apos;tan Ulaş
-            </Button>
-          </a>
+            {/* Sağ: Fiyat + CTA */}
+            <div className="p-8 md:p-10 flex flex-col gap-6">
+              {price ? (
+                <div className="text-center">
+                  <p className="font-body text-[10px] tracking-[0.28em] uppercase text-gold mb-4">
+                    YATIRIM ARALIĞI
+                  </p>
+                  <p
+                    className="font-display italic text-gold-dark"
+                    style={{ fontSize: 'clamp(32px, 4vw, 44px)', lineHeight: '1.1' }}
+                  >
+                    {formatCurrency(price.min)} — {formatCurrency(price.max)}
+                  </p>
+                  <p
+                    className="font-display italic text-ink/40 mt-3"
+                    style={{ fontSize: '14px' }}
+                  >
+                    Net teklif kişisel görüşmede netleşir.
+                  </p>
+                </div>
+              ) : (
+                <div className="text-center py-4">
+                  <p className="font-body text-sm text-ink/50">Fiyat için birkaç adım daha tamamlayın.</p>
+                </div>
+              )}
 
-          {/* Email Form */}
-          <div className="border-t border-gold-soft/30 pt-6">
-            <p className="font-accent italic text-gold-dark text-base mb-4">Sizinle tanışalım</p>
-
-            {emailSent ? (
-              <p className="font-body text-sm text-ink/60">
-                Mesajınız iletildi. En kısa sürede geri dönüyoruz.
-              </p>
-            ) : (
-              <form onSubmit={handleSubmit(onEmailSubmit)} className="flex flex-col gap-4">
-                <div>
-                  <label htmlFor="result-name" className="block font-body text-[10px] tracking-[0.28em] uppercase text-[#8A7F70] mb-2">
-                    Ad Soyad
-                  </label>
-                  <input
-                    id="result-name"
-                    {...register('name')}
-                    placeholder="Adınız"
-                    className="w-full border border-[#E8DEC9] bg-[#FFFCF5] px-4 py-[14px] font-body text-sm text-ink placeholder:italic placeholder:text-[#8A7F70] focus:outline-none focus:border-[#B89968] transition-colors duration-200 rounded-[6px]"
-                  />
-                  {errors.name && <p className="font-body text-xs text-error mt-1">{errors.name.message}</p>}
-                </div>
-                <div>
-                  <label htmlFor="result-email" className="block font-body text-[10px] tracking-[0.28em] uppercase text-[#8A7F70] mb-2">
-                    E-posta
-                  </label>
-                  <input
-                    id="result-email"
-                    {...register('email')}
-                    type="email"
-                    placeholder="ornek@mail.com"
-                    className="w-full border border-[#E8DEC9] bg-[#FFFCF5] px-4 py-[14px] font-body text-sm text-ink placeholder:italic placeholder:text-[#8A7F70] focus:outline-none focus:border-[#B89968] transition-colors duration-200 rounded-[6px]"
-                  />
-                  {errors.email && <p className="font-body text-xs text-error mt-1">{errors.email.message}</p>}
-                </div>
-                <div>
-                  <label htmlFor="result-phone" className="block font-body text-[10px] tracking-[0.28em] uppercase text-[#8A7F70] mb-2">
-                    Telefon <span className="normal-case tracking-normal">(isteğe bağlı)</span>
-                  </label>
-                  <input
-                    id="result-phone"
-                    {...register('phone')}
-                    type="tel"
-                    placeholder="+90 5xx xxx xx xx"
-                    className="w-full border border-[#E8DEC9] bg-[#FFFCF5] px-4 py-[14px] font-body text-sm text-ink placeholder:italic placeholder:text-[#8A7F70] focus:outline-none focus:border-[#B89968] transition-colors duration-200 rounded-[6px]"
-                  />
-                </div>
+              {/* WhatsApp CTA */}
+              <a href={buildWAUrl()} target="_blank" rel="noopener noreferrer" className="block">
                 <button
-                  type="submit"
-                  disabled={emailLoading}
-                  className="inline-flex items-center gap-2 self-start min-h-[44px] px-8 py-[14px] rounded-[6px] font-body font-medium text-sm cursor-pointer transition-colors duration-200 bg-[#2A2520] text-[#F7F1E6] hover:bg-[#9A7E4F] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2"
+                  className="w-full inline-flex items-center justify-center gap-3 text-cream rounded-full cursor-pointer font-body text-[12px] tracking-[0.22em] uppercase font-medium min-h-[52px] transition-all duration-200 hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2"
+                  style={{
+                    background: 'linear-gradient(135deg, #B89968, #9A7E4F)',
+                    boxShadow: '0 6px 20px rgba(154,126,79,0.28)',
+                  }}
                 >
-                  <Send size={16} />
-                  {emailLoading ? 'Gönderiliyor…' : 'Gönder'}
+                  <MessageCircle size={18} strokeWidth={1.5} />
+                  WHATSAPP&apos;TAN ULAŞ →
                 </button>
-              </form>
-            )}
+              </a>
+
+              {/* Email Form */}
+              <div
+                className="border-t pt-6"
+                style={{ borderColor: 'rgba(184,153,104,0.2)' }}
+              >
+                <p className="font-accent italic text-gold-dark text-base mb-5">Sizinle tanışalım</p>
+
+                {emailSent ? (
+                  <p className="font-body text-sm text-ink/55">
+                    Mesajınız iletildi. En kısa sürede geri dönüyoruz.
+                  </p>
+                ) : (
+                  <form onSubmit={handleSubmit(onEmailSubmit)} className="flex flex-col gap-4">
+                    {[
+                      { id: 'result-name', name: 'name' as const, label: 'Ad Soyad', placeholder: 'Adınız', type: 'text' },
+                      { id: 'result-email', name: 'email' as const, label: 'E-posta', placeholder: 'ornek@mail.com', type: 'email' },
+                      { id: 'result-phone', name: 'phone' as const, label: 'Telefon (isteğe bağlı)', placeholder: '+90 5xx xxx xx xx', type: 'tel' },
+                    ].map(({ id, name, label: fieldLabel, placeholder, type }) => (
+                      <div key={id}>
+                        <label htmlFor={id} className="block font-body text-[10px] tracking-[0.28em] uppercase text-ink/40 mb-2">
+                          {fieldLabel}
+                        </label>
+                        <input
+                          id={id}
+                          {...register(name)}
+                          type={type}
+                          placeholder={placeholder}
+                          className={inputClass}
+                          style={{
+                            ...inputStyle,
+                            ...(focusedField === id ? inputFocusStyle : {}),
+                          }}
+                          onFocus={() => setFocusedField(id)}
+                          onBlur={() => setFocusedField(null)}
+                        />
+                        {name === 'name' && errors.name && (
+                          <p className="font-body text-xs text-error mt-1">{errors.name.message}</p>
+                        )}
+                        {name === 'email' && errors.email && (
+                          <p className="font-body text-xs text-error mt-1">{errors.email.message}</p>
+                        )}
+                      </div>
+                    ))}
+
+                    <button
+                      type="submit"
+                      disabled={emailLoading}
+                      className="inline-flex items-center gap-2 self-start min-h-[44px] px-8 py-[13px] rounded-full font-body text-[11px] tracking-[0.2em] uppercase font-medium cursor-pointer transition-all duration-200 hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2"
+                      style={{
+                        background: 'transparent',
+                        border: '1px solid rgba(184,153,104,0.6)',
+                        color: '#2A2520',
+                      }}
+                    >
+                      <Send size={14} strokeWidth={1.5} />
+                      {emailLoading ? 'Gönderiliyor…' : 'Bilgilerimi Gönder'}
+                    </button>
+                  </form>
+                )}
+              </div>
+            </div>
           </div>
         </div>
+
+        <div className="mt-8 flex justify-center">
+          <button
+            onClick={() => router.push('/configure/extras')}
+            className="inline-flex items-center gap-2 font-body text-sm text-ink/40 hover:text-ink transition-colors cursor-pointer"
+          >
+            <ChevronLeft size={16} />
+            Geri
+          </button>
+        </div>
       </div>
-    </StepContainer>
+    </section>
   )
 }
