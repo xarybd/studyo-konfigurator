@@ -15,6 +15,16 @@ interface CardProps {
   children?: React.ReactNode
 }
 
+const cardVariants = {
+  rest: { y: 0 },
+  hover: { y: -4 },
+}
+
+const iconVariants = {
+  rest: { scale: 1 },
+  hover: { scale: 1.08 },
+}
+
 export function Card({
   title,
   description,
@@ -30,8 +40,8 @@ export function Card({
 
   const x = useMotionValue(0)
   const y = useMotionValue(0)
-  const rotateY = useTransform(x, [-100, 100], [-5, 5])
-  const rotateX = useTransform(y, [-100, 100], [5, -5])
+  const rotateY = useTransform(x, [-100, 100], [-4, 4])
+  const rotateX = useTransform(y, [-100, 100], [4, -4])
 
   const isTouchDevice =
     typeof window !== 'undefined' && 'ontouchstart' in window
@@ -47,6 +57,9 @@ export function Card({
     x.set(0)
     y.set(0)
   }
+
+  const motionStyle =
+    shouldReduce || isTouchDevice ? {} : { rotateX, rotateY, transformPerspective: 1000 }
 
   return (
     <m.div
@@ -64,45 +77,53 @@ export function Card({
       }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      style={shouldReduce || isTouchDevice ? {} : { rotateX, rotateY, transformPerspective: 1000 }}
-      whileHover={
-        shouldReduce || disabled
-          ? {}
-          : { y: -4, transition: { duration: 0.3, ease: [0.4, 0, 0.2, 1] } }
-      }
+      initial="rest"
+      whileHover={shouldReduce || disabled ? 'rest' : 'hover'}
+      variants={cardVariants}
+      transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+      style={motionStyle}
       className={cn(
         'relative cursor-pointer select-none outline-none',
-        'p-6 flex flex-col gap-3',
+        'px-6 py-7 flex flex-col gap-3',
         'border transition-all duration-300',
         'rounded-[10px]',
-        /* Frosted Parchment */
         'bg-[#FFFCF5]/[0.92] backdrop-blur-[4px]',
-        /* Idle */
-        !selected && !disabled && 'border-gold-soft/60 shadow-[0_2px_8px_rgba(42,37,32,0.06),0_8px_24px_rgba(42,37,32,0.04)]',
-        /* Hover border (CSS only for non-motion devices) */
-        !selected && !disabled && 'hover:border-gold hover:shadow-[0_4px_20px_rgba(184,153,104,0.18),0_8px_32px_rgba(42,37,32,0.08)]',
-        /* Selected */
-        selected &&
-          'border-gold shadow-[0_4px_20px_rgba(184,153,104,0.22),0_8px_32px_rgba(42,37,32,0.08)] bg-gold/5',
-        /* Disabled */
+        !selected && !disabled && [
+          'border-gold-soft/60',
+          'shadow-[0_1px_2px_rgba(42,37,32,0.04),0_4px_12px_rgba(154,126,79,0.08)]',
+          'hover:border-gold',
+          'hover:shadow-[0_12px_40px_rgba(154,126,79,0.14),0_4px_16px_rgba(42,37,32,0.06)]',
+        ],
+        selected && [
+          'border-gold',
+          'shadow-[0_4px_20px_rgba(184,153,104,0.22),0_8px_32px_rgba(42,37,32,0.08)]',
+          'bg-gold/5',
+        ],
         disabled && 'opacity-40 cursor-not-allowed pointer-events-none',
-        /* Focus ring */
         'focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2',
         className,
       )}
     >
-      {/* Checkmark */}
       <span
         className={cn(
-          'absolute top-3 right-3 w-5 h-5 rounded-full bg-gold flex items-center justify-center',
+          'absolute top-3 right-3 w-[18px] h-[18px] rounded-full bg-gold',
+          'flex items-center justify-center',
           'transition-opacity duration-200',
           selected ? 'opacity-100' : 'opacity-0',
         )}
       >
-        <Check size={11} strokeWidth={3} className="text-cream" />
+        <Check size={10} strokeWidth={3} className="text-cream" />
       </span>
 
-      {icon && <div className="text-gold-dark mb-1">{icon}</div>}
+      {icon && (
+        <m.div
+          className="text-gold-dark mb-1"
+          variants={iconVariants}
+          transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+        >
+          {icon}
+        </m.div>
+      )}
 
       <h2 className="font-display text-xl font-normal text-ink leading-snug">{title}</h2>
 

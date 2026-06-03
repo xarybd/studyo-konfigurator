@@ -3,20 +3,20 @@ import { useRouter } from 'next/navigation'
 import { StepContainer } from '@/components/StepContainer'
 import { Card } from '@/components/Card'
 import { useWizardState } from '@/hooks/useWizardState'
-import { Users, Heart, Baby } from 'lucide-react'
+import { Gem, Diamond, Baby } from 'lucide-react'
 
 const OPTIONS = [
   {
     key: 'wedding',
     title: 'Düğün',
     description: 'En özel günün eksiksiz hikâyesi',
-    icon: <Heart size={28} strokeWidth={1.5} />,
+    icon: <Gem size={28} strokeWidth={1.5} />,
   },
   {
     key: 'engagement',
     title: 'Nişan / Söz',
     description: 'Yolculuğun ilk büyük adımı',
-    icon: <Users size={28} strokeWidth={1.5} />,
+    icon: <Diamond size={28} strokeWidth={1.5} />,
   },
   {
     key: 'family',
