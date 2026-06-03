@@ -32,7 +32,14 @@ export const metadata: Metadata = {
   description: 'Kendi fotoğraf paketinizi tasarlayın',
 }
 
-const NOISE_SVG = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")`
+const MESH_GRADIENT =
+  'radial-gradient(circle at 15% 25%, #D9C39A 0%, transparent 45%), ' +
+  'radial-gradient(circle at 85% 35%, #FAEAD8 0%, transparent 50%), ' +
+  'radial-gradient(circle at 50% 85%, #FFF5E6 0%, transparent 45%), ' +
+  'radial-gradient(circle at 25% 65%, #E8D4A8 0%, transparent 40%)'
+
+const NOISE_SVG =
+  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E\")"
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -41,31 +48,33 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${cormorant.variable} ${italiana.variable} ${inter.variable}`}
     >
       <body>
-        {/* Layer 2: animated gradient mesh */}
+        {/* Katman A — animasyonlu gradient mesh */}
         <div
           aria-hidden="true"
-          style={{ position: 'fixed', inset: 0, zIndex: -2, overflow: 'hidden', opacity: 0.7 }}
-        >
-          <div style={{ position: 'absolute', inset: 0, filter: 'blur(80px)' }}>
-            <div className="mesh-blob mesh-blob-1" />
-            <div className="mesh-blob mesh-blob-2" />
-            <div className="mesh-blob mesh-blob-3" />
-            <div className="mesh-blob mesh-blob-4" />
-          </div>
-        </div>
+          className="mesh-drift-layer"
+          style={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: -2,
+            pointerEvents: 'none',
+            background: MESH_GRADIENT,
+            filter: 'blur(100px) saturate(125%)',
+            opacity: 0.75,
+          }}
+        />
 
-        {/* Layer 3: SVG noise overlay */}
+        {/* Katman B — grain noise */}
         <div
           aria-hidden="true"
           style={{
             position: 'fixed',
             inset: 0,
             zIndex: -1,
-            opacity: 0.04,
-            mixBlendMode: 'overlay' as const,
-            backgroundImage: NOISE_SVG,
-            backgroundSize: '180px 180px',
             pointerEvents: 'none',
+            backgroundImage: NOISE_SVG,
+            backgroundSize: '200px 200px',
+            opacity: 0.05,
+            mixBlendMode: 'overlay' as const,
           }}
         />
 

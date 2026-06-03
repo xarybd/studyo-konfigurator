@@ -142,10 +142,9 @@ export default function ResultPage() {
           Net teklif kişisel görüşmede netleşir.
         </p>
 
-        <div style={glassPanelStyle} className="mt-12 text-left">
-          <div className="grid grid-cols-1 lg:grid-cols-2">
-            {/* Sol: Özet */}
-            <div className="p-8 md:p-10 border-b lg:border-b-0 lg:border-r border-gold/20">
+        <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Sol: Paket Özeti */}
+            <div style={glassPanelStyle} className="p-8 md:p-10 text-left">
               <p className="font-body text-[10px] tracking-[0.28em] uppercase text-gold/70 mb-6">
                 PAKET ÖZETİ
               </p>
@@ -160,7 +159,7 @@ export default function ResultPage() {
             </div>
 
             {/* Sağ: Fiyat + CTA */}
-            <div className="p-8 md:p-10 flex flex-col gap-6">
+            <div style={glassPanelStyle} className="p-8 md:p-10 flex flex-col gap-6 text-left">
               {price ? (
                 <div className="text-center">
                   <p className="font-body text-[10px] tracking-[0.28em] uppercase text-gold mb-4">
@@ -260,7 +259,6 @@ export default function ResultPage() {
                 )}
               </div>
             </div>
-          </div>
         </div>
 
         <div className="mt-8 flex justify-center">

@@ -18,7 +18,7 @@ interface CardProps {
 
 const cardVariants = {
   rest: { y: 0 },
-  hover: { y: -4 },
+  hover: { y: -6 },
 }
 
 const iconVariants = {
@@ -40,15 +40,20 @@ export function Card({
   const shouldReduce = useReducedMotion()
   const [hovered, setHovered] = useState(false)
 
-  const bg = selected || hovered ? 'rgba(255,252,245,0.70)' : 'rgba(255,252,245,0.55)'
-  const border = selected
-    ? '1.5px solid rgba(184,153,104,0.85)'
+  const bg = selected
+    ? 'rgba(255,252,245,0.65)'
     : hovered
-      ? '1px solid rgba(184,153,104,0.50)'
-      : '1px solid rgba(184,153,104,0.25)'
-  const shadow = selected || hovered
-    ? '0 4px 24px rgba(42,37,32,0.06), 0 20px 48px rgba(154,126,79,0.10), inset 0 1px 0 rgba(255,255,255,0.6)'
-    : '0 4px 20px rgba(42,37,32,0.04), 0 16px 40px rgba(154,126,79,0.06), inset 0 1px 0 rgba(255,255,255,0.5)'
+      ? 'rgba(255,252,245,0.60)'
+      : 'rgba(255,252,245,0.45)'
+  const backdropBlur = hovered ? 'blur(24px) saturate(150%)' : 'blur(20px) saturate(140%)'
+  const border = selected
+    ? '1.5px solid rgba(184,153,104,0.75)'
+    : hovered
+      ? '1px solid rgba(184,153,104,0.45)'
+      : '1px solid rgba(184,153,104,0.22)'
+  const shadow = hovered
+    ? '0 4px 16px rgba(42,37,32,0.04), 0 20px 60px rgba(154,126,79,0.14), inset 0 1px 0 rgba(255,255,255,0.55)'
+    : '0 4px 16px rgba(42,37,32,0.04), 0 16px 48px rgba(154,126,79,0.08), inset 0 1px 0 rgba(255,255,255,0.55)'
 
   return (
     <m.div
@@ -72,8 +77,8 @@ export function Card({
       }}
       style={{
         background: bg,
-        backdropFilter: 'blur(18px) saturate(1.2)',
-        WebkitBackdropFilter: 'blur(18px) saturate(1.2)',
+        backdropFilter: backdropBlur,
+        WebkitBackdropFilter: backdropBlur,
         border,
         borderRadius: '16px',
         padding: '32px 24px',
