@@ -165,43 +165,52 @@ export default function ResultPage() {
                 Mesajınız iletildi. En kısa sürede geri dönüyoruz.
               </p>
             ) : (
-              <form onSubmit={handleSubmit(onEmailSubmit)} className="flex flex-col gap-3">
+              <form onSubmit={handleSubmit(onEmailSubmit)} className="flex flex-col gap-4">
                 <div>
+                  <label htmlFor="result-name" className="block font-body text-[10px] tracking-[0.28em] uppercase text-[#8A7F70] mb-2">
+                    Ad Soyad
+                  </label>
                   <input
+                    id="result-name"
                     {...register('name')}
-                    placeholder="Ad Soyad"
-                    className="w-full border border-gold-soft/60 bg-cream px-4 py-3 font-body text-sm text-ink placeholder:text-gold-soft focus:outline-none focus:border-gold transition-colors duration-200 rounded-sm"
+                    placeholder="Adınız"
+                    className="w-full border border-[#E8DEC9] bg-[#FFFCF5] px-4 py-[14px] font-body text-sm text-ink placeholder:italic placeholder:text-[#8A7F70] focus:outline-none focus:border-[#B89968] transition-colors duration-200 rounded-[6px]"
                   />
                   {errors.name && <p className="font-body text-xs text-error mt-1">{errors.name.message}</p>}
                 </div>
                 <div>
+                  <label htmlFor="result-email" className="block font-body text-[10px] tracking-[0.28em] uppercase text-[#8A7F70] mb-2">
+                    E-posta
+                  </label>
                   <input
+                    id="result-email"
                     {...register('email')}
                     type="email"
-                    placeholder="E-posta"
-                    className="w-full border border-gold-soft/60 bg-cream px-4 py-3 font-body text-sm text-ink placeholder:text-gold-soft focus:outline-none focus:border-gold transition-colors duration-200 rounded-sm"
+                    placeholder="ornek@mail.com"
+                    className="w-full border border-[#E8DEC9] bg-[#FFFCF5] px-4 py-[14px] font-body text-sm text-ink placeholder:italic placeholder:text-[#8A7F70] focus:outline-none focus:border-[#B89968] transition-colors duration-200 rounded-[6px]"
                   />
                   {errors.email && <p className="font-body text-xs text-error mt-1">{errors.email.message}</p>}
                 </div>
-                <input
-                  {...register('phone')}
-                  type="tel"
-                  placeholder="Telefon (isteğe bağlı)"
-                  className="w-full border border-gold-soft/60 bg-cream px-4 py-3 font-body text-sm text-ink placeholder:text-gold-soft focus:outline-none focus:border-gold transition-colors duration-200 rounded-sm"
-                />
-                <Button
+                <div>
+                  <label htmlFor="result-phone" className="block font-body text-[10px] tracking-[0.28em] uppercase text-[#8A7F70] mb-2">
+                    Telefon <span className="normal-case tracking-normal">(isteğe bağlı)</span>
+                  </label>
+                  <input
+                    id="result-phone"
+                    {...register('phone')}
+                    type="tel"
+                    placeholder="+90 5xx xxx xx xx"
+                    className="w-full border border-[#E8DEC9] bg-[#FFFCF5] px-4 py-[14px] font-body text-sm text-ink placeholder:italic placeholder:text-[#8A7F70] focus:outline-none focus:border-[#B89968] transition-colors duration-200 rounded-[6px]"
+                  />
+                </div>
+                <button
                   type="submit"
-                  variant="outline"
                   disabled={emailLoading}
-                  className="self-start"
+                  className="inline-flex items-center gap-2 self-start min-h-[44px] px-8 py-[14px] rounded-[6px] font-body font-medium text-sm cursor-pointer transition-colors duration-200 bg-[#2A2520] text-[#F7F1E6] hover:bg-[#9A7E4F] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2"
                 >
-                  {emailLoading ? 'Gönderiliyor…' : (
-                    <>
-                      <Send size={14} />
-                      Gönder
-                    </>
-                  )}
-                </Button>
+                  <Send size={16} />
+                  {emailLoading ? 'Gönderiliyor…' : 'Gönder'}
+                </button>
               </form>
             )}
           </div>

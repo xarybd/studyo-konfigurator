@@ -30,7 +30,14 @@ export function Button({
         variant === 'ghost' && 'text-ink/60 hover:text-ink px-0 py-0 min-w-0',
         variant === 'outline' &&
           'border border-gold text-ink hover:bg-gold/5 px-6',
-        variant === 'whatsapp' && 'bg-[#25D366] text-white hover:bg-[#1da851] w-full md:w-auto',
+        variant === 'whatsapp' && [
+          'bg-gradient-to-br from-[#B89968] to-[#9A7E4F]',
+          'text-cream',
+          'w-full md:w-auto',
+          'uppercase tracking-[0.18em] text-[14px]',
+          'hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(154,126,79,0.3)]',
+          'transition-[transform,box-shadow,background] duration-200',
+        ],
         className,
       )}
       {...props}
