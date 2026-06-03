@@ -1,6 +1,7 @@
 'use client'
 import { PageTransition } from '@/components/PageTransition'
 import { PriceDisplay } from '@/components/PriceDisplay'
+import { SiteHeader } from '@/components/SiteHeader'
 import { useWizardState } from '@/hooks/useWizardState'
 import { calculatePrice } from '@/lib/price-engine'
 import { usePathname } from 'next/navigation'
@@ -31,8 +32,9 @@ export function ConfigureLayoutInner({ children }: { children: React.ReactNode }
   const showPrice = PRICE_VISIBLE_STEPS.some((s) => pathname.startsWith(s))
 
   return (
-    <div className="min-h-screen bg-cream">
-      <PageTransition>{children}</PageTransition>
+    <div className="min-h-screen flex flex-col">
+      <SiteHeader />
+      <PageTransition className="flex-1 flex flex-col">{children}</PageTransition>
       <PriceDisplay price={price} visible={showPrice} />
     </div>
   )

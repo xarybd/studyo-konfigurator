@@ -2,7 +2,12 @@
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion'
 import { useSelectedLayoutSegment } from 'next/navigation'
 
-export function PageTransition({ children }: { children: React.ReactNode }) {
+interface PageTransitionProps {
+  children: React.ReactNode
+  className?: string
+}
+
+export function PageTransition({ children, className }: PageTransitionProps) {
   const segment = useSelectedLayoutSegment()
 
   return (
@@ -10,6 +15,7 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
       <AnimatePresence mode="wait">
         <m.div
           key={segment ?? 'root'}
+          className={className}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
