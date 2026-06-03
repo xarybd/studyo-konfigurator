@@ -60,22 +60,6 @@ export default function DatePage() {
             selectedDate={state.date ?? undefined}
             onSelectDate={handleSelectDate}
           />
-          <div className="flex items-center gap-6 mt-6">
-            <span className="flex items-center gap-2 font-body text-xs text-ink/50">
-              <span className="w-3 h-3 rounded-full bg-cream border border-gold-soft/60 inline-block" />
-              Müsait
-            </span>
-            <span className="flex items-center gap-2 font-body text-xs text-ink/50">
-              <span className="w-3 h-3 rounded-full bg-ink/20 inline-block" />
-              Dolu
-            </span>
-            {state.date && (
-              <span className="flex items-center gap-2 font-body text-xs text-ink/50">
-                <span className="w-3 h-3 rounded-full bg-gold inline-block" />
-                Seçili
-              </span>
-            )}
-          </div>
         </div>
       )}
     </StepContainer>
