@@ -4,13 +4,13 @@ import { StepContainer } from '@/components/StepContainer'
 import { Card } from '@/components/Card'
 import { Button } from '@/components/Button'
 import { useWizardState } from '@/hooks/useWizardState'
-import { ChevronLeft, Image, BookOpen, Film, Package } from 'lucide-react'
+import { ChevronLeft, Smartphone, BookOpen, Video, Package } from 'lucide-react'
 
 const OPTIONS = [
-  { key: 'digital', title: 'Dijital', description: 'Tüm fotoğraflar online galeri', icon: <Image size={28} strokeWidth={1.5} /> },
-  { key: 'album', title: 'Dijital + Albüm', description: 'Tutulabilir, baskılı bir hatıra', icon: <BookOpen size={28} strokeWidth={1.5} /> },
-  { key: 'video', title: 'Dijital + Video', description: 'Sinematik highlight filmi', icon: <Film size={28} strokeWidth={1.5} /> },
-  { key: 'complete', title: 'Komple Paket', description: 'Hepsi bir arada', icon: <Package size={28} strokeWidth={1.5} /> },
+  { key: 'digital', title: 'Dijital', description: 'Tüm fotoğraflar online galeri', icon: <Smartphone size={36} strokeWidth={1.5} /> },
+  { key: 'album', title: 'Dijital + Albüm', description: 'Tutulabilir, baskılı bir hatıra', icon: <BookOpen size={36} strokeWidth={1.5} /> },
+  { key: 'video', title: 'Dijital + Video', description: 'Sinematik highlight filmi', icon: <Video size={36} strokeWidth={1.5} /> },
+  { key: 'complete', title: 'Komple Paket', description: 'Hepsi bir arada', icon: <Package size={36} strokeWidth={1.5} /> },
 ] as const
 
 export default function DeliveryPage() {
@@ -19,13 +19,13 @@ export default function DeliveryPage() {
 
   async function handleSelect(key: string) {
     await setState({ delivery: key })
-    setTimeout(() => router.push('/configure/extras'), 300)
+    setTimeout(() => router.push('/configure/extras'), 350)
   }
 
   return (
     <StepContainer
       step={8}
-      title={<>Sizi nasıl <em className="font-accent not-italic text-gold-dark italic">teslim edelim?</em></>}
+      title={<>Nasıl <em className="font-accent not-italic italic text-gold-dark">teslim alalım?</em></>}
       subtitle="Teslimat, paketin algılanan değerini iki katına çıkarır."
       hasPriceBar
       footer={
@@ -35,7 +35,7 @@ export default function DeliveryPage() {
         </Button>
       }
     >
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-2">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-[900px] mx-auto">
         {OPTIONS.map((opt) => (
           <Card
             key={opt.key}

@@ -4,15 +4,14 @@ import { StepContainer } from '@/components/StepContainer'
 import { Card } from '@/components/Card'
 import { Button } from '@/components/Button'
 import { useWizardState } from '@/hooks/useWizardState'
-import { Flower2, Sun, Leaf, Snowflake, HelpCircle } from 'lucide-react'
-import { ChevronLeft } from 'lucide-react'
+import { Flower, Sun, Leaf, Snowflake, HelpCircle, ChevronLeft } from 'lucide-react'
 
 const OPTIONS = [
-  { key: 'spring', title: 'İlkbahar', description: 'Yumuşak ışık, çiçekli zemin', icon: <Flower2 size={28} strokeWidth={1.5} /> },
-  { key: 'summer', title: 'Yaz', description: 'Altın saat, uzun günler', icon: <Sun size={28} strokeWidth={1.5} /> },
-  { key: 'autumn', title: 'Sonbahar', description: 'Sıcak tonlar, doku', icon: <Leaf size={28} strokeWidth={1.5} /> },
-  { key: 'winter', title: 'Kış', description: 'Berrak, dramatik, sade', icon: <Snowflake size={28} strokeWidth={1.5} /> },
-  { key: 'unknown', title: 'Henüz net değil', description: 'Tarih oluşunca konuşalım', icon: <HelpCircle size={28} strokeWidth={1.5} /> },
+  { key: 'spring', title: 'İlkbahar', description: 'Yumuşak ışık, çiçekli zemin', icon: <Flower size={36} strokeWidth={1.5} /> },
+  { key: 'summer', title: 'Yaz', description: 'Altın saat, uzun günler', icon: <Sun size={36} strokeWidth={1.5} /> },
+  { key: 'autumn', title: 'Sonbahar', description: 'Sıcak tonlar, doku', icon: <Leaf size={36} strokeWidth={1.5} /> },
+  { key: 'winter', title: 'Kış', description: 'Berrak, dramatik, sade', icon: <Snowflake size={36} strokeWidth={1.5} /> },
+  { key: 'unknown', title: 'Henüz net değil', description: 'Tarih oluşunca konuşalım', icon: <HelpCircle size={36} strokeWidth={1.5} /> },
 ] as const
 
 export default function SeasonPage() {
@@ -22,13 +21,13 @@ export default function SeasonPage() {
   async function handleSelect(key: string) {
     await setState({ season: key })
     const next = key === 'unknown' ? '/configure/style' : '/configure/date'
-    setTimeout(() => router.push(next), 300)
+    setTimeout(() => router.push(next), 350)
   }
 
   return (
     <StepContainer
       step={2}
-      title={<>Hangi <em className="font-accent not-italic text-gold-dark italic">mevsimde</em> bir araya gelelim?</>}
+      title={<>Hangi <em className="font-accent not-italic italic text-gold-dark">mevsimde?</em></>}
       footer={
         <Button variant="ghost" onClick={() => router.push('/configure/context')}>
           <ChevronLeft size={16} />
@@ -36,7 +35,7 @@ export default function SeasonPage() {
         </Button>
       }
     >
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mt-2">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 max-w-[1000px] mx-auto">
         {OPTIONS.map((opt) => (
           <Card
             key={opt.key}

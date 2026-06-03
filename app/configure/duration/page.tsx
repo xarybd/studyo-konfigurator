@@ -4,13 +4,13 @@ import { StepContainer } from '@/components/StepContainer'
 import { Card } from '@/components/Card'
 import { Button } from '@/components/Button'
 import { useWizardState } from '@/hooks/useWizardState'
-import { ChevronLeft } from 'lucide-react'
+import { ChevronLeft, Clock4, ClockArrowUp, Clock12, CalendarRange } from 'lucide-react'
 
 const ALL_OPTIONS = [
-  { key: 'ceremony', title: 'Sadece Tören', description: '2–3 saat, sadece anlar', contexts: ['wedding', 'engagement', 'family'] },
-  { key: 'half', title: 'Yarım Gün', description: '5–6 saat, hazırlık + tören', contexts: ['wedding', 'engagement'] },
-  { key: 'full', title: 'Tam Gün', description: '10–12 saat, başından sonuna', contexts: ['wedding', 'engagement'] },
-  { key: 'multi', title: 'Çok Günlü', description: 'Kına + düğün, ya da fazlası', contexts: ['wedding'] },
+  { key: 'ceremony', title: 'Sadece Tören', description: '2–3 saat, sadece anlar', icon: <Clock4 size={36} strokeWidth={1.5} />, contexts: ['wedding', 'engagement', 'family'] },
+  { key: 'half', title: 'Yarım Gün', description: '5–6 saat, hazırlık + tören', icon: <ClockArrowUp size={36} strokeWidth={1.5} />, contexts: ['wedding', 'engagement'] },
+  { key: 'full', title: 'Tam Gün', description: '10–12 saat, başından sonuna', icon: <Clock12 size={36} strokeWidth={1.5} />, contexts: ['wedding', 'engagement'] },
+  { key: 'multi', title: 'Çok Günlü', description: 'Kına + düğün, ya da fazlası', icon: <CalendarRange size={36} strokeWidth={1.5} />, contexts: ['wedding'] },
 ] as const
 
 export default function DurationPage() {
@@ -23,13 +23,13 @@ export default function DurationPage() {
 
   async function handleSelect(key: string) {
     await setState({ duration: key })
-    setTimeout(() => router.push('/configure/team'), 300)
+    setTimeout(() => router.push('/configure/team'), 350)
   }
 
   return (
     <StepContainer
       step={6}
-      title={<>Ne <em className="font-accent not-italic text-gold-dark italic">kadar</em> sizinleyiz?</>}
+      title={<><em className="font-accent not-italic italic text-gold-dark">Ne kadar</em> sizinleyiz?</>}
       subtitle="Süre, fiyat motorunun en güçlü değişkeni."
       hasPriceBar
       footer={
@@ -39,12 +39,13 @@ export default function DurationPage() {
         </Button>
       }
     >
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-2">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-[900px] mx-auto">
         {options.map((opt) => (
           <Card
             key={opt.key}
             title={opt.title}
             description={opt.description}
+            icon={opt.icon}
             selected={state.duration === opt.key}
             onClick={() => handleSelect(opt.key)}
           />

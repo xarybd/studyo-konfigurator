@@ -4,14 +4,14 @@ import { StepContainer } from '@/components/StepContainer'
 import { Card } from '@/components/Card'
 import { Button } from '@/components/Button'
 import { useWizardState } from '@/hooks/useWizardState'
-import { ChevronLeft, ChevronRight, Plane, Film, BookMarked, Heart, Camera } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Plane, Film, BookHeart, Heart, Sparkle } from 'lucide-react'
 
 const ALL_OPTIONS = [
-  { key: 'drone', title: 'Drone Çekimi', description: 'Havadan kareler', icon: <Plane size={24} strokeWidth={1.5} />, contexts: ['wedding', 'engagement'] },
-  { key: 'fullVideo', title: 'Tam Edit Video', description: 'Highlight değil, komple film', icon: <Film size={24} strokeWidth={1.5} />, contexts: ['wedding', 'engagement', 'family'] },
-  { key: 'photobook', title: 'Lüks Anı Kitabı', description: 'Misafir defteri + fotoğraflar', icon: <BookMarked size={24} strokeWidth={1.5} />, contexts: ['wedding', 'engagement', 'family'] },
-  { key: 'engagement', title: 'Engagement Çekimi', description: 'Save-the-date için ön seans', icon: <Heart size={24} strokeWidth={1.5} />, contexts: ['wedding'] },
-  { key: 'preparation', title: 'Hazırlık Çekimi', description: 'Gelin/damat hazırlık anları', icon: <Camera size={24} strokeWidth={1.5} />, contexts: ['wedding', 'engagement'] },
+  { key: 'drone', title: 'Drone Çekimi', description: 'Havadan kareler', icon: <Plane size={36} strokeWidth={1.5} />, contexts: ['wedding', 'engagement'] },
+  { key: 'fullVideo', title: 'Tam Edit Video', description: 'Highlight değil, komple film', icon: <Film size={36} strokeWidth={1.5} />, contexts: ['wedding', 'engagement', 'family'] },
+  { key: 'photobook', title: 'Lüks Anı Kitabı', description: 'Misafir defteri + fotoğraflar', icon: <BookHeart size={36} strokeWidth={1.5} />, contexts: ['wedding', 'engagement', 'family'] },
+  { key: 'engagement', title: 'Engagement Çekimi', description: 'Save-the-date için ön seans', icon: <Heart size={36} strokeWidth={1.5} />, contexts: ['wedding'] },
+  { key: 'preparation', title: 'Hazırlık Çekimi', description: 'Gelin/damat hazırlık anları', icon: <Sparkle size={36} strokeWidth={1.5} />, contexts: ['wedding', 'engagement'] },
 ] as const
 
 export default function ExtrasPage() {
@@ -34,11 +34,11 @@ export default function ExtrasPage() {
   return (
     <StepContainer
       step={9}
-      title={<>Bir <em className="font-accent not-italic text-gold-dark italic">dokunuş</em> daha?</>}
+      title={<>Bir <em className="font-accent not-italic italic text-gold-dark">dokunuş</em> daha?</>}
       subtitle="Birden fazla seçebilirsiniz."
       hasPriceBar
       footer={
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-6">
           <Button variant="ghost" onClick={() => router.push('/configure/delivery')}>
             <ChevronLeft size={16} />
             Geri
@@ -50,7 +50,7 @@ export default function ExtrasPage() {
         </div>
       }
     >
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-2">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-[900px] mx-auto">
         {options.map((opt) => (
           <Card
             key={opt.key}
