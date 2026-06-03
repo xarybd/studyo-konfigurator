@@ -60,8 +60,8 @@ export function ProgressBar({ current }: ProgressBarProps) {
         </div>
       </div>
 
-      <span className="font-body text-[11px] text-ink/40 tracking-widest whitespace-nowrap shrink-0">
-        Adım {String(current).padStart(2, '0')} / 09
+      <span className="font-body text-[11px] text-gold tracking-[0.32em] uppercase whitespace-nowrap shrink-0">
+        {String(current).padStart(2, '0')} / 09
       </span>
     </div>
   )
