@@ -43,6 +43,9 @@ export const studioConfig = {
 
   // --- Görsel ---
   backgroundTexture: 'film-grain' as 'none' | 'film-grain' | 'sky' | 'sand' | 'paper',
+  backgroundMode: 'mesh' as 'mesh' | 'photo' | 'video' | 'grain-only',
+  backgroundPhoto: null as null | string,
+  backgroundVideo: null as null | string,
 
   // --- İletişim ---
   whatsappNumber: '905XXXXXXXXX',

@@ -6,6 +6,18 @@ import { calculatePrice } from '@/lib/price-engine'
 import { usePathname } from 'next/navigation'
 import { studioConfig } from '@/studio.config'
 
+function MeshBackground() {
+  if (studioConfig.backgroundMode === 'grain-only') return null
+  return (
+    <div className="fixed inset-0 -z-20 overflow-hidden pointer-events-none" aria-hidden="true">
+      <div className="mesh-blob-a" />
+      <div className="mesh-blob-b" />
+      <div className="mesh-blob-c" />
+      <div className="mesh-blob-d" />
+    </div>
+  )
+}
+
 const PRICE_VISIBLE_STEPS = [
   '/configure/style',
   '/configure/location',
@@ -33,6 +45,7 @@ export function ConfigureLayoutInner({ children }: { children: React.ReactNode }
 
   return (
     <div className="min-h-screen bg-cream relative">
+      <MeshBackground />
       <div className="px-6 pt-8 md:px-12" aria-hidden="true">
         <p className="font-body text-[10px] tracking-[0.25em] uppercase text-ink/40">
           {studioConfig.name}
