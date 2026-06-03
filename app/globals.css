@@ -28,6 +28,62 @@ body {
   color: #2A2520;
 }
 
+/* ── Gradient mesh blobs ── */
+@keyframes mesh-drift-1 {
+  0%, 100% { transform: translate(0%, 0%) scale(1); }
+  25%  { transform: translate(12%,  8%) scale(1.08); }
+  50%  { transform: translate(20%, -5%) scale(0.96); }
+  75%  { transform: translate(-6%, 15%) scale(1.04); }
+}
+@keyframes mesh-drift-2 {
+  0%, 100% { transform: translate(0%, 0%) scale(1.05); }
+  25%  { transform: translate(-10%, -8%) scale(0.92); }
+  50%  { transform: translate(-18%, 6%) scale(1.1); }
+  75%  { transform: translate(8%, -12%) scale(1.0); }
+}
+@keyframes mesh-drift-3 {
+  0%, 100% { transform: translate(0%, 0%) scale(0.95); }
+  25%  { transform: translate(8%, -10%) scale(1.1); }
+  50%  { transform: translate(-8%, -18%) scale(1.05); }
+  75%  { transform: translate(-14%,  6%) scale(0.9); }
+}
+@keyframes mesh-drift-4 {
+  0%, 100% { transform: translate(0%, 0%) scale(1.1); }
+  25%  { transform: translate(6%, -14%) scale(0.95); }
+  50%  { transform: translate(12%,   8%) scale(1.05); }
+  75%  { transform: translate(-10%, -6%) scale(1.15); }
+}
+
+.mesh-blob {
+  position: absolute;
+  border-radius: 50%;
+  will-change: transform;
+}
+.mesh-blob-1 {
+  top: -30%; left: -20%;
+  width: 70%; height: 80%;
+  background: radial-gradient(circle, #D9C39A 0%, transparent 68%);
+  animation: mesh-drift-1 25s ease-in-out infinite;
+}
+.mesh-blob-2 {
+  top: -20%; right: -25%;
+  width: 65%; height: 75%;
+  background: radial-gradient(circle, #FAEAD8 0%, transparent 68%);
+  animation: mesh-drift-2 25s ease-in-out infinite;
+}
+.mesh-blob-3 {
+  bottom: -30%; right: -15%;
+  width: 60%; height: 70%;
+  background: radial-gradient(circle, #F7F1E6 0%, transparent 68%);
+  animation: mesh-drift-3 25s ease-in-out infinite;
+}
+.mesh-blob-4 {
+  bottom: -20%; left: -25%;
+  width: 65%; height: 75%;
+  background: radial-gradient(circle, #FFF5E6 0%, transparent 68%);
+  animation: mesh-drift-4 25s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -36,5 +92,11 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+  .mesh-blob-1,
+  .mesh-blob-2,
+  .mesh-blob-3,
+  .mesh-blob-4 {
+    animation: none !important;
   }
 }

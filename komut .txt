@@ -1,0 +1,224 @@
+9 adımlı stüdyo paket konfigüratörünün UI'sini sıfırdan yaz.
+Akış mantığı, pricing engine, routing, state — KALACAK.
+
+REFERANS HİS: useorigin.com (mutlaka mental modelin için bu sitenin DNA'sını canlandır)
+- Animasyonlu gradient mesh arka plan (yavaş bulutsu renk dalgası)
+- Glass kartlar (yarı şeffaf krem + backdrop-blur)
+- DEV italik başlık ana görsel hook
+- Sayfa içeriği TAM ortalanmış, bol nefes
+- Premium fintech tech ürün hissi
+
+PALET (sabit):
+- bg: krem #F7F1E6 (mesh animasyonun base'i)
+- Mesh renkleri: krem, yumuşak altın #D9C39A, beyaz, çok açık şeftali #FAEAD8
+- Glass kart bg: rgba(255,252,245,0.55)
+- Altın accent: #B89968 (italic kelime + buton)
+- Koyu altın: #9A7E4F
+- Mürekkep: #2A2520 (regular text + dark button)
+
+TİPOGRAFİ (sabit):
+- Cormorant Garamond — display başlık, regular kelime
+- Italiana — italic accent (altın renk)
+- Inter — body, button, label
+
+HİSLER (öncelik sırası — agent'ın bunu içselleştirmesi lazım):
+1. Premium tech ürün hissi (Origin/Linear/Vercel kalitesi)
+2. "Yaşayan" — arka plan hareket ediyor, ekran ölü değil
+3. Bol nefes alanı — sıkıştırma yok, içerik orta
+4. Sadelik içinde derinlik — az eleman, kaliteli yüzeyler
+5. Italik altın hook — her sayfada görsel ana atari
+
+YAP:
+
+1. ROOT LAYOUT (app/layout.tsx)
+- Body: bg #F7F1E6
+- 4 katman z-index:
+  - Layer 1 (z -3): krem bg
+  - Layer 2 (z -2): animasyonlu gradient mesh — CSS @keyframes, 4 renk noktası diagonal hareket eder, 25s loop, blur(80px), opacity 0.7. Renkler: #D9C39A (sol-üst), #FAEAD8 (sağ-üst), #F7F1E6 (sağ-alt), #FFF5E6 (sol-alt)
+  - Layer 3 (z -1): SVG noise overlay opacity 0.04, mix-blend-mode overlay, fixed inset 0
+  - Layer 4 (z 1+): içerik
+- prefers-reduced-motion: mesh duruyor, statik kalıyor
+
+2. HEADER (her sayfada)
+- Sol üst: küçük logo blok
+  - "STÜDYO" (Italiana 13px letter-spacing 0.2em, mürekkep)
+  - "Fine Wedding Photography" altta (Inter 9px letter-spacing 0.3em, gri uppercase)
+- Sağ üst: 9 küçük yatay nokta indicator
+  - Her nokta 4px daire, gap 8px
+  - Mevcut adım: altın #B89968 dolu daire 6px
+  - Tamamlanan adımlar: yumuşak altın opacity 0.5
+  - Gelecek adımlar: gri opacity 0.2
+- Padding x-12 py-8
+
+3. WELCOME EKRANI (/configure veya / route, ilk açılış)
+İçerik flex column items-center justify-center min-h-screen:
+- Eyebrow küçük: "BİR AN. BİR ÖMÜR. BİR PAKET." (Inter 11px letter-spacing 0.32em altın uppercase)
+- Boşluk 32px
+- DEV başlık 2 satır:
+  - "Paketinizi" (Cormorant Garamond clamp(48px, 7vw, 88px), regular, mürekkep, line-height 0.95)
+  - "birlikte tasarlayalım" (Italiana aynı boyut, italic, altın #9A7E4F)
+- Boşluk 24px
+- Subtitle (Cormorant italic 17px gri max-w-md text-center):
+  "9 adımda zevkinize ve gününüze özel bir paket öneriyoruz. Süreç 5 dakika sürer."
+- Boşluk 48px
+- 3 istatistik yan yana (gap 64px):
+  - "9 / ADIM"
+  - "5 / DAKİKA"
+  - "∞ / KOMBİNASYON"
+  Her biri: rakam Cormorant 32px regular altın üstte, etiket Inter 10px letter-spacing 0.3em gri uppercase altta
+- Boşluk 48px
+- CTA buton: "TASARIMA BAŞLA →"
+  - bg gradient: linear-gradient(135deg, #2A2520, #4A3D2A)
+  - text: #F7F1E6
+  - padding: 18px 42px
+  - border-radius: 999px (pill)
+  - Inter 12px letter-spacing 0.28em uppercase
+  - shadow: 0 8px 24px rgba(42,37,32,0.18)
+  - hover: translateY(-2px), shadow büyür, brightness 1.1
+- En altta küçük footer text: "DEMO V0.1 · STÜDYONUZ İLE ÖZELLEŞTİRİLECEK" (Inter 10px letter-spacing 0.3em açık gri ortalı, mb-8)
+
+4. ADIM SAYFALARI (configure/[step])
+İçerik flex column items-center justify-center min-h-screen (ama header header'da):
+- Eyebrow: "ADIM 03 / 09" (Inter 11px letter-spacing 0.32em altın)
+- Boşluk 24px
+- DEV başlık (Cormorant clamp(40px, 6vw, 72px)):
+  Format: "Regular kelime " + "italic altın kelime" + " bitiş kelimesi"
+  Örnekler:
+    Adım 1: "Sizi" reg + "buluşturalım" italic altın
+    Adım 2: "Hangi" reg + "mevsimde" italic altın + "?"
+    Adım 3: "Müsait bir" reg + "gününüzü" italic altın + "seçin"
+    Adım 4: "Stiliniz" italic altın + "hangisi?"
+    Adım 5: "Nerede" reg + "buluşalım" italic altın + "?"
+    Adım 6: "Ne kadar" italic altın + "sizinleyiz?"
+    Adım 7: "Kaç kişilik" reg + "ekip" italic altın + "?"
+    Adım 8: "Nasıl" italic altın + "teslim alalım?"
+    Adım 9: "Bir" reg + "dokunuş" italic altın + "daha?"
+- Boşluk 16px
+- Subtitle (Cormorant italic 16px gri ortalı max-w-lg)
+- Boşluk 56px
+- Kart grid (max-w-5xl mx-auto):
+  - Mobile: grid-cols-1 gap-4
+  - Tablet: grid-cols-2 gap-5
+  - Desktop: grid-cols-3 veya grid-cols-4 (kart sayısına göre) gap-6
+  - Her kart aspect-ratio dikey poster (~3:4) ya da yatay (~4:3)
+- Auto-advance: kart tıklanır → 350ms wait → next step fade transition
+
+5. CARD COMPONENT (glass)
+- bg: rgba(255, 252, 245, 0.55)
+- backdrop-filter: blur(18px) saturate(1.2)
+- -webkit-backdrop-filter aynı
+- border: 1px solid rgba(184, 153, 104, 0.25)
+- border-radius: 16px
+- padding: 32px 24px
+- box-shadow: 
+  - 0 4px 20px rgba(42,37,32,0.04)
+  - 0 16px 40px rgba(154,126,79,0.06)
+  - inset 0 1px 0 rgba(255,255,255,0.5)
+- min-height: 240px
+- flex column gap-4
+- transition: all 350ms cubic-bezier(0.4, 0, 0.2, 1)
+
+İçerik (yukarıdan):
+- Üstte: Lucide ikon 36px stroke 1.5 altın #9A7E4F
+- Ortada: başlık (Cormorant 22px regular mürekkep)
+- Altta: kısa açıklama (Inter 13px gri max 2 satır italic)
+
+Hover:
+- backdrop-blur 18→22px
+- bg opacity 0.55→0.7
+- translateY -4px
+- shadow büyür: 0 12px 40px rgba(154,126,79,0.12)
+- border opacity 0.25→0.5
+- ikon scale 1.0→1.08
+
+Selected:
+- border: 1.5px solid rgba(184, 153, 104, 0.85)
+- bg opacity 0.7
+- üst sağda 22px altın daire + beyaz Lucide Check 11px
+- shadow biraz daha belirgin
+
+prefers-reduced-motion: transform yok, sadece opacity 0.5→1
+
+6. İKONLAR (Lucide React)
+- Adım 1 (Bağlam): Sparkles (düğün), Diamond (nişan/söz), Baby (bebek/aile)
+- Adım 2 (Mevsim): Flower (ilkbahar), Sun (yaz), Leaf (sonbahar), Snowflake (kış), HelpCircle (henüz net değil)
+- Adım 3 (Takvim): N/A (calendar component)
+- Adım 4 (Stil): Heart, Zap, Camera, Film
+- Adım 5 (Lokasyon): Building (stüdyo), ImageIcon (plato), Trees (dış mekan), Landmark (venue), Layers (karma)
+- Adım 6 (Süre): Clock4, ClockArrowUp, Clock12, CalendarRange
+- Adım 7 (Ekip): User, Users, UserPlus
+- Adım 8 (Teslimat): Smartphone, BookOpen, Video, Package
+- Adım 9 (Ekstralar): Plane, Film, BookHeart, Heart, Sparkle
+- Hepsi 36px stroke 1.5 #9A7E4F
+
+7. TAKVİM (Adım 3)
+Aynı header + DEV başlık.
+Glass panel içinde (Card stilinin büyük versiyonu, padding 40px):
+- Desktop: 3 ay yan yana grid-cols-3 gap-8
+- Mobile: tek ay aktif, sağa sola swipe (Framer Motion drag x)
+- Her ay üstte: ay adı (Italiana 20px italic altın uppercase letter-spacing 0.15em)
+- Day labels row: P S Ç P C C P (Inter 10px gri letter-spacing 0.2em, gap eşit)
+- Day grid: CSS Grid 7 col, 40x40px hücreler (mobile 44px)
+- Available day: bg rgba(184,153,104,0.18) yuvarlak daire, text mürekkep, hover scale 1.08 + opacity 0.4
+- Booked: text gri opacity 0.5 + line-through, no bg, no hover
+- Selected: bg mürekkep #2A2520 daire, text krem, font-weight 500
+- Lejand alt: 3 daire + Inter 11px etiket: ● Müsait, ⊘ Dolu, ● Seçili
+
+8. SONUÇ EKRANI (Adım sonrası /configure/result)
+Aynı header + DEV başlık: "Sizin için" reg + "tasarladığımız" italic altın + "paket".
+Subtitle italic gri.
+Glass panel max-w-4xl:
+- Sol panel (paket özeti): label-value satırları, her satır arası 1px açık altın opacity 0.2 çizgi
+  - Label: Inter 10px letter-spacing 0.28em uppercase gri
+  - Value: Cormorant 16px italic mürekkep sağa hizalı
+- Sağ panel:
+  - "YATIRIM ARALIĞI" eyebrow altın
+  - DEV fiyat: "92.500 ₺ — 117.500 ₺" (Cormorant 44px italic altın)
+  - Açıklama küçük italic gri
+  - WhatsApp CTA: full-width altın pill (bg gradient #B89968→#9A7E4F, text krem, Lucide MessageCircle 18px, "WHATSAPP'TAN ULAŞ →")
+  - Yedek form: 3 input glass yüzey, ince altın border, focus altın
+  - "Bilgilerimi gönder" secondary buton transparent + altın border
+
+9. ANIMASYONLAR (sade)
+- Sayfa girişi: içerik stagger fade-in, 60ms arayla her eleman (opacity 0→1 + translateY 8px→0)
+- Step geçişi: outgoing fade-out 200ms → incoming fade-in 300ms
+- Kart hover: yukarıda tanımlı
+- Tüm: cubic-bezier(0.4, 0, 0.2, 1), 60fps, transform/opacity only
+- prefers-reduced-motion: sadece opacity
+
+10. MOBİL (≤768px)
+- Padding x-5
+- DEV başlık clamp 32→48px
+- Kartlar grid-cols-1 gap-3
+- Glass blur 14px (performans)
+- Takvim tek ay swipe
+- Form full-width
+- Tap target ≥44px
+
+YASAK:
+- Mikro CSS spec'lerinde kaybolma — eğer yukarıda spec yok ise SENSE OF AESTHETIC kullan
+- Comment / console.log
+- Routing/state/pricing engine'e dokunma
+- Dark mode
+- Bento Grid asimetrik layout
+- Köşeye yapışan içerik
+
+UYGULAMA SIRASI:
+1. Root layout + 4 katman bg (mesh + grain)
+2. Header (logo + dots)
+3. Welcome ekranı
+4. Card primitive
+5. Adım sayfaları (1-9, aynı pattern)
+6. Takvim
+7. Sonuç ekranı
+8. Animasyon polish
+
+Her bölüm bitince:
+git add -A && git commit -m "ui: [bölüm]" --no-verify
+
+Build hatası veya 3+ ardışık fix loop → DUR, raporla.
+
+Bittiğinde:
+- Değişen dosya listesi
+- Test edilecekler 3-5 madde
+- Özet/övgü YOK
