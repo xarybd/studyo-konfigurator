@@ -7,6 +7,16 @@ import { Button } from '@/components/Button'
 import { useWizardState } from '@/hooks/useWizardState'
 import { ChevronLeft, RefreshCw } from 'lucide-react'
 
+const glassPanelStyle = {
+  background: 'rgba(255,252,245,0.55)',
+  backdropFilter: 'blur(18px) saturate(1.2)',
+  WebkitBackdropFilter: 'blur(18px) saturate(1.2)',
+  border: '1px solid rgba(184,153,104,0.25)',
+  borderRadius: '16px',
+  padding: '40px',
+  boxShadow: '0 4px 20px rgba(42,37,32,0.04), 0 16px 40px rgba(154,126,79,0.06), inset 0 1px 0 rgba(255,255,255,0.5)',
+}
+
 export default function DatePage() {
   const router = useRouter()
   const [state, setState] = useWizardState()
@@ -27,13 +37,13 @@ export default function DatePage() {
 
   async function handleSelectDate(date: string) {
     await setState({ date })
-    setTimeout(() => router.push('/configure/style'), 300)
+    setTimeout(() => router.push('/configure/style'), 350)
   }
 
   return (
     <StepContainer
       step={3}
-      title={<>Müsait bir <em className="font-accent not-italic text-gold-dark italic">günü</em> seçin</>}
+      title={<>Müsait bir <em className="font-accent not-italic italic text-gold-dark">gününüzü</em> seçin</>}
       subtitle="Dolu günler otomatik olarak işaretlidir."
       footer={
         <div className="flex items-center gap-6">
@@ -48,12 +58,12 @@ export default function DatePage() {
       }
     >
       {loading ? (
-        <div className="flex items-center gap-2 text-ink/40 mt-8">
+        <div className="flex items-center gap-2 text-ink/40 justify-center mt-8">
           <RefreshCw size={16} className="animate-spin" />
           <span className="font-body text-sm">Takvim yükleniyor…</span>
         </div>
       ) : (
-        <div className="mt-4">
+        <div style={glassPanelStyle}>
           <CalendarGrid
             months={months}
             busyDays={busyDays}

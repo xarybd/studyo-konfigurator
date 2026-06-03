@@ -7,8 +7,8 @@ import { cn } from '@/lib/utils'
 const WEEKDAYS = ['P', 'S', 'Ç', 'P', 'C', 'C', 'P']
 
 const MONTH_NAMES = [
-  '', 'Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran',
-  'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık',
+  '', 'OCAK', 'ŞUBAT', 'MART', 'NİSAN', 'MAYIS', 'HAZİRAN',
+  'TEMMUZ', 'AĞUSTOS', 'EYLÜL', 'EKİM', 'KASIM', 'ARALIK',
 ]
 
 interface MonthData {
@@ -55,13 +55,16 @@ function MonthGrid({ year, month, busySet, selectedDate, today, onSelectDate }: 
 
   return (
     <div>
-      <h3 className="font-display text-lg italic font-light text-ink text-center mb-4">
+      <h3
+        className="font-accent italic text-gold tracking-[0.15em] uppercase text-center mb-5"
+        style={{ fontSize: '20px' }}
+      >
         {MONTH_NAMES[month]}
       </h3>
 
       <div className="grid grid-cols-7 mb-2">
         {WEEKDAYS.map((d, i) => (
-          <div key={i} className="font-body text-[10px] text-ink/40 tracking-wide text-center py-1">
+          <div key={i} className="font-body text-[10px] tracking-[0.2em] text-ink/40 text-center py-1">
             {d}
           </div>
         ))}
@@ -69,7 +72,7 @@ function MonthGrid({ year, month, busySet, selectedDate, today, onSelectDate }: 
 
       <div className="grid grid-cols-7">
         {cells.map((day, idx) => {
-          if (!day) return <div key={`e-${idx}`} className="w-[44px] h-[44px]" />
+          if (!day) return <div key={`e-${idx}`} className="w-10 h-10 md:w-[44px] md:h-[44px]" />
 
           const dateStr = formatDate(year, month, day)
           const isBusy = busySet.has(dateStr)
@@ -86,13 +89,16 @@ function MonthGrid({ year, month, busySet, selectedDate, today, onSelectDate }: 
               aria-label={`${day} ${MONTH_NAMES[month]} ${year}${isBusy ? ' — Dolu' : ''}`}
               aria-pressed={isSelected}
               className={cn(
-                'w-[44px] h-[44px] flex items-center justify-center mx-auto',
+                'w-10 h-10 md:w-[44px] md:h-[44px] flex items-center justify-center mx-auto',
                 'font-body text-sm rounded-full',
-                'transition-colors duration-150',
+                'transition-all duration-150',
                 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold',
                 isSelected && 'bg-ink text-cream font-medium',
                 isToday && !isSelected && 'border border-gold font-semibold text-ink',
-                !isSelected && !isToday && !isUnavailable && 'text-ink/80 hover:bg-gold/15 cursor-pointer',
+                !isSelected && !isToday && !isUnavailable && [
+                  'text-ink/80 cursor-pointer',
+                  'hover:bg-[rgba(184,153,104,0.18)] hover:scale-[1.08]',
+                ],
                 isUnavailable && 'text-ink/30 line-through cursor-not-allowed',
               )}
             >
@@ -108,16 +114,16 @@ function MonthGrid({ year, month, busySet, selectedDate, today, onSelectDate }: 
 function Legend({ hasSelected }: { hasSelected: boolean }) {
   return (
     <div className="flex items-center gap-6 mt-6">
-      <span className="flex items-center gap-2 font-body text-xs text-ink/50">
-        <span className="w-3 h-3 rounded-full bg-gold-soft inline-block" />
+      <span className="flex items-center gap-2 font-body text-[11px] text-ink/50">
+        <span className="w-3 h-3 rounded-full bg-gold/30 inline-block" />
         Müsait
       </span>
-      <span className="flex items-center gap-2 font-body text-xs text-ink/50">
-        <span className="font-body text-xs text-ink/40 line-through">15</span>
+      <span className="flex items-center gap-2 font-body text-[11px] text-ink/50">
+        <span className="font-body text-[11px] text-ink/30 line-through">15</span>
         Dolu
       </span>
       {hasSelected && (
-        <span className="flex items-center gap-2 font-body text-xs text-ink/50">
+        <span className="flex items-center gap-2 font-body text-[11px] text-ink/50">
           <span className="w-3 h-3 rounded-full bg-ink inline-block" />
           Seçili
         </span>
@@ -156,7 +162,10 @@ function MobileCalendar({ months, busySet, selectedDate, today, onSelectDate }: 
           <ChevronLeft size={18} strokeWidth={1.5} />
         </button>
 
-        <h3 className="font-display text-xl italic font-light text-ink">
+        <h3
+          className="font-accent italic text-gold tracking-[0.15em] uppercase"
+          style={{ fontSize: '20px' }}
+        >
           {MONTH_NAMES[current.month]}
         </h3>
 
