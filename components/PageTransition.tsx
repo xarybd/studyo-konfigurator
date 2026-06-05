@@ -16,10 +16,23 @@ export function PageTransition({ children, className }: PageTransitionProps) {
         <m.div
           key={segment ?? 'root'}
           className={className}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.2, ease: 'easeInOut' }}
+          initial={{ opacity: 0, y: 8 }}
+          animate={{
+            opacity: 1,
+            y: 0,
+            transition: {
+              duration: 0.42,
+              ease: [0.16, 1, 0.3, 1],
+            },
+          }}
+          exit={{
+            opacity: 0,
+            y: -6,
+            transition: {
+              duration: 0.22,
+              ease: [0.4, 0, 1, 1],
+            },
+          }}
         >
           {children}
         </m.div>
