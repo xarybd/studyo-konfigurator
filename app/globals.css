@@ -10,7 +10,7 @@
 
   --font-display: var(--font-cormorant), 'Cormorant Garamond', Georgia, serif;
   --font-accent: var(--font-italiana), 'Italiana', Georgia, serif;
-  --font-body: var(--font-inter), 'Inter', system-ui, sans-serif;
+  --font-body: var(--font-dm-sans), 'DM Sans', system-ui, sans-serif;
 }
 
 * {

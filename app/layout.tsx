@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Cormorant_Garamond, Italiana, Inter } from 'next/font/google'
+import { Cormorant_Garamond, Italiana, DM_Sans } from 'next/font/google'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import './globals.css'
 
@@ -20,9 +20,10 @@ const italiana = Italiana({
   preload: false,
 })
 
-const inter = Inter({
+const dmSans = DM_Sans({
   subsets: ['latin', 'latin-ext'],
-  variable: '--font-inter',
+  weight: ['300', '400', '500', '600'],
+  variable: '--font-dm-sans',
   display: 'swap',
   preload: true,
 })
@@ -45,7 +46,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="tr"
-      className={`${cormorant.variable} ${italiana.variable} ${inter.variable}`}
+      className={`${cormorant.variable} ${italiana.variable} ${dmSans.variable}`}
     >
       <body>
         {/* Katman A — animasyonlu gradient mesh */}
