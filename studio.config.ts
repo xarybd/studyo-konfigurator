@@ -44,6 +44,21 @@ export const studioConfig = {
   // --- Görsel ---
   backgroundTexture: 'none' as 'none' | 'film-grain',
 
+  // --- Marquee ---
+  marquee: {
+    enabled: true,
+    speed: 'medium' as 'slow' | 'medium' | 'fast',
+    items: [
+      'BAHAR 2026 ÖZEL TARİFE',
+      'NİŞAN PAKETLERİNDE %20 İNDİRİM',
+      'MART REZERVASYONLARI BAŞLADI',
+      'LİMİTLİ KONTENJAN',
+      'MAYIS DOLU',
+      'DRONE ÇEKİMİ ÜCRETSİZ',
+      'NİSAN İÇİN 2 KONTENJAN',
+    ],
+  },
+
   // --- İletişim ---
   whatsappNumber: '905XXXXXXXXX',
   studioEmail: 'info@studyo.com',

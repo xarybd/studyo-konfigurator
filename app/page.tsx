@@ -1,6 +1,7 @@
 'use client'
 import { useRouter } from 'next/navigation'
 import { SiteHeader } from '@/components/SiteHeader'
+import { Marquee } from '@/components/Marquee'
 
 const STATS = [
   { num: '9', label: 'ADIM' },
@@ -93,8 +94,7 @@ export default function WelcomePage() {
         </div>
       </main>
 
-      {/* Marquee placeholder — will be replaced in next step */}
-      <div className="h-14" />
+      <Marquee />
     </div>
   )
 }

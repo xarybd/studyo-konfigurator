@@ -28,6 +28,18 @@ body {
   color: #2A2520;
 }
 
+/* ── Marquee ── */
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 42s linear infinite;
+}
+
 /* ── Gradient mesh ── */
 @keyframes mesh-drift {
   0%   { transform: translate3d(0, 0, 0) scale(1); }
