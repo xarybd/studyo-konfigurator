@@ -28,6 +28,33 @@ body {
   color: #2A2520;
 }
 
+/* ── Gold particles ── */
+@keyframes particle-float {
+  0%   { opacity: 0; transform: translateY(0) translateX(0) scale(1); }
+  18%  { opacity: 0.32; }
+  82%  { opacity: 0.16; }
+  100% { opacity: 0; transform: translateY(-58vh) translateX(var(--drift, 0px)) scale(0.6); }
+}
+
+.gold-particle {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #EDD89E, #B89968 70%);
+  animation: particle-float var(--dur, 20s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+  will-change: transform, opacity;
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gold-particle { display: none !important; }
+}
+
+/* ── Tipografik mikro-denge: Italiana italic ── */
+.font-accent.italic {
+  letter-spacing: -0.01em;
+}
+
 /* ── Marquee ── */
 @keyframes marquee-scroll {
   from { transform: translateX(0); }

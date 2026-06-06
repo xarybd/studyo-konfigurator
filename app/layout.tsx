@@ -42,6 +42,16 @@ const MESH_GRADIENT =
 const NOISE_SVG =
   "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E\")"
 
+const PARTICLES = [
+  { left: '36%', bottom: '4%',  w: '1.5px', dur: '19s', delay: '0s',    drift: '-16px' },
+  { left: '43%', bottom: '8%',  w: '1px',   dur: '24s', delay: '4.5s',  drift: '14px'  },
+  { left: '50%', bottom: '3%',  w: '2px',   dur: '21s', delay: '9s',    drift: '-6px'  },
+  { left: '57%', bottom: '10%', w: '1.5px', dur: '26s', delay: '2s',    drift: '20px'  },
+  { left: '63%', bottom: '6%',  w: '1px',   dur: '17s', delay: '13s',   drift: '-22px' },
+  { left: '40%', bottom: '12%', w: '1.5px', dur: '22s', delay: '7s',    drift: '8px'   },
+  { left: '54%', bottom: '5%',  w: '1px',   dur: '20s', delay: '16.5s', drift: '-10px' },
+]
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
@@ -79,7 +89,38 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
 
-        <NuqsAdapter>{children}</NuqsAdapter>
+        {/* Katman C — altın toz partiküller */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: 0,
+            pointerEvents: 'none',
+            overflow: 'hidden',
+          }}
+        >
+          {PARTICLES.map((p, i) => (
+            <div
+              key={i}
+              className="gold-particle"
+              style={{
+                left: p.left,
+                bottom: p.bottom,
+                width: p.w,
+                height: p.w,
+                '--dur': p.dur,
+                '--delay': p.delay,
+                '--drift': p.drift,
+              } as React.CSSProperties}
+            />
+          ))}
+        </div>
+
+        {/* Sayfa içeriği — partiküllerin üstünde */}
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <NuqsAdapter>{children}</NuqsAdapter>
+        </div>
       </body>
     </html>
   )
