@@ -38,7 +38,7 @@ export default function ExtrasPage() {
       subtitle="Birden fazla seçebilirsiniz."
       hasPriceBar
       footer={
-        <div className="flex items-center justify-between gap-6">
+        <div className="flex items-center justify-between gap-6 w-full">
           <Button variant="ghost" onClick={() => router.push('/configure/delivery')}>
             <ChevronLeft size={16} />
             Geri

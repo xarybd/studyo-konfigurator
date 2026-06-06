@@ -18,7 +18,8 @@ export function StepContainer({ step, title, subtitle, children, footer, hasPric
         hasPriceBar && 'pb-24',
       )}
     >
-      <div className="w-full max-w-5xl text-center">
+      {/* Optik merkezleme — içerik bloğu matematiksel değil görsel merkezdedir */}
+      <div className="w-full max-w-5xl text-center -translate-y-[3vh]">
         {step > 0 && (
           <p className="font-body text-[11px] tracking-[0.32em] uppercase text-gold mb-6">
             ADIM {String(step).padStart(2, '0')} / 09
@@ -41,16 +42,16 @@ export function StepContainer({ step, title, subtitle, children, footer, hasPric
           </p>
         )}
 
-        <div className={cn('mt-14', !subtitle && 'mt-14')}>
+        <div className="mt-14">
           {children}
         </div>
-
-        {footer && (
-          <div className="mt-8">
-            {footer}
-          </div>
-        )}
       </div>
+
+      {footer && (
+        <div className="w-full max-w-5xl flex items-center mt-6 -translate-y-[3vh]">
+          {footer}
+        </div>
+      )}
     </section>
   )
 }
