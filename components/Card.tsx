@@ -1,5 +1,5 @@
 'use client'
-import { m, useReducedMotion } from 'framer-motion'
+import { m, useReducedMotion, useMotionValue, useSpring } from 'framer-motion'
 import { useState } from 'react'
 import { Check } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -17,13 +17,13 @@ interface CardProps {
 }
 
 const cardVariants = {
-  rest: { y: 0 },
+  rest:  { y: 0 },
   hover: { y: -6 },
 }
 
 const iconVariants = {
-  rest: { scale: 1 },
-  hover: { scale: 1.08 },
+  rest:  { scale: 1 },
+  hover: { scale: 1.06 },
 }
 
 export function Card({
@@ -39,6 +39,37 @@ export function Card({
 }: CardProps) {
   const shouldReduce = useReducedMotion()
   const [hovered, setHovered] = useState(false)
+  const [ripple, setRipple] = useState<{ x: number; y: number; key: number } | null>(null)
+
+  const rotX = useMotionValue(0)
+  const rotY = useMotionValue(0)
+  const springX = useSpring(rotX, { stiffness: 160, damping: 28 })
+  const springY = useSpring(rotY, { stiffness: 160, damping: 28 })
+
+  function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
+    if (shouldReduce || disabled) return
+    const rect = e.currentTarget.getBoundingClientRect()
+    const x = (e.clientX - rect.left) / rect.width - 0.5
+    const y = (e.clientY - rect.top) / rect.height - 0.5
+    rotX.set(-y * 8)
+    rotY.set(x * 8)
+  }
+
+  function handleHoverEnd() {
+    rotX.set(0)
+    rotY.set(0)
+    setHovered(false)
+  }
+
+  function handleClick(e: React.MouseEvent<HTMLDivElement>) {
+    if (disabled) return
+    const rect = e.currentTarget.getBoundingClientRect()
+    const x = e.clientX - rect.left
+    const y = e.clientY - rect.top
+    setRipple({ x, y, key: Date.now() })
+    setTimeout(() => setRipple(null), 650)
+    onClick?.()
+  }
 
   const bg = selected
     ? 'rgba(255,252,245,0.65)'
@@ -64,11 +95,13 @@ export function Card({
       initial="rest"
       animate="rest"
       whileHover={shouldReduce || disabled ? 'rest' : 'hover'}
+      whileTap={shouldReduce || disabled ? {} : { scale: 1.02 }}
       variants={cardVariants}
       transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
       onHoverStart={() => !disabled && setHovered(true)}
-      onHoverEnd={() => setHovered(false)}
-      onClick={!disabled ? onClick : undefined}
+      onHoverEnd={handleHoverEnd}
+      onMouseMove={handleMouseMove}
+      onClick={handleClick}
       onKeyDown={(e) => {
         if (!disabled && (e.key === 'Enter' || e.key === ' ')) {
           e.preventDefault()
@@ -86,6 +119,9 @@ export function Card({
         minHeight: '240px',
         transition: 'background 350ms cubic-bezier(0.4,0,0.2,1), border 350ms cubic-bezier(0.4,0,0.2,1), box-shadow 350ms cubic-bezier(0.4,0,0.2,1)',
         opacity: disabled ? 0.4 : 1,
+        transformPerspective: 1000,
+        rotateX: shouldReduce ? 0 : springX,
+        rotateY: shouldReduce ? 0 : springY,
       }}
       className={cn(
         'relative cursor-pointer select-none outline-none overflow-hidden',
@@ -95,6 +131,7 @@ export function Card({
         className,
       )}
     >
+      {/* Check badge */}
       <span
         className={cn(
           'absolute top-4 right-4 z-10 w-[22px] h-[22px] rounded-full bg-gold',
@@ -105,6 +142,27 @@ export function Card({
       >
         <Check size={11} strokeWidth={2.5} className="text-cream" />
       </span>
+
+      {/* Ripple */}
+      {ripple && (
+        <m.span
+          key={ripple.key}
+          initial={{ scale: 0, opacity: 0.5 }}
+          animate={{ scale: 4.5, opacity: 0 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+          style={{
+            position: 'absolute',
+            left: ripple.x - 20,
+            top: ripple.y - 20,
+            width: 40,
+            height: 40,
+            borderRadius: '50%',
+            background: 'rgba(184,153,104,0.35)',
+            pointerEvents: 'none',
+            zIndex: 20,
+          }}
+        />
+      )}
 
       {visual && (
         <div className="overflow-hidden -mx-6 -mt-8 rounded-t-[16px]">{visual}</div>
