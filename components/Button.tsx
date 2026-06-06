@@ -30,6 +30,8 @@ export function Button({
           'text-cream rounded-full px-10 py-[14px]',
           'text-[12px] tracking-[0.28em] uppercase font-medium',
           'hover:-translate-y-0.5 hover:brightness-110',
+          '[&>svg:last-child]:transition-transform [&>svg:last-child]:duration-200',
+          'hover:[&>svg:last-child]:translate-x-0.5',
         ],
         variant === 'ghost' && 'text-ink/50 hover:text-ink px-0 py-0 min-w-0 font-medium',
         variant === 'outline' && [
