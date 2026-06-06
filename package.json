@@ -6,7 +6,9 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "ux:design-system": "python C:/Users/pc81/.agents/skills/ui-ux-pro-max/scripts/search.py \"luxury wedding photography configurator mobile glassmorphism premium Turkish\" --design-system --persist -p \"Studyo Konfigurator\" -f markdown",
+    "ux:layout": "python C:/Users/pc81/.agents/skills/ui-ux-pro-max/scripts/search.py \"mobile layout responsive container overflow glass card\" --domain ux"
   },
   "dependencies": {
     "@21st-sdk/agent": "^0.0.18",

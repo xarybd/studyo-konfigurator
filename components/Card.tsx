@@ -129,7 +129,7 @@ export function Card({
         rotateY: shouldReduce ? 0 : springY,
       }}
       className={cn(
-        'panel-shine relative flex min-h-[112px] cursor-pointer select-none flex-col overflow-hidden rounded-[18px] p-3.5 outline-none transition-[background,border,box-shadow,opacity] duration-300 sm:min-h-[132px] sm:p-4 md:min-h-[220px] md:rounded-[14px] md:p-7',
+        'panel-shine relative flex min-h-[104px] cursor-pointer select-none flex-col overflow-hidden rounded-[18px] p-3 outline-none transition-[background,border,box-shadow,opacity] duration-300 sm:min-h-[132px] sm:p-4 md:min-h-[220px] md:rounded-[14px] md:p-7',
         'focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-cream',
         disabled && 'pointer-events-none',
         className,
@@ -175,7 +175,7 @@ export function Card({
           <m.div
             variants={iconVariants}
             transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
-            className="mb-3 flex h-[38px] w-[38px] shrink-0 items-center justify-center rounded-full border border-gold/24 bg-cream/54 text-gold-dark shadow-[0_14px_32px_rgba(154,126,79,0.12),inset_0_1px_0_rgba(255,255,255,0.72)] md:mb-6 md:h-14 md:w-14 [&>svg]:h-5 [&>svg]:w-5 md:[&>svg]:h-8 md:[&>svg]:w-8"
+            className="mb-2.5 flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-full border border-gold/24 bg-cream/54 text-gold-dark shadow-[0_14px_32px_rgba(154,126,79,0.12),inset_0_1px_0_rgba(255,255,255,0.72)] md:mb-6 md:h-14 md:w-14 [&>svg]:h-[18px] [&>svg]:w-[18px] md:[&>svg]:h-8 md:[&>svg]:w-8"
           >
             {icon}
           </m.div>
@@ -192,7 +192,7 @@ export function Card({
         ) : null}
 
         {priceNote ? (
-          <div className="mt-auto pt-3 md:pt-6">
+          <div className="mt-auto pt-2 md:pt-6">
             <div className="inline-flex max-w-full flex-wrap justify-center rounded-full border border-gold/16 bg-cream/42 px-2 py-1 text-center font-body text-[8px] font-medium uppercase leading-3 tracking-[0.05em] text-gold-dark/72 shadow-[inset_0_1px_0_rgba(255,255,255,0.62)] md:px-3 md:py-2 md:text-[10px] md:leading-4 md:tracking-[0.12em]">
               {priceNote}
             </div>

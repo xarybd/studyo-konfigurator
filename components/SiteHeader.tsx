@@ -25,11 +25,11 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-30 shrink-0 px-4 py-3 sm:px-6 md:px-10 md:py-6">
       <div className="mx-auto flex w-full max-w-[1180px] items-start justify-between gap-3">
-        <div className="max-w-[210px] rounded-full border border-gold/14 bg-cream/48 px-3.5 py-2.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.62)] backdrop-blur-xl md:px-4 md:py-3">
+        <div className="max-w-[230px] rounded-full border border-gold/14 bg-cream/48 px-3.5 py-2.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.62)] backdrop-blur-xl md:max-w-[280px] md:px-4 md:py-3">
           <p className="font-accent text-[14px] tracking-[0.14em] text-gold-dark md:text-[15px] md:tracking-[0.18em]">
             STÜDYO
           </p>
-          <p className="mt-1 truncate font-body text-[7px] uppercase tracking-[0.18em] text-ink/45 md:text-[9px] md:tracking-[0.24em]">
+          <p className="mt-1 whitespace-nowrap font-body text-[7px] uppercase tracking-[0.18em] text-ink/45 md:text-[9px] md:tracking-[0.24em]">
             Fine Wedding Photography
           </p>
         </div>

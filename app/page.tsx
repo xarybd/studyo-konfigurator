@@ -69,7 +69,7 @@ export default function WelcomePage() {
                   </div>
                 </m.div>
 
-                <m.div variants={clusterVariants} className="mx-auto max-w-[9.5ch] leading-[0.94] md:max-w-none">
+                <m.div variants={clusterVariants} className="mx-auto max-w-[13ch] text-center leading-[0.94] md:max-w-none">
                   <m.h1 variants={item} className="font-display text-[clamp(39px,11vw,60px)] font-light text-ink md:text-[clamp(42px,7vw,92px)]">
                     Çekiminizi
                   </m.h1>
