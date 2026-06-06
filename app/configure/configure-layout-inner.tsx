@@ -1,4 +1,5 @@
 'use client'
+import { BrandGradientBackdrop } from '@/components/BrandGradientBackdrop'
 import { PageTransition } from '@/components/PageTransition'
 import { PriceDisplay } from '@/components/PriceDisplay'
 import { Marquee } from '@/components/Marquee'
@@ -32,11 +33,14 @@ export function ConfigureLayoutInner({ children }: { children: React.ReactNode }
   const showPrice = PRICE_VISIBLE_STEPS.some((s) => pathname.startsWith(s))
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="relative isolate flex min-h-screen flex-col overflow-hidden">
+      <BrandGradientBackdrop intensity="page" />
       <SiteHeader />
-      <PageTransition className="flex-1 flex flex-col">{children}</PageTransition>
+      <PageTransition className="relative z-10 flex flex-1 flex-col">{children}</PageTransition>
       <PriceDisplay price={price} visible={showPrice} />
-      <Marquee />
+      <div className="relative z-10">
+        <Marquee />
+      </div>
     </div>
   )
 }

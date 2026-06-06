@@ -3,8 +3,7 @@
 import { ArrowRight, Sparkles } from 'lucide-react'
 import { LazyMotion, domAnimation, m, useReducedMotion } from 'framer-motion'
 import { useRouter } from 'next/navigation'
-import { BackgroundGradientAnimation } from '@/components/BackgroundGradientAnimation'
-import { HeroPhotoReel } from '@/components/HeroPhotoReel'
+import { BrandGradientBackdrop } from '@/components/BrandGradientBackdrop'
 import { Marquee } from '@/components/Marquee'
 import { SiteHeader } from '@/components/SiteHeader'
 
@@ -54,13 +53,10 @@ export default function WelcomePage() {
         </m.div>
 
         <main className="relative isolate flex flex-1 items-center justify-center overflow-hidden px-4 pb-9 pt-4 sm:px-8 sm:pb-14 sm:pt-8 xl:px-16">
-          <HeroPhotoReel />
-          <div className="absolute inset-0 md:hidden">
-            <BackgroundGradientAnimation className="h-full w-full opacity-55" />
-          </div>
+          <BrandGradientBackdrop intensity="hero" />
           <div className="relative z-10 mx-auto flex w-full max-w-[390px] flex-col items-center sm:max-w-[430px] md:max-w-[900px]">
-            <div className="panel-shine relative w-full overflow-hidden rounded-[22px] border border-gold/20 bg-cream/66 px-5 py-7 text-center shadow-[0_34px_110px_rgba(42,37,32,0.12),inset_0_1px_0_rgba(255,255,255,0.76)] backdrop-blur-2xl sm:px-8 sm:py-10 md:rounded-[14px] lg:px-14 lg:py-12">
-              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(184,153,104,0.18),transparent_34%),linear-gradient(145deg,rgba(255,255,255,0.34),rgba(255,255,255,0.08)_48%,rgba(184,153,104,0.08))]" />
+            <div className="panel-shine relative w-full overflow-hidden rounded-[24px] border border-cream/42 bg-cream/46 px-5 py-7 text-center shadow-[0_34px_120px_rgba(42,37,32,0.14),inset_0_1px_0_rgba(255,255,255,0.82)] backdrop-blur-2xl sm:px-8 sm:py-10 md:rounded-[18px] lg:px-14 lg:py-12">
+              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,252,245,0.32),transparent_34%),linear-gradient(145deg,rgba(255,255,255,0.26),rgba(255,255,255,0.08)_48%,rgba(154,126,79,0.1))]" />
               <div className="relative">
                 <m.div variants={item}>
                   <div className="mb-4 inline-flex max-w-full items-center gap-2 rounded-full border border-gold/20 bg-cream/58 px-3 py-1.5 font-body text-[8px] uppercase tracking-[0.16em] text-gold-dark/70 shadow-[inset_0_1px_0_rgba(255,255,255,0.72)] backdrop-blur-xl sm:mb-6 sm:px-4 sm:py-2 sm:text-[9px] sm:tracking-[0.26em]">

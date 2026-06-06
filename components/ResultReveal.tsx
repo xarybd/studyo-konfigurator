@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { AnimatePresence, m, useReducedMotion } from 'framer-motion'
 import { MessageCircle, RotateCcw, Sparkles, X } from 'lucide-react'
-import { BackgroundGradientAnimation } from '@/components/BackgroundGradientAnimation'
+import { BrandGradientBackdrop } from '@/components/BrandGradientBackdrop'
 
 interface RevealItem {
   label: string
@@ -37,16 +37,25 @@ function buildStorySlides(items: RevealItem[]) {
     {
       eyebrow: 'Hikayenizin tonu',
       title: `${context} için ${style}`,
+      stamp: '01',
       text: `${season} ışığıyla, çekiminizin estetik dili baştan kuruluyor.`,
     },
     {
       eyebrow: 'Sahne ve akış',
       title: `${location} / ${duration}`,
+      stamp: '02',
       text: `${team} ile günün ritmi kaçmadan, ana anlar zarif bir akışa dönüşüyor.`,
     },
     {
-      eyebrow: 'Paylaşılabilir taslak',
+      eyebrow: 'Teslim ritmi',
       title: delivery,
+      stamp: '03',
+      text: 'Seçtiğiniz teslim akışı, hikayenizin son dokunuşunu belirliyor.',
+    },
+    {
+      eyebrow: 'Paylaşılabilir taslak',
+      title: extras === 'Yok' ? 'Sade ve zamansız' : extras,
+      stamp: '04',
       text: extras === 'Yok' ? 'Minimal, temiz ve sosyal medyada paylaşmaya hazır bir çekim hikayesi.' : `${extras} dokunuşuyla sosyal medyada paylaşmaya hazır bir çekim hikayesi.`,
     },
   ]
@@ -91,7 +100,8 @@ export function ResultReveal({ min, max, items, whatsappUrl }: ResultRevealProps
             exit={{ opacity: 0, filter: 'blur(14px)' }}
             transition={{ duration: 0.45 }}
           >
-            <BackgroundGradientAnimation className="h-[100svh] w-full">
+            <div className="relative h-[100svh] w-full overflow-hidden">
+              <BrandGradientBackdrop intensity="story" />
               <button
                 type="button"
                 onClick={() => setVisible(false)}
@@ -125,6 +135,9 @@ export function ResultReveal({ min, max, items, whatsappUrl }: ResultRevealProps
                     transition={{ duration: 0.62, ease }}
                   >
                     <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_18%,rgba(255,255,255,0.22),transparent_34%),linear-gradient(180deg,rgba(255,255,255,0.12),transparent_48%,rgba(42,37,32,0.2))]" />
+                    <div className="pointer-events-none absolute -right-4 top-16 font-display text-[120px] italic leading-none text-cream/[0.055] sm:text-[150px]">
+                      {current.stamp}
+                    </div>
                     <div className="relative">
                       <div className="mx-auto mb-5 inline-flex items-center gap-2 rounded-full border border-cream/22 bg-cream/12 px-3 py-1.5 font-body text-[8px] uppercase tracking-[0.16em] sm:mb-6 sm:px-4 sm:py-2 sm:text-[9px] sm:tracking-[0.26em]">
                         <Sparkles size={13} />
@@ -136,7 +149,10 @@ export function ResultReveal({ min, max, items, whatsappUrl }: ResultRevealProps
                     </div>
 
                     <div className="relative">
-                      <h2 className="mx-auto max-w-[9ch] break-words font-display text-[clamp(32px,9vw,64px)] font-light leading-[0.96] sm:max-w-[10ch]">
+                      <div className="mx-auto mb-4 inline-flex rounded-full border border-cream/18 bg-cream/10 px-3 py-1 font-body text-[8px] uppercase tracking-[0.18em] text-cream/60">
+                        Öne çıkan seçim
+                      </div>
+                      <h2 className="mx-auto max-w-[10ch] break-words font-display text-[clamp(34px,9.5vw,66px)] font-light leading-[0.94] sm:max-w-[11ch]">
                         {current.title}
                       </h2>
                       <div className="mx-auto my-6 h-px w-20 bg-cream/38 sm:my-7 sm:w-24" />
@@ -170,7 +186,7 @@ export function ResultReveal({ min, max, items, whatsappUrl }: ResultRevealProps
                   </m.div>
                 </AnimatePresence>
               </div>
-            </BackgroundGradientAnimation>
+            </div>
           </m.div>
         ) : null}
       </AnimatePresence>
