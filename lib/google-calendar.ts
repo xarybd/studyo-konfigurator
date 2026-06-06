@@ -14,7 +14,6 @@ function getCalendarClient(): CalendarClient {
     private_key: string
   }
 
-  // Vercel sometimes stores \n as \\n — fix it
   const privateKey = credentials.private_key.replace(/\\n/g, '\n')
 
   const auth = new JWT({
@@ -35,13 +34,12 @@ export const SEASON_MONTHS: Record<string, number[]> = {
 
 function getSeasonWindow(season: string) {
   const months = SEASON_MONTHS[season] ?? SEASON_MONTHS.spring
-  const year = new Date().getFullYear()
-
+  const now = new Date()
+  const year = now.getFullYear()
   const startMonth = months[0]
   const endMonth = months[2]
-  const startYear = startMonth === 12 ? year : year
-  const endYear = endMonth < startMonth ? year + 1 : year
-
+  const startYear = season === 'winter' || startMonth >= now.getMonth() + 1 ? year : year + 1
+  const endYear = season === 'winter' || endMonth < startMonth ? startYear + 1 : startYear
   const timeMin = new Date(startYear, startMonth - 1, 1).toISOString()
   const timeMax = new Date(endYear, endMonth, 0, 23, 59, 59).toISOString()
 
@@ -50,9 +48,9 @@ function getSeasonWindow(season: string) {
 
 export async function getBusyDays(season: string, calendarId: string): Promise<string[]> {
   const { timeMin, timeMax } = getSeasonWindow(season)
-  const calendar = getCalendarClient()
+  const calendarClient = getCalendarClient()
 
-  const response = await calendar.freebusy.query({
+  const response = await calendarClient.freebusy.query({
     requestBody: {
       timeMin,
       timeMax,
@@ -66,12 +64,14 @@ export async function getBusyDays(season: string, calendarId: string): Promise<s
 
   for (const slot of busySlots) {
     if (!slot.start || !slot.end) continue
+
     const start = new Date(slot.start)
     const end = new Date(slot.end)
-    const cur = new Date(start)
-    while (cur <= end) {
-      busyDays.add(cur.toISOString().split('T')[0])
-      cur.setDate(cur.getDate() + 1)
+    const current = new Date(start)
+
+    while (current <= end) {
+      busyDays.add(current.toISOString().split('T')[0])
+      current.setDate(current.getDate() + 1)
     }
   }
 

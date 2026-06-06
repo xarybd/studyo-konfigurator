@@ -1,8 +1,6 @@
 export const studioConfig = {
   name: 'Stüdyo',
   tagline: 'Fine Wedding Photography',
-
-  // --- Fiyat Motoru ---
   BASE: {
     wedding: 45000,
     engagement: 12000,
@@ -40,11 +38,7 @@ export const studioConfig = {
   },
   PRICE_RANGE: { low: 0.88, high: 1.12 },
   PRICE_ROUNDING: 500,
-
-  // --- Görsel ---
   backgroundTexture: 'none' as 'none' | 'film-grain',
-
-  // --- Marquee ---
   marquee: {
     enabled: true,
     speed: 'medium' as 'slow' | 'medium' | 'fast',
@@ -58,8 +52,6 @@ export const studioConfig = {
       'NİSAN İÇİN 2 KONTENJAN',
     ],
   },
-
-  // --- İletişim ---
   whatsappNumber: '905XXXXXXXXX',
   studioEmail: 'info@studyo.com',
 } as const

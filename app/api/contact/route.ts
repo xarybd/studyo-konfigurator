@@ -23,9 +23,9 @@ export async function POST(request: NextRequest) {
 
   try {
     await resend.emails.send({
-      from: 'konfigüratör@studyo.com',
+      from: 'konfigurator@studyo.com',
       to: studioEmail,
-      subject: `Yeni Paket İsteği — ${name}`,
+      subject: `Yeni Paket İsteği - ${name}`,
       text: [
         `Ad: ${name}`,
         `E-posta: ${email}`,
@@ -38,8 +38,7 @@ export async function POST(request: NextRequest) {
     })
 
     return NextResponse.json({ success: true })
-  } catch (err) {
-    console.error('[contact]', err)
+  } catch {
     return NextResponse.json({ error: 'E-posta gönderilemedi' }, { status: 500 })
   }
 }

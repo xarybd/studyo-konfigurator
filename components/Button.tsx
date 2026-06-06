@@ -1,7 +1,8 @@
 'use client'
-import { cn } from '@/lib/utils'
-import { Slot } from '@radix-ui/react-slot'
+
 import type { ButtonHTMLAttributes } from 'react'
+import { Slot } from '@radix-ui/react-slot'
+import { cn } from '@/lib/utils'
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'ghost' | 'outline' | 'whatsapp'
@@ -20,38 +21,33 @@ export function Button({
   return (
     <Comp
       className={cn(
-        'inline-flex items-center justify-center gap-2 cursor-pointer',
-        'font-body text-sm',
-        'min-h-[44px] min-w-[44px]',
-        'transition-all duration-200',
-        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2',
-        'disabled:opacity-60 disabled:cursor-not-allowed',
+        'inline-flex min-h-12 min-w-12 cursor-pointer items-center justify-center gap-2 rounded-full font-body text-sm transition duration-300',
+        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-cream',
+        'disabled:cursor-not-allowed disabled:opacity-55',
         variant === 'primary' && [
-          'text-cream rounded-full px-10 py-[14px]',
-          'text-[12px] tracking-[0.28em] uppercase font-medium',
-          'hover:-translate-y-0.5 hover:brightness-110',
-          '[&>svg:last-child]:transition-transform [&>svg:last-child]:duration-200',
-          'hover:[&>svg:last-child]:translate-x-0.5',
+          'min-w-[158px] px-10 py-4 text-[11px] font-medium uppercase tracking-[0.22em] text-cream shadow-[0_16px_34px_rgba(42,37,32,0.18)]',
+          'hover:-translate-y-0.5 hover:shadow-[0_22px_44px_rgba(42,37,32,0.2)]',
+          '[&>svg:last-child]:transition-transform [&>svg:last-child]:duration-300 hover:[&>svg:last-child]:translate-x-0.5',
         ],
-        variant === 'ghost' && 'text-ink/50 hover:text-ink px-0 py-0 min-w-0 font-medium',
+        variant === 'ghost' && [
+          'min-w-[118px] px-4 py-3 text-[11px] font-medium uppercase tracking-[0.16em] text-ink/52',
+          'hover:bg-cream/55 hover:text-ink/76',
+        ],
         variant === 'outline' && [
-          'border border-gold text-ink px-8 py-3 rounded-full',
-          'text-[12px] tracking-[0.2em] uppercase',
-          'hover:bg-gold/5',
+          'border border-gold/34 bg-cream/42 px-7 py-3 text-[11px] uppercase tracking-[0.2em] text-ink backdrop-blur-md',
+          'hover:-translate-y-0.5 hover:border-gold/60 hover:bg-cream/70',
         ],
         variant === 'whatsapp' && [
-          'text-cream rounded-full w-full',
-          'px-8 py-[14px]',
-          'text-[12px] tracking-[0.22em] uppercase font-medium',
-          'hover:-translate-y-0.5 hover:brightness-105',
+          'w-full px-8 py-3.5 text-[11px] font-medium uppercase tracking-[0.2em] text-cream shadow-[0_16px_34px_rgba(154,126,79,0.22)]',
+          'hover:-translate-y-0.5 hover:shadow-[0_22px_44px_rgba(154,126,79,0.24)]',
         ],
         className,
       )}
       style={
         variant === 'primary'
-          ? { background: 'linear-gradient(135deg, #2A2520, #4A3D2A)', boxShadow: '0 8px 24px rgba(42,37,32,0.18)' }
+          ? { background: 'linear-gradient(135deg, #2A2520, #4A3D2A)' }
           : variant === 'whatsapp'
-            ? { background: 'linear-gradient(135deg, #B89968, #9A7E4F)', boxShadow: '0 6px 20px rgba(154,126,79,0.22)' }
+            ? { background: 'linear-gradient(135deg, #B89968, #9A7E4F)' }
             : undefined
       }
       {...props}

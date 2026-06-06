@@ -16,16 +16,12 @@ export async function GET(request: NextRequest) {
   }
 
   const calendarId = process.env.GOOGLE_CALENDAR_ID
-  if (!calendarId) {
-    // Dev mode: return empty array so UI works without Calendar setup
-    return NextResponse.json({ busyDays: [] })
-  }
+  if (!calendarId) return NextResponse.json({ busyDays: [] })
 
   try {
     const busyDays = await getCachedBusyDays(season, calendarId)
     return NextResponse.json({ busyDays })
-  } catch (err) {
-    console.error('[availability]', err)
+  } catch {
     return NextResponse.json({ busyDays: [] })
   }
 }

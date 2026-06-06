@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Cormorant_Garamond, Italiana, DM_Sans } from 'next/font/google'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
+import '@21st-sdk/react/styles.css'
 import './globals.css'
 
 const cormorant = Cormorant_Garamond({
@@ -34,47 +35,54 @@ export const metadata: Metadata = {
 }
 
 const MESH_GRADIENT =
-  'radial-gradient(circle at 15% 25%, #D9C39A 0%, transparent 45%), ' +
-  'radial-gradient(circle at 85% 35%, #FAEAD8 0%, transparent 50%), ' +
-  'radial-gradient(circle at 50% 85%, #FFF5E6 0%, transparent 45%), ' +
-  'radial-gradient(circle at 25% 65%, #E8D4A8 0%, transparent 40%)'
+  'radial-gradient(circle at 14% 18%, rgba(217,195,154,0.74) 0%, transparent 36%), ' +
+  'radial-gradient(circle at 88% 28%, rgba(250,234,216,0.82) 0%, transparent 42%), ' +
+  'radial-gradient(circle at 48% 84%, rgba(255,245,230,0.9) 0%, transparent 40%), ' +
+  'radial-gradient(circle at 24% 68%, rgba(184,153,104,0.34) 0%, transparent 34%)'
 
 const NOISE_SVG =
-  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E\")"
+  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E\")"
 
 const PARTICLES = [
-  { left: '36%', bottom: '4%',  w: '1.5px', dur: '19s', delay: '0s',    drift: '-16px' },
-  { left: '43%', bottom: '8%',  w: '1px',   dur: '24s', delay: '4.5s',  drift: '14px'  },
-  { left: '50%', bottom: '3%',  w: '2px',   dur: '21s', delay: '9s',    drift: '-6px'  },
-  { left: '57%', bottom: '10%', w: '1.5px', dur: '26s', delay: '2s',    drift: '20px'  },
-  { left: '63%', bottom: '6%',  w: '1px',   dur: '17s', delay: '13s',   drift: '-22px' },
-  { left: '40%', bottom: '12%', w: '1.5px', dur: '22s', delay: '7s',    drift: '8px'   },
-  { left: '54%', bottom: '5%',  w: '1px',   dur: '20s', delay: '16.5s', drift: '-10px' },
+  { left: '18%', bottom: '8%', w: '1px', dur: '22s', delay: '0s', drift: '-18px' },
+  { left: '31%', bottom: '4%', w: '1.5px', dur: '25s', delay: '5s', drift: '14px' },
+  { left: '44%', bottom: '11%', w: '2px', dur: '20s', delay: '9s', drift: '-8px' },
+  { left: '57%', bottom: '5%', w: '1.5px', dur: '27s', delay: '2s', drift: '22px' },
+  { left: '70%', bottom: '13%', w: '1px', dur: '18s', delay: '13s', drift: '-20px' },
+  { left: '82%', bottom: '7%', w: '1.5px', dur: '24s', delay: '7s', drift: '10px' },
 ]
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="tr"
-      className={`${cormorant.variable} ${italiana.variable} ${dmSans.variable}`}
-    >
+    <html lang="tr" className={`${cormorant.variable} ${italiana.variable} ${dmSans.variable}`}>
       <body>
-        {/* Katman A — animasyonlu gradient mesh */}
         <div
           aria-hidden="true"
           className="mesh-drift-layer"
           style={{
             position: 'fixed',
             inset: 0,
-            zIndex: -2,
+            zIndex: -3,
             pointerEvents: 'none',
             background: MESH_GRADIENT,
-            filter: 'blur(100px) saturate(125%)',
-            opacity: 0.75,
+            filter: 'blur(96px) saturate(126%)',
+            opacity: 0.86,
           }}
         />
-
-        {/* Katman B — grain noise */}
+        <div
+          aria-hidden="true"
+          className="aurora-sweep"
+          style={{
+            position: 'fixed',
+            inset: '8% -12% auto -12%',
+            height: '44vh',
+            zIndex: -2,
+            pointerEvents: 'none',
+            background:
+              'linear-gradient(105deg, transparent 8%, rgba(184,153,104,0.12) 32%, rgba(255,252,245,0.36) 50%, rgba(154,126,79,0.12) 68%, transparent 92%)',
+            filter: 'blur(18px)',
+          }}
+        />
         <div
           aria-hidden="true"
           style={{
@@ -83,13 +91,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             zIndex: -1,
             pointerEvents: 'none',
             backgroundImage: NOISE_SVG,
-            backgroundSize: '200px 200px',
-            opacity: 0.05,
+            backgroundSize: '180px 180px',
+            opacity: 0.048,
             mixBlendMode: 'overlay' as const,
           }}
         />
-
-        {/* Katman C — altın toz partiküller */}
         <div
           aria-hidden="true"
           style={{
@@ -116,8 +122,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             />
           ))}
         </div>
-
-        {/* Sayfa içeriği — partiküllerin üstünde */}
         <div style={{ position: 'relative', zIndex: 1 }}>
           <NuqsAdapter>{children}</NuqsAdapter>
         </div>

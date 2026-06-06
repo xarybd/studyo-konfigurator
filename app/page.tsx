@@ -1,14 +1,12 @@
 'use client'
-import { useRouter } from 'next/navigation'
-import { LazyMotion, domAnimation, m, useReducedMotion } from 'framer-motion'
-import { SiteHeader } from '@/components/SiteHeader'
-import { Marquee } from '@/components/Marquee'
 
-const STATS = [
-  { num: '9', label: 'ADIM' },
-  { num: '5', label: 'DAKİKA' },
-  { num: '∞', label: 'KOMBİNASYON' },
-] as const
+import { ArrowRight, Sparkles } from 'lucide-react'
+import { LazyMotion, domAnimation, m, useReducedMotion } from 'framer-motion'
+import { useRouter } from 'next/navigation'
+import { BackgroundGradientAnimation } from '@/components/BackgroundGradientAnimation'
+import { HeroPhotoReel } from '@/components/HeroPhotoReel'
+import { Marquee } from '@/components/Marquee'
+import { SiteHeader } from '@/components/SiteHeader'
 
 const ease: [number, number, number, number] = [0.16, 1, 0.3, 1]
 
@@ -16,23 +14,16 @@ const pageVariants = {
   hidden: {},
   show: {
     transition: {
-      staggerChildren: 0.09,
-      delayChildren: 0.06,
+      staggerChildren: 0.08,
+      delayChildren: 0.04,
     },
   },
 }
 
-const headingVariants = {
+const clusterVariants = {
   hidden: {},
   show: {
     transition: { staggerChildren: 0.06 },
-  },
-}
-
-const statsVariants = {
-  hidden: {},
-  show: {
-    transition: { staggerChildren: 0.07 },
   },
 }
 
@@ -43,116 +34,78 @@ export default function WelcomePage() {
   const item = shouldReduce
     ? {
         hidden: { opacity: 0 },
-        show: { opacity: 1, transition: { duration: 0.45 } },
+        show: { opacity: 1, transition: { duration: 0.36 } },
       }
     : {
-        hidden: { opacity: 0, y: 10 },
-        show: { opacity: 1, y: 0, transition: { duration: 0.62, ease } },
+        hidden: { opacity: 0, y: 12, filter: 'blur(8px)' },
+        show: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.62, ease } },
       }
 
   return (
     <LazyMotion features={domAnimation}>
       <m.div
-        className="min-h-screen flex flex-col"
+        className="flex min-h-screen flex-col"
         variants={pageVariants}
         initial="hidden"
         animate="show"
       >
-        {/* Header */}
         <m.div variants={item}>
           <SiteHeader />
         </m.div>
 
-        {/* Hero */}
-        <main className="flex-1 flex flex-col items-center justify-center px-6 md:px-12 py-10">
-          <div className="flex flex-col items-center text-center w-full max-w-[740px] mx-auto gap-7 md:gap-9">
+        <main className="relative isolate flex flex-1 items-center justify-center overflow-hidden px-5 pb-10 pt-5 sm:px-10 sm:pb-14 sm:pt-8 xl:px-16">
+          <HeroPhotoReel />
+          <div className="absolute inset-0 md:hidden">
+            <BackgroundGradientAnimation className="h-full w-full opacity-55" />
+          </div>
+          <div className="relative z-10 mx-auto flex w-full max-w-[430px] flex-col items-center md:max-w-[900px]">
+            <div className="panel-shine relative w-full overflow-hidden rounded-[20px] border border-gold/22 bg-cream/64 px-5 py-8 text-center shadow-[0_38px_130px_rgba(42,37,32,0.13),inset_0_1px_0_rgba(255,255,255,0.76)] backdrop-blur-2xl sm:px-8 sm:py-10 md:rounded-[14px] lg:px-14 lg:py-12">
+              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(184,153,104,0.18),transparent_34%),linear-gradient(145deg,rgba(255,255,255,0.34),rgba(255,255,255,0.08)_48%,rgba(184,153,104,0.08))]" />
+              <div className="relative">
+                <m.div variants={item}>
+                  <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-gold/20 bg-cream/58 px-3 py-1.5 font-body text-[8px] uppercase tracking-[0.2em] text-gold-dark/70 shadow-[inset_0_1px_0_rgba(255,255,255,0.72)] backdrop-blur-xl sm:mb-6 sm:px-4 sm:py-2 sm:text-[9px] sm:tracking-[0.26em]">
+                    <Sparkles size={13} strokeWidth={1.6} />
+                    Stüdyonuz için özelleştirilecek demo
+                  </div>
+                </m.div>
 
-            {/* Badge pill */}
-            <m.div variants={item}>
-              <div
-                className="inline-flex items-center px-5 py-[7px] rounded-full font-body text-[9px] tracking-[0.26em] uppercase"
-                style={{
-                  background: 'rgba(255,252,245,0.78)',
-                  backdropFilter: 'blur(14px)',
-                  WebkitBackdropFilter: 'blur(14px)',
-                  border: '1px solid rgba(184,153,104,0.2)',
-                  boxShadow: '0 2px 10px rgba(42,37,32,0.04), inset 0 1px 0 rgba(255,255,255,0.75)',
-                  color: '#635749',
-                }}
-              >
-                DEMO · STÜDYONUZ İÇİN ÖZELLEŞTİRİLECEK
-              </div>
-            </m.div>
+                <m.div variants={clusterVariants} className="leading-[0.92]">
+                  <m.h1 variants={item} className="font-display text-[clamp(40px,12vw,64px)] font-light text-ink md:text-[clamp(42px,7vw,92px)]">
+                    Çekiminizi
+                  </m.h1>
+                  <m.p variants={item} className="font-accent text-[clamp(34px,11vw,58px)] italic leading-[1.02] text-gold-dark md:text-[clamp(36px,6.4vw,82px)]">
+                    birlikte tasarlayalım
+                  </m.p>
+                </m.div>
 
-            {/* Heading — two lines stagger independently */}
-            <m.div variants={headingVariants} style={{ lineHeight: '0.93' }}>
-              <m.h1
-                variants={item}
-                className="block font-display font-light text-ink"
-                style={{ fontSize: 'clamp(48px, 8vw, 94px)' }}
-              >
-                Paketinizi
-              </m.h1>
-              <m.p
-                variants={item}
-                className="block font-accent italic text-gold-dark"
-                style={{ fontSize: 'clamp(44px, 7.5vw, 88px)', lineHeight: '1.05' }}
-              >
-                birlikte tasarlayalım
-              </m.p>
-            </m.div>
+                <m.p
+                  variants={item}
+                  className="mx-auto mt-5 max-w-[32ch] font-display text-[15px] italic leading-7 text-ink/54 sm:mt-6 sm:max-w-2xl sm:text-[17px] sm:leading-8"
+                >
+                  Zevkinize, hikayenize ve gününüze göre özel bir fotoğraf paketi öneriyoruz.
+                  Süreç kısa, sonuç net ve paylaşmaya hazır.
+                </m.p>
 
-            {/* Subtitle */}
-            <m.p
-              variants={item}
-              className="font-display italic text-ink/45 max-w-[440px]"
-              style={{ fontSize: 'clamp(14px, 1.65vw, 17px)', lineHeight: '1.72' }}
-            >
-              9 adımda zevkinize, hikayenize ve gününüze özel bir paket öneriyoruz. Süreç 5 dakika sürer.
-            </m.p>
-
-            {/* Stats */}
-            <m.div variants={statsVariants} className="flex items-start gap-10 md:gap-16">
-              {STATS.map(({ num, label }) => (
-                <m.div key={label} variants={item} className="flex flex-col items-center gap-2">
-                  <span
-                    className="font-display font-light text-gold"
-                    style={{ fontSize: 'clamp(28px, 3.5vw, 42px)', lineHeight: '1' }}
+                <m.div variants={item} className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+                  <m.button
+                    onClick={() => router.push('/configure/context')}
+                    whileHover={shouldReduce ? {} : { y: -3 }}
+                    whileTap={{ scale: 0.985 }}
+                    transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}
+                    className="inline-flex min-h-14 w-full max-w-[280px] items-center justify-center gap-3 rounded-full bg-ink px-7 font-body text-[11px] font-medium uppercase tracking-[0.18em] text-cream shadow-[0_18px_44px_rgba(42,37,32,0.18)] transition hover:bg-gold-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-cream sm:w-auto sm:min-w-[220px] sm:px-8 sm:tracking-[0.22em]"
                   >
-                    {num}
-                  </span>
-                  <span className="font-body text-[9px] tracking-[0.34em] uppercase text-ink/35">
-                    {label}
+                    Tasarıma başla
+                    <ArrowRight size={16} strokeWidth={1.7} />
+                  </m.button>
+                  <span className="font-body text-[10px] uppercase tracking-[0.18em] text-ink/38 sm:text-[11px] sm:tracking-[0.22em]">
+                    5 dakikalık akış
                   </span>
                 </m.div>
-              ))}
-            </m.div>
-
-            {/* CTA */}
-            <m.div variants={item}>
-              <m.button
-                onClick={() => router.push('/configure/context')}
-                whileHover={shouldReduce ? {} : { y: -2 }}
-                whileTap={{ scale: 0.98 }}
-                transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}
-                className="font-body text-[11px] tracking-[0.28em] uppercase text-ink rounded-full cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2"
-                style={{
-                  background: 'rgba(255,252,245,0.88)',
-                  backdropFilter: 'blur(16px)',
-                  WebkitBackdropFilter: 'blur(16px)',
-                  border: '1px solid rgba(184,153,104,0.42)',
-                  padding: '17px 46px',
-                  boxShadow: '0 4px 20px rgba(42,37,32,0.07), 0 1px 0 rgba(255,255,255,0.9) inset',
-                }}
-              >
-                TASARIMA BAŞLA →
-              </m.button>
-            </m.div>
-
+              </div>
+            </div>
           </div>
         </main>
 
-        {/* Marquee */}
         <m.div variants={item}>
           <Marquee />
         </m.div>

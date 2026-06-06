@@ -1,6 +1,7 @@
 'use client'
 import { PageTransition } from '@/components/PageTransition'
 import { PriceDisplay } from '@/components/PriceDisplay'
+import { Marquee } from '@/components/Marquee'
 import { SiteHeader } from '@/components/SiteHeader'
 import { useWizardState } from '@/hooks/useWizardState'
 import { calculatePrice } from '@/lib/price-engine'
@@ -13,7 +14,6 @@ const PRICE_VISIBLE_STEPS = [
   '/configure/team',
   '/configure/delivery',
   '/configure/extras',
-  '/configure/result',
 ]
 
 export function ConfigureLayoutInner({ children }: { children: React.ReactNode }) {
@@ -32,10 +32,11 @@ export function ConfigureLayoutInner({ children }: { children: React.ReactNode }
   const showPrice = PRICE_VISIBLE_STEPS.some((s) => pathname.startsWith(s))
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="flex min-h-screen flex-col">
       <SiteHeader />
       <PageTransition className="flex-1 flex flex-col">{children}</PageTransition>
       <PriceDisplay price={price} visible={showPrice} />
+      <Marquee />
     </div>
   )
 }

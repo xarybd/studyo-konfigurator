@@ -56,6 +56,7 @@ const LABELS = {
 export interface WhatsAppMessageData {
   name: string
   email: string
+  phone?: string
   context?: string
   season?: string
   date?: string
@@ -76,15 +77,20 @@ function label<T extends Record<string, string>>(map: T, key: string | undefined
 export function buildWhatsAppMessage(data: WhatsAppMessageData): string {
   const extrasList =
     data.extras && data.extras.length > 0
-      ? data.extras.map(e => label(LABELS.extras, e)).join(', ')
+      ? data.extras.map((extra) => label(LABELS.extras, extra)).join(', ')
       : 'Yok'
 
   const lines = [
-    'Merhaba, web sitesi konfigüratörü üzerinden paket tasarladım.',
-    `Ad: ${data.name}`,
-    `Mail: ${data.email}`,
-    '— Paket Özeti —',
+    'Merhaba, web sitesi üzerinden bir çekim paketi oluşturdum.',
+    '',
+    'Müşteri Bilgileri',
+    `Ad Soyad: ${data.name || 'Belirtilmedi'}`,
+    `E-posta: ${data.email || 'Belirtilmedi'}`,
+    `Telefon: ${data.phone || 'Belirtilmedi'}`,
+    '',
+    'Paket Özeti',
     `Etkinlik: ${label(LABELS.context, data.context)}`,
+    `Mevsim: ${label(LABELS.season, data.season)}`,
     `Tarih: ${data.date ?? 'Belirtilmedi'}`,
     `Stil: ${label(LABELS.style, data.style)}`,
     `Lokasyon: ${label(LABELS.location, data.location)}`,
@@ -92,8 +98,11 @@ export function buildWhatsAppMessage(data: WhatsAppMessageData): string {
     `Ekip: ${label(LABELS.team, data.team)}`,
     `Teslimat: ${label(LABELS.delivery, data.delivery)}`,
     `Ekstralar: ${extrasList}`,
-    `Yatırım: ${formatCurrency(data.price.min)} — ${formatCurrency(data.price.max)}`,
-    'Görüşme için uygun olduğunuzda dönebilir misiniz?',
+    '',
+    'Ön Yatırım Aralığı',
+    `${formatCurrency(data.price.min)} - ${formatCurrency(data.price.max)}`,
+    '',
+    'Bu paket için uygunluk ve net teklif hakkında bilgi almak istiyorum.',
   ]
 
   return lines.join('\n')
