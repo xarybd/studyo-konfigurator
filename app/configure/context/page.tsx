@@ -44,7 +44,7 @@ export default function ContextPage() {
       title={<>Sizi <em className="font-accent italic text-gold-dark">buluşturalım</em></>}
       subtitle="Bağlam, ilerleyen tüm adımların tonunu ve kapsamını belirler."
     >
-      <div className="mx-auto grid w-full max-w-[430px] grid-cols-1 gap-3 sm:max-w-4xl sm:grid-cols-3 sm:gap-5">
+      <div className="mx-auto grid w-full max-w-[390px] grid-cols-1 gap-3 sm:max-w-4xl sm:grid-cols-3 sm:gap-5">
         {OPTIONS.map((opt) => (
           <Card
             key={opt.key}

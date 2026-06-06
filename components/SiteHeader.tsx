@@ -23,41 +23,48 @@ export function SiteHeader() {
   const currentStep = isResult ? 9 : idx + 1
 
   return (
-    <header className="sticky top-0 z-30 flex shrink-0 items-start justify-between px-5 py-4 md:px-10 md:py-6">
-      <div className="rounded-full border border-gold/14 bg-cream/42 px-4 py-3 backdrop-blur-xl shadow-[inset_0_1px_0_rgba(255,255,255,0.62)]">
-        <p className="font-accent text-[15px] tracking-[0.18em] text-gold-dark">
-          STÜDYO
-        </p>
-        <p className="mt-1 font-body text-[8px] uppercase tracking-[0.24em] text-ink/45 md:text-[9px]">
-          Fine Wedding Photography
-        </p>
+    <header className="sticky top-0 z-30 shrink-0 px-4 py-3 sm:px-6 md:px-10 md:py-6">
+      <div className="mx-auto flex w-full max-w-[1180px] items-start justify-between gap-3">
+        <div className="max-w-[210px] rounded-full border border-gold/14 bg-cream/48 px-3.5 py-2.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.62)] backdrop-blur-xl md:px-4 md:py-3">
+          <p className="font-accent text-[14px] tracking-[0.14em] text-gold-dark md:text-[15px] md:tracking-[0.18em]">
+            STÜDYO
+          </p>
+          <p className="mt-1 truncate font-body text-[7px] uppercase tracking-[0.18em] text-ink/45 md:text-[9px] md:tracking-[0.24em]">
+            Fine Wedding Photography
+          </p>
+        </div>
+
+        {isWelcome ? (
+          <div className="rounded-full border border-gold/14 bg-cream/48 px-3 py-2.5 font-body text-[9px] uppercase tracking-[0.18em] text-ink/45 backdrop-blur-xl md:px-4 md:py-3 md:text-[10px] md:tracking-[0.24em]">
+            00 / 09
+          </div>
+        ) : (
+          <div className="mt-2 flex items-center gap-2 rounded-full border border-gold/14 bg-cream/48 px-3 py-2.5 backdrop-blur-xl md:mt-3 md:px-4 md:py-3">
+            <span className="font-body text-[9px] uppercase tracking-[0.18em] text-ink/42 sm:hidden">
+              {String(currentStep).padStart(2, '0')} / 09
+            </span>
+            <div className="hidden items-center gap-2 sm:flex">
+              {Array.from({ length: 9 }, (_, i) => {
+                const step = i + 1
+                const isActive = step === currentStep
+                const isCompleted = currentStep > 0 && step < currentStep
+
+                return (
+                  <span
+                    key={step}
+                    className={cn(
+                      'rounded-full transition-all duration-300',
+                      isActive && 'h-2 w-5 bg-gold',
+                      isCompleted && 'h-1.5 w-1.5 bg-gold/55',
+                      !isActive && !isCompleted && 'h-1.5 w-1.5 bg-gold/18',
+                    )}
+                  />
+                )
+              })}
+            </div>
+          </div>
+        )}
       </div>
-
-      {isWelcome ? (
-        <div className="rounded-full border border-gold/14 bg-cream/42 px-4 py-3 font-body text-[10px] uppercase tracking-[0.24em] text-ink/45 backdrop-blur-xl">
-          00 / 09
-        </div>
-      ) : (
-        <div className="mt-3 hidden items-center gap-2 rounded-full border border-gold/14 bg-cream/42 px-4 py-3 backdrop-blur-xl sm:flex">
-          {Array.from({ length: 9 }, (_, i) => {
-            const step = i + 1
-            const isActive = step === currentStep
-            const isCompleted = currentStep > 0 && step < currentStep
-
-            return (
-              <span
-                key={step}
-                className={cn(
-                  'rounded-full transition-all duration-300',
-                  isActive && 'h-2 w-5 bg-gold',
-                  isCompleted && 'h-1.5 w-1.5 bg-gold/55',
-                  !isActive && !isCompleted && 'h-1.5 w-1.5 bg-gold/18',
-                )}
-              />
-            )
-          })}
-        </div>
-      )}
     </header>
   )
 }

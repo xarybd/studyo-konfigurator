@@ -45,7 +45,7 @@ export function Marquee() {
 
   return (
     <div className="shrink-0 border-y border-gold/24 bg-[linear-gradient(to_right,rgba(42,37,32,0.05),rgba(184,153,104,0.18),rgba(255,252,245,0.18),rgba(184,153,104,0.16),rgba(42,37,32,0.05))] shadow-[0_-18px_60px_rgba(42,37,32,0.055)] backdrop-blur-md">
-      <svg aria-hidden="true" width="100%" height="6" viewBox="0 0 1440 7" preserveAspectRatio="none">
+      <svg aria-hidden="true" width="100%" height="4" viewBox="0 0 1440 7" preserveAspectRatio="none">
         <polyline
           points={zigzagPoints}
           fill="none"
@@ -56,15 +56,15 @@ export function Marquee() {
       </svg>
 
       <div
-        className="overflow-hidden px-0 py-[8px] sm:py-[15px]"
+        className="overflow-hidden px-0 py-[6px] sm:py-[15px]"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
         <div ref={trackRef} className="marquee-track" style={{ animationDuration: `${speed}s` }}>
-          <span className="whitespace-nowrap pl-6 font-body text-[9px] font-medium uppercase tracking-[0.22em] text-ink/66 sm:pl-8 sm:text-[10px] sm:tracking-[0.32em]">
+          <span className="whitespace-nowrap pl-5 font-body text-[8px] font-medium uppercase tracking-[0.16em] text-ink/58 sm:pl-8 sm:text-[10px] sm:tracking-[0.32em] sm:text-ink/66">
             {fullText}
           </span>
-          <span aria-hidden="true" className="whitespace-nowrap pl-6 font-body text-[9px] font-medium uppercase tracking-[0.22em] text-ink/66 sm:pl-8 sm:text-[10px] sm:tracking-[0.32em]">
+          <span aria-hidden="true" className="whitespace-nowrap pl-5 font-body text-[8px] font-medium uppercase tracking-[0.16em] text-ink/58 sm:pl-8 sm:text-[10px] sm:tracking-[0.32em] sm:text-ink/66">
             {fullText}
           </span>
         </div>

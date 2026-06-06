@@ -63,7 +63,7 @@ export default function DatePage() {
           <span className="font-body text-sm">Takvim yükleniyor</span>
         </div>
       ) : (
-        <div className="mx-auto w-full max-w-[430px] p-2.5 sm:max-w-5xl sm:p-5 md:p-6" style={glassPanelStyle}>
+        <div className="mx-auto w-full max-w-[390px] p-2.5 sm:max-w-5xl sm:p-5 md:p-6" style={glassPanelStyle}>
           <CalendarGrid
             months={months}
             busyDays={busyDays}

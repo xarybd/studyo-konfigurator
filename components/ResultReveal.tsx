@@ -114,11 +114,11 @@ export function ResultReveal({ min, max, items, whatsappUrl }: ResultRevealProps
                 ))}
               </div>
 
-              <div className="relative z-10 flex h-[100svh] items-center justify-center px-5 py-16 text-cream sm:px-6">
+              <div className="relative z-10 flex h-[100svh] select-none items-center justify-center px-5 py-16 text-cream sm:px-6">
                 <AnimatePresence mode="wait">
                   <m.div
                     key={current.eyebrow}
-                    className="relative flex aspect-[9/16] max-h-[82svh] w-full max-w-[430px] flex-col justify-between overflow-hidden rounded-[20px] border border-cream/22 bg-ink/18 p-5 text-center shadow-[0_46px_150px_rgba(42,37,32,0.38),inset_0_1px_0_rgba(255,255,255,0.2)] backdrop-blur-2xl sm:rounded-[14px] sm:p-7"
+                    className="relative flex aspect-[9/16] max-h-[82svh] w-full max-w-[390px] flex-col justify-between overflow-hidden rounded-[22px] border border-cream/22 bg-ink/18 p-5 text-center shadow-[0_46px_150px_rgba(42,37,32,0.38),inset_0_1px_0_rgba(255,255,255,0.2)] backdrop-blur-2xl sm:max-w-[430px] sm:rounded-[14px] sm:p-7"
                     initial={{ opacity: 0, y: 44, scale: 0.96, filter: 'blur(14px)' }}
                     animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
                     exit={{ opacity: 0, y: -24, scale: 0.98, filter: 'blur(10px)' }}
@@ -126,21 +126,21 @@ export function ResultReveal({ min, max, items, whatsappUrl }: ResultRevealProps
                   >
                     <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_18%,rgba(255,255,255,0.22),transparent_34%),linear-gradient(180deg,rgba(255,255,255,0.12),transparent_48%,rgba(42,37,32,0.2))]" />
                     <div className="relative">
-                      <div className="mx-auto mb-5 inline-flex items-center gap-2 rounded-full border border-cream/22 bg-cream/12 px-3 py-1.5 font-body text-[8px] uppercase tracking-[0.2em] sm:mb-6 sm:px-4 sm:py-2 sm:text-[9px] sm:tracking-[0.26em]">
+                      <div className="mx-auto mb-5 inline-flex items-center gap-2 rounded-full border border-cream/22 bg-cream/12 px-3 py-1.5 font-body text-[8px] uppercase tracking-[0.16em] sm:mb-6 sm:px-4 sm:py-2 sm:text-[9px] sm:tracking-[0.26em]">
                         <Sparkles size={13} />
                         Çekim raporunuz
                       </div>
-                      <p className="font-body text-[10px] uppercase tracking-[0.24em] text-cream/66 sm:text-[11px] sm:tracking-[0.34em]">
+                      <p className="font-body text-[9px] uppercase tracking-[0.2em] text-cream/66 sm:text-[11px] sm:tracking-[0.34em]">
                         {current.eyebrow}
                       </p>
                     </div>
 
                     <div className="relative">
-                      <h2 className="break-words font-display text-[clamp(34px,10vw,68px)] font-light leading-[0.95]">
+                      <h2 className="mx-auto max-w-[9ch] break-words font-display text-[clamp(32px,9vw,64px)] font-light leading-[0.96] sm:max-w-[10ch]">
                         {current.title}
                       </h2>
                       <div className="mx-auto my-6 h-px w-20 bg-cream/38 sm:my-7 sm:w-24" />
-                      <p className="mx-auto max-w-[28ch] font-display text-[18px] italic leading-7 text-cream/78 sm:text-[20px] sm:leading-8">
+                      <p className="mx-auto max-w-[27ch] font-display text-[17px] italic leading-7 text-cream/78 sm:text-[20px] sm:leading-8">
                         {current.text}
                       </p>
                     </div>
@@ -157,7 +157,7 @@ export function ResultReveal({ min, max, items, whatsappUrl }: ResultRevealProps
                             <MessageCircle size={16} />
                             WhatsApp'a gönder
                           </a>
-                          <p className="font-body text-[10px] uppercase tracking-[0.18em] text-cream/54">
+                          <p className="font-body text-[9px] uppercase tracking-[0.14em] text-cream/54 sm:text-[10px] sm:tracking-[0.18em]">
                             Paylaşım şablonunda fiyat görünmez
                           </p>
                         </div>

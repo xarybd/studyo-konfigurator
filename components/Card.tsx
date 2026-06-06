@@ -20,7 +20,7 @@ interface CardProps {
 
 const cardVariants = {
   rest: { y: 0 },
-  hover: { y: -7 },
+  hover: { y: -4 },
 }
 
 const iconVariants = {
@@ -129,7 +129,7 @@ export function Card({
         rotateY: shouldReduce ? 0 : springY,
       }}
       className={cn(
-        'panel-shine relative flex min-h-[142px] cursor-pointer select-none flex-col overflow-hidden rounded-[18px] p-4 outline-none transition-[background,border,box-shadow,opacity] duration-300 sm:min-h-[168px] sm:p-5 md:min-h-[236px] md:rounded-[14px] md:p-8',
+        'panel-shine relative flex min-h-[112px] cursor-pointer select-none flex-col overflow-hidden rounded-[18px] p-3.5 outline-none transition-[background,border,box-shadow,opacity] duration-300 sm:min-h-[132px] sm:p-4 md:min-h-[220px] md:rounded-[14px] md:p-7',
         'focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-cream',
         disabled && 'pointer-events-none',
         className,
@@ -137,7 +137,7 @@ export function Card({
     >
       <span
         className={cn(
-          'absolute right-3 top-3 z-10 flex h-5 w-5 items-center justify-center rounded-full bg-gold text-cream shadow-[0_8px_20px_rgba(154,126,79,0.24)] transition duration-200 md:right-4 md:top-4 md:h-6 md:w-6',
+          'absolute right-3 top-3 z-10 flex h-[18px] w-[18px] items-center justify-center rounded-full bg-gold text-cream shadow-[0_8px_20px_rgba(154,126,79,0.24)] transition duration-200 md:right-4 md:top-4 md:h-6 md:w-6',
           selected ? 'scale-100 opacity-100' : 'scale-75 opacity-0',
         )}
       >
@@ -165,7 +165,7 @@ export function Card({
       ) : null}
 
       {visual ? (
-        <div className="-mx-4 -mt-4 mb-4 overflow-hidden rounded-t-[18px] sm:-mx-5 sm:-mt-5 md:-mx-7 md:-mt-7 md:rounded-t-[14px]">
+        <div className="-mx-3.5 -mt-3.5 mb-3 overflow-hidden rounded-t-[18px] sm:-mx-4 sm:-mt-4 md:-mx-7 md:-mt-7 md:mb-5 md:rounded-t-[14px]">
           {visual}
         </div>
       ) : null}
@@ -175,31 +175,31 @@ export function Card({
           <m.div
             variants={iconVariants}
             transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
-            className="mb-4 flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-gold/24 bg-cream/54 text-gold-dark shadow-[0_14px_32px_rgba(154,126,79,0.12),inset_0_1px_0_rgba(255,255,255,0.72)] md:mb-6 md:h-14 md:w-14 [&>svg]:h-6 [&>svg]:w-6 md:[&>svg]:h-8 md:[&>svg]:w-8"
+            className="mb-3 flex h-[38px] w-[38px] shrink-0 items-center justify-center rounded-full border border-gold/24 bg-cream/54 text-gold-dark shadow-[0_14px_32px_rgba(154,126,79,0.12),inset_0_1px_0_rgba(255,255,255,0.72)] md:mb-6 md:h-14 md:w-14 [&>svg]:h-5 [&>svg]:w-5 md:[&>svg]:h-8 md:[&>svg]:w-8"
           >
             {icon}
           </m.div>
         ) : null}
 
-        <h2 className="break-words font-display text-[20px] font-normal leading-tight text-ink md:text-[25px]">
+        <h2 className="break-words font-display text-[18px] font-normal leading-tight text-ink md:text-[25px]">
           {title}
         </h2>
 
         {description ? (
-          <p className="mt-2 max-w-full font-body text-[12px] italic leading-5 text-ink/56 md:mt-3 md:max-w-[28ch] md:text-[13px] md:leading-6">
+          <p className="mt-1.5 max-w-full font-body text-[11.5px] italic leading-5 text-ink/56 md:mt-3 md:max-w-[28ch] md:text-[13px] md:leading-6">
             {description}
           </p>
         ) : null}
 
         {priceNote ? (
-          <div className="mt-auto pt-4 md:pt-6">
-            <div className="inline-flex max-w-full flex-wrap justify-center rounded-full border border-gold/20 bg-cream/58 px-2.5 py-1.5 text-center font-body text-[9px] font-medium uppercase leading-4 tracking-[0.08em] text-gold-dark shadow-[inset_0_1px_0_rgba(255,255,255,0.72)] md:px-3 md:py-2 md:text-[10px] md:tracking-[0.12em]">
+          <div className="mt-auto pt-3 md:pt-6">
+            <div className="inline-flex max-w-full flex-wrap justify-center rounded-full border border-gold/16 bg-cream/42 px-2 py-1 text-center font-body text-[8px] font-medium uppercase leading-3 tracking-[0.05em] text-gold-dark/72 shadow-[inset_0_1px_0_rgba(255,255,255,0.62)] md:px-3 md:py-2 md:text-[10px] md:leading-4 md:tracking-[0.12em]">
               {priceNote}
             </div>
           </div>
         ) : null}
 
-        {children ? <div className="mt-4 md:mt-5">{children}</div> : null}
+        {children ? <div className="mt-3 md:mt-5">{children}</div> : null}
       </div>
     </m.div>
   )

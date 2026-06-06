@@ -38,7 +38,7 @@ export default function SeasonPage() {
         </Button>
       }
     >
-      <div className="mx-auto grid w-full max-w-[430px] grid-cols-1 gap-3 sm:max-w-5xl sm:grid-cols-2 sm:gap-4 lg:grid-cols-5">
+      <div className="mx-auto grid w-full max-w-[390px] grid-cols-1 gap-3 sm:max-w-5xl sm:grid-cols-2 sm:gap-4 lg:grid-cols-5">
         {OPTIONS.map((opt) => (
           <Card
             key={opt.key}

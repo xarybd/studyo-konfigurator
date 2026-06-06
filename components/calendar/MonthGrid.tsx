@@ -20,7 +20,7 @@ export function MonthGrid({ year, month, busySet, selectedDate, today, showTitle
   ]
 
   return (
-    <div className="rounded-[18px] border border-gold/14 bg-cream/32 p-3.5 backdrop-blur-xl sm:rounded-[14px] sm:p-5">
+    <div className="rounded-[18px] border border-gold/14 bg-cream/32 p-3 backdrop-blur-xl sm:rounded-[14px] sm:p-5">
       {showTitle ? (
         <h3 className="mb-4 text-center font-accent text-[20px] italic uppercase tracking-[0.12em] text-gold-dark">
           {MONTH_NAMES[month]}
@@ -35,7 +35,7 @@ export function MonthGrid({ year, month, busySet, selectedDate, today, showTitle
         ))}
       </div>
 
-      <div className="grid grid-cols-7 gap-1">
+      <div className="grid grid-cols-7 gap-0.5 sm:gap-1">
         {cells.map((day, idx) => {
           if (!day) return <div key={`empty-${idx}`} className="aspect-square" />
 
@@ -54,7 +54,7 @@ export function MonthGrid({ year, month, busySet, selectedDate, today, showTitle
               aria-label={`${day} ${MONTH_NAMES[month]} ${year}${isBusy ? ' dolu' : ''}`}
               aria-pressed={isSelected}
               className={cn(
-                'mx-auto flex aspect-square w-full max-w-10 items-center justify-center rounded-full font-body text-[13px] transition duration-200 sm:max-w-11 sm:text-sm',
+                'mx-auto flex aspect-square w-full max-w-9 items-center justify-center rounded-full font-body text-[12px] transition duration-200 sm:max-w-11 sm:text-sm',
                 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-cream',
                 isSelected && 'bg-ink text-cream shadow-[0_10px_22px_rgba(42,37,32,0.18)]',
                 isToday && !isSelected && 'border border-gold text-ink',

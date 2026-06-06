@@ -27,7 +27,7 @@ export function getPriceImpact(current: LooseSelections, next: LooseSelections):
   const minDelta = nextPrice.min - currentPrice.min
   const maxDelta = nextPrice.max - currentPrice.max
 
-  if (minDelta === 0 && maxDelta === 0) return 'Fiyatı değiştirmez'
+  if (minDelta === 0 && maxDelta === 0) return ''
 
   const prefix = minDelta > 0 ? '+' : ''
   return `${prefix}${formatCurrency(minDelta)} - ${prefix}${formatCurrency(maxDelta)}`

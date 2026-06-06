@@ -135,27 +135,27 @@ export default function ResultPage() {
   }
 
   return (
-    <section className="flex-1 overflow-visible px-5 pb-24 pt-6 sm:px-8 lg:px-12">
+    <section className="flex-1 overflow-visible px-4 pb-24 pt-5 sm:px-8 lg:px-12">
       <ResultReveal min={price?.min} max={price?.max} items={revealItems} whatsappUrl={buildWAUrl()} />
-      <div className="mx-auto flex w-full max-w-[430px] flex-col gap-6 md:max-w-[1180px] md:gap-8">
-        <div className="mx-auto max-w-4xl text-center">
+      <div className="mx-auto flex w-full max-w-[390px] flex-col gap-5 sm:max-w-[430px] md:max-w-[1180px] md:gap-8">
+        <div className="mx-auto max-w-[390px] text-center md:max-w-4xl">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-gold/22 bg-cream/68 px-3 py-1.5 font-body text-[8px] uppercase tracking-[0.22em] text-gold-dark shadow-[inset_0_1px_0_rgba(255,255,255,0.75)] backdrop-blur-xl md:mb-5 md:px-4 md:py-2 md:text-[9px] md:tracking-[0.28em]">
             <Sparkles size={13} strokeWidth={1.5} />
             Paketiniz hazır
           </div>
-          <h1 className="font-display text-[clamp(34px,10vw,58px)] font-light leading-[1] text-ink md:text-[clamp(40px,6vw,76px)] md:leading-[0.98]">
+          <h1 className="mx-auto max-w-[10ch] font-display text-[clamp(33px,9.5vw,54px)] font-light leading-[1.03] text-ink md:max-w-none md:text-[clamp(40px,6vw,76px)] md:leading-[0.98]">
             Sizin için <em className="font-accent italic text-gold-dark">tasarlanan</em> teklif
           </h1>
-          <p className="mx-auto mt-3 max-w-[32ch] font-display text-[14px] italic leading-6 text-ink/48 md:mt-4 md:max-w-2xl md:text-[16px] md:leading-7">
+          <p className="mx-auto mt-3 max-w-[31ch] font-display text-[13px] italic leading-6 text-ink/48 md:mt-4 md:max-w-2xl md:text-[16px] md:leading-7">
             Seçimlerinize göre ön yatırım aralığını hazırladık. Son dokunuşu kısa bir görüşmede netleştiririz.
           </p>
         </div>
 
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-6">
-          <div className="panel-shine relative overflow-hidden rounded-[20px] border border-gold/22 bg-cream/58 p-5 shadow-[0_26px_90px_rgba(42,37,32,0.09),inset_0_1px_0_rgba(255,255,255,0.74)] backdrop-blur-2xl md:rounded-[14px] md:p-8">
+          <div className="panel-shine relative overflow-hidden rounded-[22px] border border-gold/20 bg-cream/60 p-4 shadow-[0_24px_80px_rgba(42,37,32,0.08),inset_0_1px_0_rgba(255,255,255,0.74)] backdrop-blur-2xl md:rounded-[14px] md:p-8">
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_0%,rgba(184,153,104,0.16),transparent_34%),linear-gradient(145deg,rgba(255,255,255,0.28),transparent_56%)]" />
-            <div className="relative">
-              <p className="mb-4 font-body text-[9px] uppercase tracking-[0.24em] text-gold-dark/68 md:mb-5 md:tracking-[0.3em]">
+            <div className="relative space-y-2">
+              <p className="mb-3 font-body text-[8px] uppercase tracking-[0.18em] text-gold-dark/68 md:mb-5 md:text-[9px] md:tracking-[0.3em]">
                 Paket özeti
               </p>
               <SummaryRow label="Etkinlik" value={lbl(LABELS.context, state.context)} />
@@ -170,19 +170,19 @@ export default function ResultPage() {
             </div>
           </div>
 
-          <div className="relative overflow-hidden rounded-[20px] border border-gold/24 bg-cream/62 p-5 shadow-[0_32px_100px_rgba(42,37,32,0.105),inset_0_1px_0_rgba(255,255,255,0.76)] backdrop-blur-2xl md:rounded-[14px] md:p-8">
+          <div className="relative overflow-hidden rounded-[22px] border border-gold/22 bg-cream/62 p-4 shadow-[0_28px_90px_rgba(42,37,32,0.1),inset_0_1px_0_rgba(255,255,255,0.76)] backdrop-blur-2xl md:rounded-[14px] md:p-8">
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_78%_8%,rgba(184,153,104,0.2),transparent_34%),linear-gradient(150deg,rgba(255,255,255,0.32),rgba(247,241,230,0.06)_48%,rgba(154,126,79,0.1))]" />
             <div className="relative flex flex-col">
-              <div className="rounded-[18px] border border-gold/20 bg-[linear-gradient(150deg,rgba(42,37,32,0.92),rgba(154,126,79,0.7)_46%,rgba(247,241,230,0.68))] p-5 text-cream shadow-[inset_0_1px_0_rgba(255,255,255,0.2)] md:rounded-[14px] md:p-7">
+              <div className="rounded-[20px] border border-gold/18 bg-[linear-gradient(150deg,rgba(42,37,32,0.94),rgba(154,126,79,0.72)_48%,rgba(247,241,230,0.62))] p-5 text-cream shadow-[0_18px_50px_rgba(42,37,32,0.12),inset_0_1px_0_rgba(255,255,255,0.2)] md:rounded-[14px] md:p-7">
                 <p className="mb-3 font-body text-[8px] uppercase tracking-[0.24em] text-cream/68 md:text-[9px] md:tracking-[0.3em]">
                   Yatırım aralığı
                 </p>
                 {price ? (
                   <div className="flex flex-col gap-4">
-                    <p className="break-words font-display text-[clamp(28px,8vw,52px)] italic leading-[1.05] text-cream">
+                    <p className="break-words font-display text-[clamp(26px,7.5vw,52px)] italic leading-[1.08] text-cream">
                       {formatCurrency(price.min)} - {formatCurrency(price.max)}
                     </p>
-                    <p className="max-w-[42ch] font-body text-[13px] leading-6 text-cream/72 md:text-sm">
+                    <p className="max-w-[42ch] font-body text-[12px] leading-5 text-cream/72 md:text-sm md:leading-6">
                       Bu aralık seçtiğiniz kapsam için ön teklif niteliğindedir.
                     </p>
                   </div>
@@ -198,7 +198,7 @@ export default function ResultPage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-disabled={!price}
-                className="mt-5 inline-flex min-h-13 items-center justify-center gap-3 rounded-full bg-ink px-6 font-body text-[10px] font-medium uppercase tracking-[0.16em] text-cream shadow-[0_18px_44px_rgba(42,37,32,0.18)] transition duration-300 hover:-translate-y-0.5 hover:bg-gold-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-cream aria-disabled:pointer-events-none aria-disabled:opacity-45 md:px-7 md:text-[11px] md:tracking-[0.2em]"
+                className="mt-4 inline-flex min-h-12 items-center justify-center gap-3 rounded-full bg-ink px-6 font-body text-[10px] font-medium uppercase tracking-[0.14em] text-cream shadow-[0_18px_44px_rgba(42,37,32,0.18)] transition duration-300 hover:-translate-y-0.5 hover:bg-gold-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-cream aria-disabled:pointer-events-none aria-disabled:opacity-45 md:mt-5 md:min-h-13 md:px-7 md:text-[11px] md:tracking-[0.2em]"
               >
                 <MessageCircle size={17} strokeWidth={1.7} />
                 WhatsApp ile devam et
