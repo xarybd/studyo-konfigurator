@@ -5,7 +5,7 @@ export function buildWizardUrl(path: string, state: Record<string, unknown>): st
     if (!value) return
 
     if (Array.isArray(value)) {
-      value.forEach((item) => params.append(key, String(item)))
+      if (value.length > 0) params.set(key, value.map((item) => String(item)).join(','))
       return
     }
 

@@ -4,6 +4,9 @@ import { parseAsArrayOf, parseAsString, useQueryStates } from 'nuqs'
 export function useWizardState() {
   return useQueryStates(
     {
+      name: parseAsString,
+      email: parseAsString,
+      phone: parseAsString,
       context: parseAsString,
       season: parseAsString,
       date: parseAsString,

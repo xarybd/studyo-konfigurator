@@ -49,6 +49,11 @@ export default function ResultPage() {
     watch,
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
+    defaultValues: {
+      name: state.name ?? '',
+      email: state.email ?? '',
+      phone: state.phone ?? '',
+    },
   })
 
   const price = calculatePrice({
@@ -79,14 +84,15 @@ export default function ResultPage() {
 
   const nameVal = watch('name') ?? ''
   const emailVal = watch('email') ?? ''
+  const phoneVal = watch('phone') ?? ''
 
   function getMessageData(data?: Partial<FormValues>) {
     if (!price) return null
 
     return {
-      name: data?.name || nameVal || 'Misafir',
-      email: data?.email || emailVal || 'Belirtilmedi',
-      phone: data?.phone,
+      name: data?.name || nameVal || state.name || 'Misafir',
+      email: data?.email || emailVal || state.email || 'Belirtilmedi',
+      phone: data?.phone || phoneVal || state.phone || undefined,
       context: state.context ?? undefined,
       season: state.season ?? undefined,
       date: state.date ?? undefined,
@@ -203,6 +209,9 @@ export default function ResultPage() {
                 <MessageCircle size={17} strokeWidth={1.7} />
                 WhatsApp ile devam et
               </a>
+              <p className="mx-auto mt-3 max-w-[36ch] text-center font-body text-[10px] leading-5 text-ink/42 md:text-[11px]">
+                Başta bıraktığınız bilgiler WhatsApp mesajına otomatik eklendi.
+              </p>
 
               <div className="my-6 h-px bg-gold/18 md:my-7" />
 

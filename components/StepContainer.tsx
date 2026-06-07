@@ -25,12 +25,12 @@ export function StepContainer({ step, title, subtitle, children, footer, hasPric
             </div>
           )}
 
-          <h1 className="mx-auto max-w-[10ch] font-display text-[clamp(31px,9.2vw,54px)] font-light leading-[1.04] text-ink md:max-w-none md:text-[clamp(38px,6vw,76px)] md:leading-[0.98]">
+          <h1 className="mx-auto max-w-[12ch] text-balance font-display text-[clamp(30px,8.7vw,52px)] font-light leading-[1.04] text-ink md:max-w-none md:text-[clamp(38px,6vw,76px)] md:leading-[0.98]">
             {title}
           </h1>
 
           {subtitle ? (
-            <p className="mx-auto mt-3 max-w-[31ch] font-display text-[13px] italic leading-6 text-ink/50 md:mt-4 md:max-w-xl md:text-[16px] md:leading-7">
+            <p className="mx-auto mt-3 max-w-[34ch] text-balance font-display text-[13px] italic leading-6 text-ink/50 md:mt-4 md:max-w-xl md:text-[16px] md:leading-7">
               {subtitle}
             </p>
           ) : null}

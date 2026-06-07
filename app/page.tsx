@@ -84,7 +84,7 @@ export default function WelcomePage() {
 
                 <m.div variants={item} className="mt-7 flex flex-col items-center justify-center gap-3.5 sm:mt-8 sm:flex-row sm:gap-4">
                   <m.button
-                    onClick={() => router.push('/configure/context')}
+                    onClick={() => router.push('/configure/info')}
                     whileHover={shouldReduce ? {} : { y: -3 }}
                     whileTap={{ scale: 0.985 }}
                     transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}

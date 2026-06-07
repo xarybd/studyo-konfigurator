@@ -19,6 +19,7 @@ export function SiteHeader() {
   const pathname = usePathname()
   const isResult = pathname.startsWith('/configure/result')
   const isWelcome = !pathname.startsWith('/configure')
+  const isIntro = pathname.startsWith('/configure/info')
   const idx = STEP_ROUTES.findIndex((route) => pathname.startsWith(route))
   const currentStep = isResult ? 9 : idx + 1
 
@@ -34,7 +35,7 @@ export function SiteHeader() {
           </p>
         </div>
 
-        {isWelcome ? (
+        {isWelcome || isIntro ? (
           <div className="rounded-full border border-gold/14 bg-cream/48 px-3 py-2.5 font-body text-[9px] uppercase tracking-[0.18em] text-ink/45 backdrop-blur-xl md:px-4 md:py-3 md:text-[10px] md:tracking-[0.24em]">
             00 / 09
           </div>
