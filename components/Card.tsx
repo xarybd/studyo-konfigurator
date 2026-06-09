@@ -170,7 +170,7 @@ export function Card({
         </div>
       ) : null}
 
-      <div className="flex flex-1 flex-col">
+      <div className="flex flex-1 flex-col items-center text-center md:items-start md:text-left">
         {icon ? (
           <m.div
             variants={iconVariants}
@@ -181,12 +181,12 @@ export function Card({
           </m.div>
         ) : null}
 
-        <h2 className="break-words font-display text-[18px] font-normal leading-tight text-ink md:text-[25px]">
+        <h2 className="w-full break-words text-center font-display text-[18px] font-normal leading-tight text-ink md:text-left md:text-[25px]">
           {title}
         </h2>
 
         {description ? (
-          <p className="mt-1.5 max-w-full font-body text-[11.5px] italic leading-5 text-ink/56 md:mt-3 md:max-w-[28ch] md:text-[13px] md:leading-6">
+          <p className="mt-1.5 max-w-[28ch] text-center font-body text-[11.5px] italic leading-5 text-ink/56 md:mt-3 md:text-left md:text-[13px] md:leading-6">
             {description}
           </p>
         ) : null}

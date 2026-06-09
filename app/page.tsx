@@ -65,12 +65,13 @@ export default function WelcomePage() {
                   </div>
                 </m.div>
 
-                <m.div variants={clusterVariants} className="mx-auto max-w-[13ch] text-center leading-[0.94] md:max-w-none">
-                  <m.h1 variants={item} className="font-display text-[clamp(39px,11vw,60px)] font-light text-ink md:text-[clamp(42px,7vw,92px)]">
+                <m.div variants={clusterVariants} className="mx-auto flex max-w-[13ch] flex-col items-center text-center leading-[0.94] md:max-w-none">
+                  <m.h1 variants={item} className="w-full text-center font-display text-[clamp(39px,11vw,60px)] font-light text-ink md:text-[clamp(42px,7vw,92px)]">
                     Çekiminizi
                   </m.h1>
-                  <m.p variants={item} className="font-accent text-[clamp(33px,10vw,54px)] italic leading-[1.02] text-gold-dark md:text-[clamp(36px,6.4vw,82px)]">
-                    birlikte tasarlayalım
+                  <m.p variants={item} className="flex w-full flex-col items-center text-center font-accent text-[clamp(33px,10vw,54px)] italic leading-[1.02] text-gold-dark md:block md:text-[clamp(36px,6.4vw,82px)]">
+                    <span className="block w-full text-center">birlikte</span>
+                    <span className="block w-full text-center">tasarlayalım</span>
                   </m.p>
                 </m.div>
 

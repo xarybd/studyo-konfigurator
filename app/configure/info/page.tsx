@@ -48,10 +48,10 @@ export default function InfoPage() {
             <UserRound size={13} strokeWidth={1.6} />
             Kısa tanışma
           </div>
-          <h1 className="mx-auto max-w-[11ch] font-display text-[clamp(32px,9vw,56px)] font-light leading-[1.02] text-ink md:max-w-none md:text-[clamp(42px,6vw,76px)]">
+          <h1 className="mx-auto max-w-[11ch] text-center font-display text-[clamp(32px,9vw,56px)] font-light leading-[1.02] text-ink md:max-w-none md:text-[clamp(42px,6vw,76px)]">
             Önce sizi <em className="font-accent italic text-gold-dark">tanıyalım</em>
           </h1>
-          <p className="mx-auto mt-3 max-w-[32ch] font-display text-[13px] italic leading-6 text-ink/52 md:mt-4 md:max-w-xl md:text-[16px] md:leading-7">
+          <p className="mx-auto mt-3 max-w-[32ch] text-center font-display text-[13px] italic leading-6 text-ink/52 md:mt-4 md:max-w-xl md:text-[16px] md:leading-7">
             Son adımda tekrar form doldurmanıza gerek kalmadan teklif mesajınızı hazırlayalım.
           </p>
         </div>
